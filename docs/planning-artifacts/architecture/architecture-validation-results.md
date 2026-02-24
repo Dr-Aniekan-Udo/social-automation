@@ -24,8 +24,8 @@ The Clean Architecture layer separation (domain → service → adapter → hand
 | Unified Inbox | `domain/messaging/` → `service/messaging/` → `adapter/platform/` → `handler/messaging_handler.go` | `(dashboard)/messages/`, `components/messaging/`, `hooks/api/useConversations.ts` | ✅ |
 | Payment Integration | `domain/payment/` → `service/payment/` → `adapter/payment/` → `handler/payment_handler.go` | `(dashboard)/payments/`, `components/payment/`, `hooks/api/usePaymentLinks.ts` | ✅ |
 | Product Catalog | `domain/product/` → `service/product/` → `adapter/postgres/` → `handler/product_handler.go` | `(dashboard)/products/`, `components/product/`, `hooks/api/useProducts.ts` | ✅ |
-| Analytics & Optimization | `domain/analytics/` → `service/analytics/` → `adapter/postgres/` → `handler/analytics_handler.go` | `(dashboard)/analytics/`, `components/analytics/`, `hooks/api/useAnalytics.ts` | ✅ |
-| Multi-Platform Publishing | `domain/publishing/` → `service/publishing/` → `adapter/platform/` → `handler/publishing_handler.go` | `(dashboard)/content/`, `components/content/ContentCalendar.tsx` | ✅ |
+| Analytics & Optimization | `domain/analytics/` â†’ `service/analytics/` â†’ `adapter/postgres/` â†’ `handler/analytics_handler.go` | contextual MVP surfaces in `(dashboard)/page.tsx`, `(dashboard)/messages/`, and feed cards; dedicated `(dashboard)/analytics/` is post-MVP/Growth (feature-gated) | âœ… |
+| Multi-Platform Publishing | `domain/publishing/` â†’ `service/publishing/` â†’ `adapter/platform/` â†’ `handler/publishing_handler.go` | `(dashboard)/content/`, `components/content/ScheduledQueue.tsx` (feed-native MVP queue); calendar UI deferred post-MVP/Growth | âœ… |
 | Revenue Command Feed | `domain/feed/` → `service/feed/` → `adapter/redis/event_bus.go` → `handler/sse_handler.go` | `(dashboard)/page.tsx`, `components/feed/`, `hooks/api/useFeed.ts` | ✅ |
 
 ##### Non-Functional Requirements Coverage

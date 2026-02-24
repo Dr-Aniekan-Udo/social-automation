@@ -221,8 +221,8 @@ marketboss/
     │   │   ├── payments/
     │   │   │   ├── page.tsx
     │   │   │   └── loading.tsx
-    │   │   ├── analytics/
-    │   │   │   ├── page.tsx
+    │   │   ├── analytics/                       # Post-MVP/Growth route group (feature-gated off in MVP)
+    │   │   │   ├── page.tsx                     # Dedicated analytics dashboard (deferred)
     │   │   │   └── loading.tsx
     │   │   └── settings/
     │   │       ├── page.tsx                     # General
@@ -254,7 +254,7 @@ marketboss/
     │   │   ├── PaymentLinkCreator.tsx
     │   │   ├── TransactionList.tsx
     │   │   └── TransactionListSkeleton.tsx
-    │   ├── analytics/
+    │   ├── analytics/                       # Post-MVP/Growth route group (feature-gated off in MVP)
     │   │   ├── EngagementChart.tsx
     │   │   ├── PostingHeatmap.tsx
     │   │   └── InsightCard.tsx
@@ -328,7 +328,7 @@ Webhook arrival → handler → service (validates + business rules) → domain 
 | Unified Inbox | `domain/messaging/` → `service/messaging/` | `messages/` | `messaging/*` | `useConversations`, `useMessages` |
 | Payments | `domain/payment/` → `service/payment/` | `payments/` | `payment/*` | `usePaymentLinks` |
 | Products | `domain/product/` → `service/product/` | `products/` | `product/*` | `useProducts` |
-| Analytics | `domain/analytics/` → `service/analytics/` | `analytics/` | `analytics/*` | `useAnalytics` |
+| Analytics | `domain/analytics/` → `service/analytics/` | contextual surfaces in `feed/messages/home` (MVP), `analytics/` route post-MVP | `analytics/*` | `useAnalytics` |
 | Publishing | `domain/publishing/` → `service/publishing/` | (in feed) | `feed/*` | `usePosts` |
 | Multi-Tenancy | `domain/tenant/` → middleware → RLS | `settings/` | (implicit) | — |
 | Auth + RBAC | `domain/auth/` → `service/auth/` | `(auth)/` | — | — |
@@ -378,4 +378,4 @@ The following 20 refinements were identified through 5 stress-testing methods (P
 2. **SSE Scalability** — Document max concurrent SSE connections per Go process. Horizontal scaling strategy: sticky sessions via DigitalOcean load balancer `hash $request_uri`.
 3. **Tenant Handler** — `handler/tenant_handler.go` added for `GET/PATCH /api/v1/settings/tenant` endpoints (settings page needs it).
 4. **Brand Voice Handler** — `handler/brand_voice_handler.go` added for `/api/v1/brand-voice/*` endpoints. Separated from draft_handler for clear domain ownership.
-
+

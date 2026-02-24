@@ -1,6 +1,9 @@
 # Epic List
 
-### Epic 1: DevOps Foundation & Infrastructure
+> [!IMPORTANT]
+> **Epic taxonomy update (readiness remediation):** Epics 1-3 are classified as **Prerequisite Enabler Tracks** (not primary product-value epics). Product-value delivery sequence starts at Epic 4.
+
+### Epic 1 (Prerequisite Enabler Track): DevOps Foundation & Infrastructure
 
 Developers and AI agents can clone, configure, build, and deploy the application with full CI/CD protection, automated security scanning, and a reproducible local development environment.
 
@@ -13,7 +16,7 @@ Developers and AI agents can clone, configure, build, and deploy the application
 
 ---
 
-### Epic 2: Backend Scaffolding & Data Foundation
+### Epic 2 (Prerequisite Enabler Track): Backend Scaffolding & Data Foundation
 
 The Go backend is operational with Clean Architecture structure, database schema foundation, migration tooling, query generation, Redis infrastructure, observability instrumentation, and health endpoints — ready to receive feature implementations.
 
@@ -23,7 +26,7 @@ The Go backend is operational with Clean Architecture structure, database schema
 
 ---
 
-### Epic 3: Frontend Scaffolding & Design System
+### Epic 3 (Prerequisite Enabler Track): Frontend Scaffolding & Design System
 
 The Next.js frontend is operational with App Router, design system tokens, component library integration, state management, API client generation, service worker, and observability — ready to receive feature implementations.
 
@@ -57,12 +60,12 @@ Sellers complete a guided onboarding journey: choose their social platform, conn
 
 Sellers create brand-authentic, market-appropriate AI-powered content with quality controls, iteration workflows, and fallback mechanisms. The AI engine calibrates to each seller's unique voice and adapts to the Nigerian market context.
 
-**FRs covered:** FR17, FR18, FR19, FR20, FR21, FR22, FR23, FR24, FR25, FR26, FR27, FR28
+**FRs covered:** FR17, FR18, FR19, FR20, FR21, FR22, FR23, FR24, FR25, FR26, FR27, FR28, FR113, FR114
 
 > [!CAUTION]
 > **Highest-risk epic** (scored 15/25 in Comparative Analysis). The 3-tier AI router + privacy proxy + 3 external providers is the most technically complex work in the project. **The first story in this epic MUST be an "AI Pipeline Smoke Test"** — a focused architectural spike that proves the router → privacy proxy → provider → response chain works E2E with a single provider before building any feature stories.
 
-**Scope:** AI Pipeline Smoke Test (E2E architectural spike), 3-tier AI router (DeepSeek / Gemini / GPT-4o) with privacy proxy, Brand Voice-calibrated caption generation, content iteration (regenerate with feedback, edit before publish), payment link CTA embedding in captions, cross-tenant uniqueness checking, AI detection resistance (pattern variation), batch content generation, Brand Voice fidelity scoring + recalibration, Nigerian market localization (Pidgin English, local slang, cultural references), learning from seller corrections, fallback templates when AI unavailable, AI budget tracking per tenant.
+**Scope:** AI Pipeline Smoke Test (E2E architectural spike), 3-tier AI router (DeepSeek / Gemini / GPT-4o) with privacy proxy, Brand Voice-calibrated caption generation, content iteration (regenerate with feedback, edit before publish), audio preview before publish (FR113), mandatory "Sounds Like Me" publish trust gate (FR114), payment link CTA embedding in captions, cross-tenant uniqueness checking, AI detection resistance (pattern variation), batch content generation, Brand Voice fidelity scoring + recalibration, Nigerian market localization (Pidgin English, local slang, cultural references), learning from seller corrections, fallback templates when AI unavailable, AI budget tracking per tenant.
 
 ---
 
@@ -122,7 +125,7 @@ Sellers delegate work to team members with granular RBAC permissions, manage dra
 
 **FRs covered:** FR71, FR72, FR73, FR74, FR75, FR76, FR77, FR78, FR79, FR80, FR81, FR82, FR83
 
-**Scope:** Team member invitations (phone/email), granular RBAC permissions (view, respond, create drafts, publish, analytics, settings), role-based UI simplification, draft creation + scheduling (pending owner approval), remote approval/rejection workflow, activity logging with system vs human attribution, team performance metrics (without revenue visibility), emergency "Pause Auto-Replies" function, catalog staleness warning (6h+), access revocation, team member → independent account upgrade path, after-hours auto-response customization.
+**Scope:** Team member invitations (phone/email), granular RBAC permissions (view, respond, create drafts, publish, analytics, settings), role-based UI simplification, draft creation + scheduling (pending owner approval), remote approval/rejection workflow, activity logging with system vs human attribution, team performance metrics (without revenue visibility), workload-based conversation auto-assignment, explicit emergency "Pause Auto-Replies" control (FR79), explicit catalog staleness warning at 6h+ (FR80), access revocation, team member → independent account upgrade path, after-hours auto-response customization.
 
 ---
 
@@ -145,4 +148,4 @@ Super Admins and Marketplace Admins can manage the platform, moderate content, r
 **Scope:** Super Admin account management (create/remove), Marketplace Admin onboarding review, admin role separation (onboarding ≠ disputes), platform health metrics (uptime, AI usage, active users, signups), support ticket management (urgency-based), user-level analytics + content history (troubleshooting), admin Brand Voice recalibration, dispute mediation + resolution (4h ack, 48h response, 7d resolution), immutable consent records (NDPA), data deletion requests (72h compliance), content moderation (flagging, takedowns, appeals), pre-publication content screening (prohibited categories), multi-tenant data isolation enforcement, customer data export (PII anonymized), voice note support submissions, tenant-level limits configuration, platform-wide settings (commission rates, grace periods, feature gates), seller billing management, trust journey tracking.
 
 ---
-
+
