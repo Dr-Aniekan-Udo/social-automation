@@ -593,3 +593,571 @@ This assessment identified 7 substantive issues across 4 categories (epic struct
 
 **Assessor:** Codex  
 **Assessment Date:** 2026-02-24
+
+## PRD Analysis (Rerun 2026-02-24)
+
+### Functional Requirements
+
+FR1: Seller can sign up using email and phone with OTP verification
+FR2: Seller can choose a primary social platform (Instagram or WhatsApp) during onboarding
+FR3: Seller can complete Brand Voice Onboarding by submitting minimum 5 brand-voice training inputs (captions, product listings, or voice samples); seller is never dropped from onboarding, but AI post generation is blocked until the minimum input threshold is met
+FR4: System captures the seller's pre-MarketBoss baseline metrics (reach, engagement, follower count) at signup
+FR5: Seller can complete low-friction onboarding verification at signup; enhanced KYC is deferred and required for payment features and higher transaction limits
+FR6: Seller can select their product category during onboarding, with prohibited categories blocked
+FR7: Sellers in regulated categories (food, cosmetics) can upload required certifications for verification before first sale
+FR8: System detects incomplete onboarding (insufficient brand-voice training input or incomplete Business Profile) and shows a persistent prompt to complete it; post generation remains blocked until requirements are met
+FR9: Seller can connect their Instagram Business account to the platform
+FR10: Seller can connect their WhatsApp Business account to the platform
+FR11: System guides new sellers through first post creation step-by-step
+FR12: Seller completes a Business Profile Form during onboarding capturing: business name, description, product categories, pricing ranges, shipping policy (delivery areas, costs, timelines), return/refund policy, accepted payment methods, operating hours, physical location (if applicable), contact channels, and common FAQs
+FR13: System ingests product information from connected social platforms (Instagram product tags, WhatsApp catalog) and pre-fills Business Profile fields where possible
+FR14: Seller captures minimal per-product data when creating a post using quick form and/or multimodal shortcuts (camera-assisted product capture and voice input), always storing product name, price, key features, and availability so AI has sufficient context for buyer inquiry responses
+FR15: AI analyzes the combined Business Profile + product data against a library of common buyer questions and displays an advisory gap indicator (e.g., "Your profile answers 12/18 common buyer questions — add shipping info to improve AI responses")
+FR16: Business Profile and per-product data feed into the RAG pipeline, enabling AI to answer buyer DMs and generate content with accurate, seller-specific information
+FR17: Seller can generate AI-powered captions calibrated to their Brand Voice profile
+FR18: Seller can regenerate AI content with feedback to improve results
+FR19: Seller can edit AI-generated content before publishing
+FR20: System generates captions with embedded payment link calls-to-action
+FR21: System performs cross-tenant uniqueness checking to prevent niche collision between sellers in the same category
+FR22: System varies AI content patterns to resist AI detection by followers
+FR23: Seller can generate content in batch for multiple products
+FR24: System scores Brand Voice fidelity and warns when calibration data is insufficient
+FR25: Seller can recalibrate their Brand Voice profile with additional captions
+FR26: System generates contextually appropriate content for Nigerian market (including Pidgin English, local slang, cultural references)
+FR27: System learns from seller content corrections to improve future AI output
+FR28: System provides fallback content options (cached templates, manual mode) when AI is unavailable
+FR29: Seller can publish single-image and carousel posts to Instagram
+FR30: Seller can schedule posts for AI-recommended optimal times
+FR31: Seller can view, reschedule, and cancel scheduled posts through a feed-native scheduled queue (MVP contextual surface), with full calendar views deferred to post-MVP/Growth
+FR32: Seller can view and respond to WhatsApp messages through a unified inbox
+FR33: Seller can send payment links via WhatsApp messages
+FR34: System detects rate limits and gracefully degrades (prioritizing live DMs over queued messages)
+FR35: Seller can configure business hours, with automated after-hours responses for incoming messages
+FR36: System prioritizes message delivery: live DMs > scheduled messages > bulk communications
+FR37: Seller can sync product catalog to WhatsApp Business
+FR38: Seller can preview and confirm messages before sending to segmented lists
+FR39: System detects social platform disconnection and guides seller through reconnection
+FR40: Seller can manage product catalog (add, edit, remove products with pricing and stock levels)
+FR41: Seller can upload and manage product media (photos/videos)
+FR42: Seller can generate payment links tied to specific customer inquiries
+FR43: Buyer receives a digital receipt with seller identity, product details, amount, and support contact after payment
+FR44: Verified sellers display a Verification Badge on receipts and payment links
+FR45: System generates and logs MarketBoss tracking URLs for seller bios and payment links
+FR46: Seller can track customer inquiries as lead cards with status progression
+FR47: Seller can manage multi-stage deals (e.g., deposit → work-in-progress → final payment)
+FR48: System tracks cross-platform customer journeys (e.g., IG post → WhatsApp DM → payment → delivery)
+FR49: System provides a fallback payment method (bank transfer details) when the primary payment provider is unavailable
+FR50: Seller can view a Content Performance Score showing engagement metrics per post
+FR51: Seller can view and manage active/expired payment links
+FR52: Seller can generate shareable product links for any channel
+FR53: Seller can share progress updates with customers during multi-stage deals
+FR54: Seller can view payout history and settlement reports
+FR55: Seller receives a customer summary card (conversation priming) when a new inquiry arrives
+FR56: Seller can take over automated conversations with a one-tap human handoff
+FR57: Seller can set up response templates for common inquiries
+FR58: Team members can use response templates set up by the account owner
+FR59: Seller can tag contacts with relationship types (e.g., regular, new, wholesale) and assign price tiers
+FR60: Seller can segment customer lists for targeted communications
+FR61: Buyer-initiated messages are never blocked, regardless of the seller's messaging limit
+FR62: System logs system-generated vs human-generated responses for clear attribution
+FR63: Buyer can initiate a dispute during escrow period
+FR64: Seller can view contextual MVP analytics (post performance, engagement rate, follower growth) within feed/inbox/home surfaces; dedicated analytics dashboard is post-MVP/Growth
+FR65: System provides engagement prompts suggesting actions to increase reach
+FR66: System alerts the seller when their reach drops below their pre-MarketBoss baseline
+FR67: System shows sellers their progress compared to their pre-MarketBoss baseline
+FR68: System provides content strategy suggestions tailored to the seller's account type and niche
+FR69: Seller receives a warning when approaching their tier usage limits (at 80% threshold)
+FR70: Seller can view pending-task summaries (unresponded inquiries, scheduled posts, draft approvals) directly in home/feed/inbox contextual surfaces without requiring a dedicated MVP analytics dashboard
+FR71: Seller (account owner) can invite team members via phone or email
+FR72: Seller can assign granular permissions to team members (view inquiries, respond, create drafts, publish, view analytics, change settings)
+FR73: Team members see a simplified role-based UI matching their permissions
+FR74: Team members can create draft posts that require owner approval before publishing
+FR75: Team members can schedule drafts pending owner approval
+FR76: Account owner can review and approve/reject draft posts remotely
+FR77: System logs all team member activity with clear system vs human attribution
+FR78: Team members can view their performance metrics without seeing revenue figures
+FR79: Team members can activate an emergency "Pause Auto-Replies" function
+FR80: System warns when product catalog has not been updated for 6+ hours
+FR81: Seller can revoke team member access
+FR82: Team member can upgrade to an independent MarketBoss account
+FR83: Seller can customize after-hours auto-response messages
+FR84: Super Admin can create and remove marketplace admin accounts
+FR85: Marketplace Admin can review and approve seller onboarding applications
+FR86: Admin roles are separated: onboarding admin cannot perform dispute resolution, and vice versa
+FR87: Admin can view platform health metrics (uptime, AI usage, active users, signups)
+FR88: Admin can manage support tickets with urgency-based prioritization
+FR89: Admin can access user-level analytics and content history for troubleshooting
+FR90: Admin can initiate Brand Voice recalibration for a seller's account
+FR91: Admin can mediate and resolve buyer-seller disputes
+FR92: System maintains immutable consent records for data protection compliance (timestamped, purpose-specific)
+FR93: System processes data deletion requests within the required compliance timeframe
+FR94: Admin can moderate content (review flagged posts, process takedown requests)
+FR95: System screens content pre-publication for prohibited categories and restricted content
+FR96: System enforces multi-tenant data isolation (zero cross-tenant data leakage)
+FR97: Sellers can export their customer data (with PII anonymized per policy)
+FR98: System supports voice note submissions for support requests with transcription
+FR99: Admin can configure tenant-level limits (post limits, message limits, products, storage)
+FR100: Admin can configure platform-wide settings (commission rates, grace periods, feature gate defaults)
+FR101: Admin can manage seller billing (view payment status, retry failed payments, manual adjustments)
+FR102: Seller can appeal content moderation decisions
+FR103: System tracks trust journey progression as an internal admin metric
+FR104: Seller can configure notification preferences (channel: push, WhatsApp, SMS, email)
+FR105: Seller receives notifications about billing lifecycle events (grace period, downgrade, suspension)
+FR106: Seller can view and terminate their active sessions
+FR107: System alerts users about suspicious account activity (new device, new IP, bulk data access)
+FR108: Users can withdraw specific consent types (NDPA requirement)
+FR109: Seller can view their current subscription plan and usage
+FR110: Seller can upgrade or downgrade their subscription tier
+FR111: System enforces tier-based limits server-side (daily posts, messages, products, connected accounts)
+FR112: System generates invoices/receipts with seller's business branding
+FR113: Seller can play an audio preview of AI-generated caption content before publishing
+FR114: System requires a per-post "Sounds Like Me" trust rating before publish; publish is enabled only when rating is 4/5 or 5/5, while lower ratings require regenerate or edit before publish
+
+Total FRs: 114
+
+### Non-Functional Requirements
+
+NFR-P1: AI caption generation completes within 5 seconds (p95 target), 10 seconds hard ceiling (p99). UX shows progressive loading placeholder/skeleton after 2 seconds; full AI draft appears only when complete
+NFR-P2: Page load time ≤ 3 seconds on 3G connection (Nigerian mobile baseline)
+NFR-P3: WhatsApp message delivery (API submission) completes within 2 seconds
+NFR-P4: Payment link generation completes within 3 seconds
+NFR-P5: MVP contextual analytics surfaces (feed, inbox, home revenue card) render within 4 seconds with up to 90 days of data; dedicated analytics dashboard pages apply post-MVP/Growth
+NFR-P6: Search and filter operations across products, contacts, and conversations return results within 2 seconds
+NFR-P7: System supports 500 concurrent sellers with <10% performance degradation
+NFR-P8: Instagram post publishing (API submission) completes within 5 seconds including image upload
+NFR-P9: Scheduled-post queue/context surfaces load within 3 seconds while showing up to 30 days of scheduled posts; dedicated calendar pages are post-MVP/Growth
+NFR-P10: Real-time notifications (new DM, payment received) delivered within 5 seconds of event
+NFR-P11: Onboarding flow (signup → first post created) completable within 10 minutes end-to-end. Each onboarding step loads within 2 seconds
+NFR-P12: Brand Voice profile updates (from seller corrections) are reflected in next generation request. No batch delay — corrections applied immediately to the seller's voice profile
+NFR-P13: Voice note transcription completes within 10 seconds for messages up to 2 minutes. Transcription accuracy ≥ 85% for Nigerian English accents
+NFR-P14: Invoice/receipt PDF generation completes within 3 seconds. Invoice accessible via unique URL for minimum 1 year
+NFR-P15: MarketBoss tracking URL redirects (link router) complete within 500ms. Click logging is asynchronous — never delays redirect
+NFR-S1: All data encrypted at rest (AES-256) and in transit (TLS 1.3)
+NFR-S2: Social media tokens stored with application-level encryption; never exposed in API responses or logs
+NFR-S3: Multi-tenant data isolation enforced at database layer (row-level security) AND application layer — tested with automated cross-tenant access tests
+NFR-S4: KYC data (NIN, BVN, biometric hashes) stored in dedicated encrypted storage with access logging
+NFR-S5: Payment processing complies with PCI-DSS Level 4 (delegated to Paystack/Flutterwave — no raw card data stored)
+NFR-S6: Personal data processing complies with NDPA requirements including consent management, data export, and deletion within 72 hours of request
+NFR-S7: Session timeout tiered by role: Sellers 72 hours inactivity, Marketplace Admin 8 hours inactivity, Super Admin 1 hour inactivity. All sessions terminate on password change
+NFR-S8: Super Admin accounts require MFA (hardware key), IP whitelisting, and 90-day credential rotation
+NFR-S9: All state-changing API endpoints require authentication and authorization. Rate limits tiered: read endpoints 200 req/min/user, state-changing endpoints 30 req/min/user, authentication endpoints 5 req/min/IP
+NFR-S10: Audit logs for admin actions are immutable (append-only). MVP requires immutable core compliance/admin events with minimum 90-day hot retention. Growth+ expands to tiered retention: hot storage 90 days (instant query), warm storage 91 days–1 year (query within 1 hour), cold archive 1–3 years (query within 24 hours). Total retention: 3 years.
+NFR-S11: Cross-tenant data leak triggers immediate: (1) affected tenant isolation within 60 seconds, (2) admin alert within 60 seconds, (3) affected data audit within 4 hours. Breach reporting to NDPC within 72 hours per NDPA Article 40
+NFR-SC1: System architecture supports horizontal scaling from 100 users (beta) to 10,000 users without architecture changes
+NFR-SC2: Database design supports seamless migration from shared multi-tenant to dedicated per-tenant instances for enterprise accounts
+NFR-SC3: AI request queue handles burst traffic (10x normal) by queueing with priority (paid tier > free tier) and graceful degradation
+NFR-SC4: Image/media storage scales independently of application servers, using object storage (S3-compatible) with CDN distribution
+NFR-SC5: Background job processing (KYC verification, analytics aggregation, notification delivery) scales independently via worker pool
+NFR-SC6: API design supports pagination, cursor-based navigation, and field filtering to prevent over-fetching as data grows
+NFR-SC7: When concurrent user threshold is approached (80%), system activates request queuing. At 100%, new logins are queued with 'high demand' wait screen. System never crashes — always degrades gracefully
+NFR-R1: Platform targets 99.5% uptime (~3.65 hours/month planned maintenance), measured monthly
+NFR-R1a: Payment-related endpoints target 99.9% availability using Paystack/Flutterwave dual-gateway resilience (Phase 2+)
+NFR-R2: Payment gateway failover triggers within 30 seconds of primary provider failure (3 consecutive health check failures, Phase 2+)
+NFR-R3: SMS notification failover triggers within 60 seconds (Termii → Africa's Talking, Phase 2+)
+NFR-R4: AI service degradation activates cached template fallback within 5 minutes; manual posting mode after 1 hour
+NFR-R5: No data loss on any single infrastructure failure — all writes acknowledged by durable storage before confirming to user
+NFR-R6: Enterprise tenant database failover completes within 30 seconds with automatic promotion of read replica
+NFR-R7: System gracefully handles Nigerian network conditions: request timeouts ≤ 30 seconds, automatic retry with exponential backoff (max 3 retries)
+NFR-R8: Scheduled posts execute within 5-minute window of scheduled time, even during partial system degradation
+NFR-R9: Complete dual-gateway payment failure triggers degraded payment mode (bank transfer details) within 60 seconds. Seller notification within 120 seconds (Phase 2+)
+NFR-R10: Content drafts auto-saved every 30 seconds. Unsaved work recoverable for 24 hours after last auto-save. Payment transactions are atomic — partial completion is impossible
+NFR-R11: Scheduled posts that fail due to network timeout are automatically re-queued with 15-minute retry intervals for up to 6 hours. Seller notified after 3 failed attempts
+NFR-R12: System monitors settlement SLAs from payment providers. If settlement exceeds 24-hour SLA, proactive seller notification sent with expected resolution date. Admin dashboard shows settlement health
+NFR-R13: Dispute acknowledgment within 4 hours (automated). Admin mediation response within 48 hours. Dispute resolution (decision rendered) within 7 business days
+NFR-R14: Critical notifications (payment received, security alert, billing event) have guaranteed delivery: primary channel + fallback within 5 minutes. Non-critical (engagement prompt) best-effort, single channel
+NFR-I1: All third-party integrations use adapter/provider pattern — adding a new payment gateway, KYC provider, AI model, or messaging service requires implementing an interface, not modifying core logic
+NFR-I2: Webhook endpoints process inbound events within 5 seconds and return HTTP 200; failed processing retried from dead letter queue
+NFR-I3: Social media API rate limits monitored in real-time with automatic throttling at 80% of limit ceiling
+NFR-I4: Integration health checks run from a centralized monitoring service (not per-instance). Critical services (payment, messaging) checked every 30 seconds; non-critical (analytics, KYC) every 5 minutes. Status broadcast via pub/sub to all application instances
+NFR-I5: All API credentials stored in secrets manager (not environment variables or code) with automatic rotation support
+NFR-I6: Open API (Phase 3) supports RESTful design, URL-based API versioning, and webhook event system
+NFR-I7: If social API rate limit is hit (HTTP 429), system immediately pauses all queued posts for that seller, notifies seller with estimated resume time, and does not retry for minimum 15 minutes
+NFR-I8: System monitors third-party API deprecation notices. Admin alerted 60 days before any API version end-of-life. Integration adapter supports running two API versions simultaneously during migration
+NFR-M1: Mobile-first responsive design with minimum supported width of 320px (optimized for 360px+), using canonical breakpoints at 480px (large phones), 768px (tablets), and 1024px (desktop) — no layout-breaking on any viewport
+NFR-M2: Application functions on minimum Android 10 / iOS 14 via mobile browser (Chrome, Safari)
+NFR-M3: Critical workflows (create post, respond to DM, generate payment link) are completable with one thumb on mobile. Minimum touch target size 48×48px. No critical actions behind long-press or precision taps
+NFR-M4: Application supports Pidgin English content generation and Nigerian English UI copy
+NFR-M5: Initial page payload ≤ 500KB compressed. Subsequent page navigations ≤ 100KB. Service worker caching for offline-tolerant patterns
+NFR-M6: Application supports offline-tolerant patterns: optimistic UI updates only for reversible actions (with undo), background sync when connectivity returns, and delivery-confirmed states (`sending` → `delivered`/`failed`) for irreversible sends
+NFR-M7: Offline-to-online sync conflicts resolved via last-write-wins with conflict notification to all parties. Seller sees 'This was changed while you were offline' alert with option to keep their version or the current version
+NFR-AI1: System supports pluggable AI provider pattern with 3 tiers: Tier 1 (self-hosted 7B model for simple tasks — classification, routing, tagging), Tier 2 (RAG-optimized API for knowledge grounding — customer summaries, Brand Voice calibration), Tier 3 (premium API for creative content — caption generation, content strategy). Models switchable per tier without application changes
+NFR-AI2: AI request router classifies task complexity and routes to appropriate tier. Routing decision adds ≤ 100ms latency. Routing classifier itself runs on Tier 1 (self-hosted)
+NFR-AI3: Per-tier latency targets: Tier 1 (self-hosted) ≤ 2 seconds for simple tasks, Tier 2 (RAG API) ≤ 4 seconds for grounded generation, Tier 3 (creative API) ≤ 5 seconds p95 / 10 seconds p99 for creative content. All tiers support fallback to next tier on failure
+
+Total NFRs: 66
+
+### Additional Requirements
+
+- Assumption validation indicates 61% of success-criteria assumptions remain untested, with top validation gates required before scaling past 100 users.
+- Document precedence constraint applies across planning artifacts: architecture > ux spec > prd > ux html > product-brief.
+- Payment architecture constraint: MVP uses Paystack subaccount direct settlement; MarketBoss never directly holds customer funds; escrow and dual-gateway failover are Growth-phase capabilities.
+- KYC model is progressive/tiered with deferred enhanced verification, and operational limits for unverified users until higher verification tiers are completed.
+- Prohibited-category and regulated-category controls are mandatory, including NAFDAC verification gate for food/cosmetics before first sale.
+- Admin and role constraints include strict role separation, immutable audit requirements, and hardened Super Admin controls (MFA hardware key, IP allowlisting, credential rotation).
+- Tenant model is hybrid: shared multi-tenant isolation for normal accounts and dedicated database isolation for enterprise accounts, with migration/failover expectations defined.
+- Feature-gating rules and tier limits are server-side enforcement requirements (daily post/message/product limits, non-blocking buyer-initiated messages, 80% usage warnings).
+- Scoping constraints require MVP to remain Instagram-first baseline when WhatsApp approval is delayed, with deferred scope explicitly reserved for Growth/Scale phases.
+- Scenario resilience requirements add hard operational thresholds for viral spikes, API/platform disruption, and regulatory response windows.
+
+### PRD Completeness Assessment
+
+- PRD requirement density is high and explicit: functional scope is comprehensive (114 FRs) and quality constraints are measurable (66 NFRs).
+- Traceability readiness is strong at requirement-definition level, but implementation readiness still depends on cross-checking that epics/stories cover all FR and NFR entries without phase leakage.
+- Requirement specificity is generally testable, especially in security, reliability, and localization; however, complexity risk is elevated due to broad MVP surface area and heavy Growth dependencies.
+- Assumption risk remains material; unresolved high-risk assumptions should be treated as pre-scale validation gates and monitored during implementation planning.
+
+
+## Epic Coverage Validation (Rerun 2026-02-24)
+
+### Epic FR Coverage Extracted
+
+FR1: Covered in Epic 4: Authentication & Multi-Tenancy
+FR2: Covered in Epic 5: Seller Onboarding & Business Profile
+FR3: Covered in Epic 5: Seller Onboarding & Business Profile
+FR4: Covered in Epic 5: Seller Onboarding & Business Profile
+FR5: Covered in Epic 4: Authentication & Multi-Tenancy
+FR6: Covered in Epic 5: Seller Onboarding & Business Profile
+FR7: Covered in Epic 5: Seller Onboarding & Business Profile
+FR8: Covered in Epic 5: Seller Onboarding & Business Profile
+FR9: Covered in Epic 5: Seller Onboarding & Business Profile
+FR10: Covered in Epic 5: Seller Onboarding & Business Profile
+FR11: Covered in Epic 5: Seller Onboarding & Business Profile
+FR12: Covered in Epic 5: Seller Onboarding & Business Profile
+FR13: Covered in Epic 5: Seller Onboarding & Business Profile
+FR14: Covered in Epic 5: Seller Onboarding & Business Profile
+FR15: Covered in Epic 5: Seller Onboarding & Business Profile
+FR16: Covered in Epic 5: Seller Onboarding & Business Profile
+FR17: Covered in Epic 6: AI-Powered Content Creation
+FR18: Covered in Epic 6: AI-Powered Content Creation
+FR19: Covered in Epic 6: AI-Powered Content Creation
+FR20: Covered in Epic 6: AI-Powered Content Creation
+FR21: Covered in Epic 6: AI-Powered Content Creation
+FR22: Covered in Epic 6: AI-Powered Content Creation
+FR23: Covered in Epic 6: AI-Powered Content Creation
+FR24: Covered in Epic 6: AI-Powered Content Creation
+FR25: Covered in Epic 6: AI-Powered Content Creation
+FR26: Covered in Epic 6: AI-Powered Content Creation
+FR27: Covered in Epic 6: AI-Powered Content Creation
+FR28: Covered in Epic 6: AI-Powered Content Creation
+FR29: Covered in Epic 7: Social Publishing & Channel Management
+FR30: Covered in Epic 7: Social Publishing & Channel Management
+FR31: Covered in Epic 7: Social Publishing & Channel Management
+FR32: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR33: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR34: Covered in Epic 7: Social Publishing & Channel Management
+FR35: Covered in Epic 7: Social Publishing & Channel Management
+FR36: Covered in Epic 7: Social Publishing & Channel Management
+FR37: Covered in Epic 7: Social Publishing & Channel Management
+FR38: Covered in Epic 7: Social Publishing & Channel Management
+FR39: Covered in Epic 7: Social Publishing & Channel Management
+FR40: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR41: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR42: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR43: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR44: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR45: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR46: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR47: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR48: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR49: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR50: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR51: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR52: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR53: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR54: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR55: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR56: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR57: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR58: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR59: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR60: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR61: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR62: Covered in Epic 9: Customer Engagement & Conversational Commerce
+FR63: Covered in Epic 8: Product Catalog & Sales Pipeline
+FR64: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR65: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR66: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR67: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR68: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR69: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR70: Covered in Epic 12: Growth Insights & Contextual Analytics
+FR71: Covered in Epic 11: Team Collaboration & Role Management
+FR72: Covered in Epic 11: Team Collaboration & Role Management
+FR73: Covered in Epic 11: Team Collaboration & Role Management
+FR74: Covered in Epic 11: Team Collaboration & Role Management
+FR75: Covered in Epic 11: Team Collaboration & Role Management
+FR76: Covered in Epic 11: Team Collaboration & Role Management
+FR77: Covered in Epic 11: Team Collaboration & Role Management
+FR78: Covered in Epic 11: Team Collaboration & Role Management
+FR79: Covered in Epic 11: Team Collaboration & Role Management
+FR80: Covered in Epic 11: Team Collaboration & Role Management
+FR81: Covered in Epic 11: Team Collaboration & Role Management
+FR82: Covered in Epic 11: Team Collaboration & Role Management
+FR83: Covered in Epic 11: Team Collaboration & Role Management
+FR84: Covered in Epic 13: Platform Administration & Compliance
+FR85: Covered in Epic 13: Platform Administration & Compliance
+FR86: Covered in Epic 13: Platform Administration & Compliance
+FR87: Covered in Epic 13: Platform Administration & Compliance
+FR88: Covered in Epic 13: Platform Administration & Compliance
+FR89: Covered in Epic 13: Platform Administration & Compliance
+FR90: Covered in Epic 13: Platform Administration & Compliance
+FR91: Covered in Epic 13: Platform Administration & Compliance
+FR92: Covered in Epic 13: Platform Administration & Compliance
+FR93: Covered in Epic 13: Platform Administration & Compliance
+FR94: Covered in Epic 13: Platform Administration & Compliance
+FR95: Covered in Epic 13: Platform Administration & Compliance
+FR96: Covered in Epic 13: Platform Administration & Compliance
+FR97: Covered in Epic 13: Platform Administration & Compliance
+FR98: Covered in Epic 13: Platform Administration & Compliance
+FR99: Covered in Epic 13: Platform Administration & Compliance
+FR100: Covered in Epic 13: Platform Administration & Compliance
+FR101: Covered in Epic 13: Platform Administration & Compliance
+FR102: Covered in Epic 13: Platform Administration & Compliance
+FR103: Covered in Epic 13: Platform Administration & Compliance
+FR104: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR105: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR106: Covered in Epic 4: Authentication & Multi-Tenancy
+FR107: Covered in Epic 4: Authentication & Multi-Tenancy
+FR108: Covered in Epic 13: Platform Administration & Compliance
+FR109: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR110: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR111: Covered in Epic 13: Platform Administration & Compliance
+FR112: Covered in Epic 10: Payment, Subscription & Billing Operations
+FR113: Covered in Epic 6: AI-Powered Content Creation
+FR114: Covered in Epic 6: AI-Powered Content Creation
+
+Total FRs in epics: 114
+
+### Coverage Matrix
+
+| FR Number | PRD Requirement | Epic Coverage | Status |
+| --------- | --------------- | ------------- | ------ |
+| FR1 | Seller can sign up using email and phone with OTP verification | Epic 4: Authentication & Multi-Tenancy | Covered |
+| FR2 | Seller can choose a primary social platform (Instagram or WhatsApp) during onboarding | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR3 | Seller can complete Brand Voice Onboarding by submitting minimum 5 brand-voice training inputs (captions, product listings, or voice samples); seller is never dropped from onboarding, but AI post generation is blocked until the minimum input threshold is met | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR4 | System captures the seller's pre-MarketBoss baseline metrics (reach, engagement, follower count) at signup | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR5 | Seller can complete low-friction onboarding verification at signup; enhanced KYC is deferred and required for payment features and higher transaction limits | Epic 4: Authentication & Multi-Tenancy | Covered |
+| FR6 | Seller can select their product category during onboarding, with prohibited categories blocked | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR7 | Sellers in regulated categories (food, cosmetics) can upload required certifications for verification before first sale | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR8 | System detects incomplete onboarding (insufficient brand-voice training input or incomplete Business Profile) and shows a persistent prompt to complete it; post generation remains blocked until requirements are met | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR9 | Seller can connect their Instagram Business account to the platform | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR10 | Seller can connect their WhatsApp Business account to the platform | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR11 | System guides new sellers through first post creation step-by-step | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR12 | Seller completes a Business Profile Form during onboarding capturing: business name, description, product categories, pricing ranges, shipping policy (delivery areas, costs, timelines), return/refund policy, accepted payment methods, operating hours, physical location (if applicable), contact channels, and common FAQs | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR13 | System ingests product information from connected social platforms (Instagram product tags, WhatsApp catalog) and pre-fills Business Profile fields where possible | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR14 | Seller captures minimal per-product data when creating a post using quick form and/or multimodal shortcuts (camera-assisted product capture and voice input), always storing product name, price, key features, and availability so AI has sufficient context for buyer inquiry responses | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR15 | AI analyzes the combined Business Profile + product data against a library of common buyer questions and displays an advisory gap indicator (e.g., "Your profile answers 12/18 common buyer questions — add shipping info to improve AI responses") | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR16 | Business Profile and per-product data feed into the RAG pipeline, enabling AI to answer buyer DMs and generate content with accurate, seller-specific information | Epic 5: Seller Onboarding & Business Profile | Covered |
+| FR17 | Seller can generate AI-powered captions calibrated to their Brand Voice profile | Epic 6: AI-Powered Content Creation | Covered |
+| FR18 | Seller can regenerate AI content with feedback to improve results | Epic 6: AI-Powered Content Creation | Covered |
+| FR19 | Seller can edit AI-generated content before publishing | Epic 6: AI-Powered Content Creation | Covered |
+| FR20 | System generates captions with embedded payment link calls-to-action | Epic 6: AI-Powered Content Creation | Covered |
+| FR21 | System performs cross-tenant uniqueness checking to prevent niche collision between sellers in the same category | Epic 6: AI-Powered Content Creation | Covered |
+| FR22 | System varies AI content patterns to resist AI detection by followers | Epic 6: AI-Powered Content Creation | Covered |
+| FR23 | Seller can generate content in batch for multiple products | Epic 6: AI-Powered Content Creation | Covered |
+| FR24 | System scores Brand Voice fidelity and warns when calibration data is insufficient | Epic 6: AI-Powered Content Creation | Covered |
+| FR25 | Seller can recalibrate their Brand Voice profile with additional captions | Epic 6: AI-Powered Content Creation | Covered |
+| FR26 | System generates contextually appropriate content for Nigerian market (including Pidgin English, local slang, cultural references) | Epic 6: AI-Powered Content Creation | Covered |
+| FR27 | System learns from seller content corrections to improve future AI output | Epic 6: AI-Powered Content Creation | Covered |
+| FR28 | System provides fallback content options (cached templates, manual mode) when AI is unavailable | Epic 6: AI-Powered Content Creation | Covered |
+| FR29 | Seller can publish single-image and carousel posts to Instagram | Epic 7: Social Publishing & Channel Management | Covered |
+| FR30 | Seller can schedule posts for AI-recommended optimal times | Epic 7: Social Publishing & Channel Management | Covered |
+| FR31 | Seller can view, reschedule, and cancel scheduled posts through a feed-native scheduled queue (MVP contextual surface), with full calendar views deferred to post-MVP/Growth | Epic 7: Social Publishing & Channel Management | Covered |
+| FR32 | Seller can view and respond to WhatsApp messages through a unified inbox | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR33 | Seller can send payment links via WhatsApp messages | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR34 | System detects rate limits and gracefully degrades (prioritizing live DMs over queued messages) | Epic 7: Social Publishing & Channel Management | Covered |
+| FR35 | Seller can configure business hours, with automated after-hours responses for incoming messages | Epic 7: Social Publishing & Channel Management | Covered |
+| FR36 | System prioritizes message delivery: live DMs > scheduled messages > bulk communications | Epic 7: Social Publishing & Channel Management | Covered |
+| FR37 | Seller can sync product catalog to WhatsApp Business | Epic 7: Social Publishing & Channel Management | Covered |
+| FR38 | Seller can preview and confirm messages before sending to segmented lists | Epic 7: Social Publishing & Channel Management | Covered |
+| FR39 | System detects social platform disconnection and guides seller through reconnection | Epic 7: Social Publishing & Channel Management | Covered |
+| FR40 | Seller can manage product catalog (add, edit, remove products with pricing and stock levels) | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR41 | Seller can upload and manage product media (photos/videos) | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR42 | Seller can generate payment links tied to specific customer inquiries | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR43 | Buyer receives a digital receipt with seller identity, product details, amount, and support contact after payment | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR44 | Verified sellers display a Verification Badge on receipts and payment links | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR45 | System generates and logs MarketBoss tracking URLs for seller bios and payment links | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR46 | Seller can track customer inquiries as lead cards with status progression | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR47 | Seller can manage multi-stage deals (e.g., deposit → work-in-progress → final payment) | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR48 | System tracks cross-platform customer journeys (e.g., IG post → WhatsApp DM → payment → delivery) | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR49 | System provides a fallback payment method (bank transfer details) when the primary payment provider is unavailable | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR50 | Seller can view a Content Performance Score showing engagement metrics per post | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR51 | Seller can view and manage active/expired payment links | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR52 | Seller can generate shareable product links for any channel | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR53 | Seller can share progress updates with customers during multi-stage deals | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR54 | Seller can view payout history and settlement reports | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR55 | Seller receives a customer summary card (conversation priming) when a new inquiry arrives | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR56 | Seller can take over automated conversations with a one-tap human handoff | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR57 | Seller can set up response templates for common inquiries | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR58 | Team members can use response templates set up by the account owner | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR59 | Seller can tag contacts with relationship types (e.g., regular, new, wholesale) and assign price tiers | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR60 | Seller can segment customer lists for targeted communications | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR61 | Buyer-initiated messages are never blocked, regardless of the seller's messaging limit | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR62 | System logs system-generated vs human-generated responses for clear attribution | Epic 9: Customer Engagement & Conversational Commerce | Covered |
+| FR63 | Buyer can initiate a dispute during escrow period | Epic 8: Product Catalog & Sales Pipeline | Covered |
+| FR64 | Seller can view contextual MVP analytics (post performance, engagement rate, follower growth) within feed/inbox/home surfaces; dedicated analytics dashboard is post-MVP/Growth | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR65 | System provides engagement prompts suggesting actions to increase reach | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR66 | System alerts the seller when their reach drops below their pre-MarketBoss baseline | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR67 | System shows sellers their progress compared to their pre-MarketBoss baseline | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR68 | System provides content strategy suggestions tailored to the seller's account type and niche | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR69 | Seller receives a warning when approaching their tier usage limits (at 80% threshold) | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR70 | Seller can view pending-task summaries (unresponded inquiries, scheduled posts, draft approvals) directly in home/feed/inbox contextual surfaces without requiring a dedicated MVP analytics dashboard | Epic 12: Growth Insights & Contextual Analytics | Covered |
+| FR71 | Seller (account owner) can invite team members via phone or email | Epic 11: Team Collaboration & Role Management | Covered |
+| FR72 | Seller can assign granular permissions to team members (view inquiries, respond, create drafts, publish, view analytics, change settings) | Epic 11: Team Collaboration & Role Management | Covered |
+| FR73 | Team members see a simplified role-based UI matching their permissions | Epic 11: Team Collaboration & Role Management | Covered |
+| FR74 | Team members can create draft posts that require owner approval before publishing | Epic 11: Team Collaboration & Role Management | Covered |
+| FR75 | Team members can schedule drafts pending owner approval | Epic 11: Team Collaboration & Role Management | Covered |
+| FR76 | Account owner can review and approve/reject draft posts remotely | Epic 11: Team Collaboration & Role Management | Covered |
+| FR77 | System logs all team member activity with clear system vs human attribution | Epic 11: Team Collaboration & Role Management | Covered |
+| FR78 | Team members can view their performance metrics without seeing revenue figures | Epic 11: Team Collaboration & Role Management | Covered |
+| FR79 | Team members can activate an emergency "Pause Auto-Replies" function | Epic 11: Team Collaboration & Role Management | Covered |
+| FR80 | System warns when product catalog has not been updated for 6+ hours | Epic 11: Team Collaboration & Role Management | Covered |
+| FR81 | Seller can revoke team member access | Epic 11: Team Collaboration & Role Management | Covered |
+| FR82 | Team member can upgrade to an independent MarketBoss account | Epic 11: Team Collaboration & Role Management | Covered |
+| FR83 | Seller can customize after-hours auto-response messages | Epic 11: Team Collaboration & Role Management | Covered |
+| FR84 | Super Admin can create and remove marketplace admin accounts | Epic 13: Platform Administration & Compliance | Covered |
+| FR85 | Marketplace Admin can review and approve seller onboarding applications | Epic 13: Platform Administration & Compliance | Covered |
+| FR86 | Admin roles are separated: onboarding admin cannot perform dispute resolution, and vice versa | Epic 13: Platform Administration & Compliance | Covered |
+| FR87 | Admin can view platform health metrics (uptime, AI usage, active users, signups) | Epic 13: Platform Administration & Compliance | Covered |
+| FR88 | Admin can manage support tickets with urgency-based prioritization | Epic 13: Platform Administration & Compliance | Covered |
+| FR89 | Admin can access user-level analytics and content history for troubleshooting | Epic 13: Platform Administration & Compliance | Covered |
+| FR90 | Admin can initiate Brand Voice recalibration for a seller's account | Epic 13: Platform Administration & Compliance | Covered |
+| FR91 | Admin can mediate and resolve buyer-seller disputes | Epic 13: Platform Administration & Compliance | Covered |
+| FR92 | System maintains immutable consent records for data protection compliance (timestamped, purpose-specific) | Epic 13: Platform Administration & Compliance | Covered |
+| FR93 | System processes data deletion requests within the required compliance timeframe | Epic 13: Platform Administration & Compliance | Covered |
+| FR94 | Admin can moderate content (review flagged posts, process takedown requests) | Epic 13: Platform Administration & Compliance | Covered |
+| FR95 | System screens content pre-publication for prohibited categories and restricted content | Epic 13: Platform Administration & Compliance | Covered |
+| FR96 | System enforces multi-tenant data isolation (zero cross-tenant data leakage) | Epic 13: Platform Administration & Compliance | Covered |
+| FR97 | Sellers can export their customer data (with PII anonymized per policy) | Epic 13: Platform Administration & Compliance | Covered |
+| FR98 | System supports voice note submissions for support requests with transcription | Epic 13: Platform Administration & Compliance | Covered |
+| FR99 | Admin can configure tenant-level limits (post limits, message limits, products, storage) | Epic 13: Platform Administration & Compliance | Covered |
+| FR100 | Admin can configure platform-wide settings (commission rates, grace periods, feature gate defaults) | Epic 13: Platform Administration & Compliance | Covered |
+| FR101 | Admin can manage seller billing (view payment status, retry failed payments, manual adjustments) | Epic 13: Platform Administration & Compliance | Covered |
+| FR102 | Seller can appeal content moderation decisions | Epic 13: Platform Administration & Compliance | Covered |
+| FR103 | System tracks trust journey progression as an internal admin metric | Epic 13: Platform Administration & Compliance | Covered |
+| FR104 | Seller can configure notification preferences (channel: push, WhatsApp, SMS, email) | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR105 | Seller receives notifications about billing lifecycle events (grace period, downgrade, suspension) | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR106 | Seller can view and terminate their active sessions | Epic 4: Authentication & Multi-Tenancy | Covered |
+| FR107 | System alerts users about suspicious account activity (new device, new IP, bulk data access) | Epic 4: Authentication & Multi-Tenancy | Covered |
+| FR108 | Users can withdraw specific consent types (NDPA requirement) | Epic 13: Platform Administration & Compliance | Covered |
+| FR109 | Seller can view their current subscription plan and usage | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR110 | Seller can upgrade or downgrade their subscription tier | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR111 | System enforces tier-based limits server-side (daily posts, messages, products, connected accounts) | Epic 13: Platform Administration & Compliance | Covered |
+| FR112 | System generates invoices/receipts with seller's business branding | Epic 10: Payment, Subscription & Billing Operations | Covered |
+| FR113 | Seller can play an audio preview of AI-generated caption content before publishing | Epic 6: AI-Powered Content Creation | Covered |
+| FR114 | System requires a per-post "Sounds Like Me" trust rating before publish; publish is enabled only when rating is 4/5 or 5/5, while lower ratings require regenerate or edit before publish | Epic 6: AI-Powered Content Creation | Covered |
+
+### Missing Requirements
+
+- No missing FR coverage found.
+- No epics-only FR IDs found outside PRD scope.
+
+### Coverage Statistics
+
+- Total PRD FRs: 114
+- FRs covered in epics: 114
+- Coverage percentage: 100%
+
+
+## UX Alignment Assessment (Rerun 2026-02-24)
+
+### UX Document Status
+
+- Found: `docs/planning-artifacts/ux-design-specification/index.md` (sharded UX specification present).
+
+### Alignment Issues
+
+- **Onboarding duration target drift:** UX journey targets first-value in `<5 minutes`, while PRD NFR-P11 sets onboarding completion at `<=10 minutes`. This is directionally compatible but not contract-aligned; implementation teams need one canonical SLA.
+- **Payment provider scope drift in UX flows:** UX journey examples reference `Paystack or OPay`, while PRD + Architecture define MVP payment path as Paystack subaccount, with Flutterwave failover in Growth and bank-transfer fallback. OPay should be removed from MVP UX flow artifacts or explicitly added to requirements/architecture.
+- **Notification channel phase ambiguity:** UX friction fixes call out reach-protection escalation via WhatsApp + SMS at Day 7, while architecture scoping keeps MVP notification stack at single SMS provider + email fallback and defers richer resilience to Growth. Phase ownership for channel set should be normalized.
+- **Traceability granularity gap:** UX documents are rich and detailed but do not map interactions to explicit FR/NFR identifiers, which increases risk of interpretation drift during story implementation.
+
+### Warnings
+
+- No critical architecture contradiction was found for the core UX model (mobile-first, contextual metrics, Brand Voice review loop, role-based team experience), but UX acceptance criteria should be linked to FR/NFR IDs before implementation to reduce ambiguity.
+- Architecture covers major UX enablers (feed-first real-time updates, AI draft pipeline, responsive/performance posture, offline-tolerant patterns), yet micro-interaction rules (e.g., strict 3-tap discipline) are currently design principles rather than enforceable engineering criteria.
+
+### Confirmed Alignment Highlights
+
+- Brand Voice trust loop in UX aligns with PRD FR17/FR18/FR19/FR24/FR25/FR113/FR114 and architecture decisions around AI routing + privacy proxy.
+- Contextual analytics/no-dashboard MVP direction aligns with PRD FR64/FR70 and architecture validation notes that dedicated analytics routes are post-MVP/Growth.
+- Delegated team workflow UX aligns with PRD FR71-FR83 and corresponding epic coverage for role-based UI + approvals + attribution logging.
+
+
+## Epic Quality Review (Rerun 2026-02-24)
+
+### Best-Practice Validation Summary
+
+- Stories reviewed: 100
+- Stories with Acceptance Criteria section: 100/100
+- Stories with Given/When/Then coverage: 100/100
+- Forward dependencies within epic: 0
+- Forward dependencies across future epics: 0
+- Stories with direct FR mapping: 62
+- Stories intentionally marked Foundational/Additional (no direct FR): 38
+
+### Epic Structure Validation
+
+- Product-value epics (Epic 4-Epic 13) are user-outcome oriented and pass user-value naming/goal checks.
+- Former technical epics are explicitly reclassified as prerequisite enabler tracks (P1-P3), reducing primary epic-sequence pollution.
+- Epic-level dependencies reference prior epics only (e.g., Epic 7 -> Epic 5/6; Epic 9 -> Epic 5/6/7/8), satisfying no-forward-dependency rules.
+
+### Story Quality Assessment
+
+- Story sizing and decomposition are generally implementation-ready with testable BDD acceptance criteria.
+- Dependency declarations are syntactically consistent and do not reference future stories/epics.
+- Starter-template requirement is satisfied by early initialization stories in Track P1/P2/P3 (repo + monorepo + scaffold foundations).
+- Greenfield indicators are present (project setup, environment config, CI/CD, scaffolding stories at sequence start).
+
+### Findings by Severity
+
+#### CRITICAL Violations
+- None identified in this rerun.
+
+#### MAJOR Issues
+- **Traceability dilution inside product epics:** multiple stories in user-value epics are marked `None (Foundational/Additional)` instead of mapping to explicit FRs or formally cataloged enabler requirements (examples: 4.3, 4.6, 4.7, 6.1, 6.2, 6.9, 6.10, 8.2, 8.3, 8.6, 9.2, 10.6, 10.7, 11.3, 11.5).
+  - Impact: scope-control and requirement-audit friction during implementation and acceptance.
+  - Recommendation: map these stories to explicit NFR/AR/ENB IDs in a canonical inventory and add �why this is required for FR-x� notes per story.
+
+#### MINOR Concerns
+- **Taxonomy consistency drift:** stories retain numeric `Story 1.x/2.x/3.x` numbering and label guidance includes `epic:1` through `epic:13`, while planning taxonomy now distinguishes P1-P3 as tracks.
+  - Impact: potential backlog/reporting confusion (track vs epic status in tooling and dashboards).
+  - Recommendation: align label strategy and numbering semantics with P-track taxonomy (e.g., `track:p1`, `track:p2`, `track:p3`) and update templates.
+
+### Compliance Checklist (Step 5)
+
+- [x] Epic delivers user value (for Epic 4+)
+- [x] Epic can function independently (no forward epic dependency)
+- [x] Stories appropriately sized
+- [x] No forward dependencies
+- [x] Database/entity timing approach is incremental (not one-shot all-feature schema in a single story)
+- [x] Acceptance criteria are clear/testable (Given/When/Then)
+- [x] Traceability present, with noted major gap for additional stories lacking direct FR linkage
+
+
+## Summary and Recommendations (Rerun 2026-02-24)
+
+### Overall Readiness Status
+
+NEEDS WORK
+
+### Critical Issues Requiring Immediate Action
+
+- Align canonical onboarding SLA across artifacts (`<5 minutes` UX target vs `<=10 minutes` PRD NFR-P11) to avoid conflicting implementation/test expectations.
+- Remove or formally approve payment-provider scope drift in UX flows (`OPay` appears in UX but MVP architecture/PRD define Paystack-first + Growth failover).
+- Tighten story traceability for foundational/additional stories embedded in product epics so each non-FR story has explicit NFR/ENB rationale linked to implementation scope control.
+
+### Recommended Next Steps
+
+1. Publish a single-source alignment patch for SLA and provider scope across PRD, UX, and Architecture (same wording in all three artifacts).
+2. Add explicit traceability tags for all `None (Foundational/Additional)` stories and reference the enabling requirement catalog in each affected story.
+3. Normalize backlog taxonomy for P1-P3 tracks in templates/labels to eliminate track-vs-epic reporting drift.
+4. Re-run implementation readiness check after the above fixes and confirm status can be upgraded to READY.
+
+### Final Note
+
+This rerun identified 6 issues across 2 categories (UX alignment and epic/story quality governance). No critical FR coverage gaps or forward dependency violations were found. Address the listed issues before implementation to reduce execution ambiguity and scope drift.
+
+**Assessment date:** 2026-02-24
+**Assessor:** Codex (BMAD implementation-readiness workflow execution)
+
