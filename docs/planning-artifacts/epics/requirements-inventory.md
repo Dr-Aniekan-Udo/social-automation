@@ -144,6 +144,11 @@
 - FR111: System enforces tier-based limits server-side (daily posts, messages, products, connected accounts)
 - FR112: System generates invoices/receipts with seller's business branding
 
+**AI Trust Controls (FR113-FR114)**
+
+- FR113: Seller can play an audio preview of AI-generated caption content before publishing
+- FR114: System requires a per-post "Sounds Like Me" trust rating before publish; publish is enabled only when rating is 4/5 or 5/5, while lower ratings require regenerate or edit before publish
+
 ### Non-Functional Requirements
 
 **Performance (NFR-P1–NFR-P15)**
@@ -233,6 +238,27 @@
 - NFR-AI3: Per-tier latency: T1 ≤2s, T2 ≤4s, T3 ≤5s p95 / 10s p99. Cross-tier fallback
 
 ### Additional Requirements
+
+**Readiness Remediation IDs (for enabler/additional traceability):**
+
+- ENB-E1: DevOps foundation prerequisite track (repo governance, CI/CD, security scanning, deploy pipeline)
+- ENB-E2: Backend foundation prerequisite track (Clean Architecture scaffolding, migrations, sqlc, Redis, observability)
+- ENB-E3: Frontend foundation prerequisite track (Next.js scaffolding, design system, state/query layers, PWA, test harness)
+- AR-TEN-1: Cross-tenant isolation validation is mandatory for all data-touching stories
+- AR-AUTH-UX-1: Mobile auth UX hardening and verification screens are required implementation support work
+- AR-SEC-1: Authentication attack-resilience controls (rate limiting, lockout, brute-force mitigation) are required
+- AR-AI-1: AI pipeline smoke-test validation is required before feature-level AI rollout
+- AR-AI-2: Privacy proxy + 3-tier AI routing and failover are required operational controls
+- AR-VIS-1: Hybrid composition image pipeline remains approved MVP additional scope
+- AR-VIS-2: Layout templates + Brand Kit onboarding remain approved MVP additional scope
+- AR-OPS-INV-1: Inventory low-stock and stock-governance controls are required operational safeguards
+- AR-OPS-PRICING-1: Pricing-tier and bulk-pricing operations are required merchandising controls
+- AR-OPS-RETURNS-1: Returns/refund workflow capture is required post-sale operations support
+- AR-CONV-1: AI auto-response operations are required conversation-scale support capabilities
+- AR-PAY-REFUND-1: Refund operations via provider APIs are required financial operations support
+- AR-PAY-DISPUTE-1: Dispute/security workflow is required payment operations risk control
+- AR-COLLAB-NOTES-1: Internal team notes are required collaboration support capability
+- AR-WORKLOAD-1: Workload-based conversation auto-assignment is approved additional operational scope
 
 **From Architecture:**
 
@@ -411,6 +437,8 @@
 | FR110 | Epic 10 | Tier upgrade/downgrade |
 | FR111 | Epic 13 | Server-side tier limits |
 | FR112 | Epic 10 | Invoice/receipt generation |
+| FR113 | Epic 6 | Audio preview before publish |
+| FR114 | Epic 6 | Mandatory "Sounds Like Me" publish trust gate |
 
 ---
-
+

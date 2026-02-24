@@ -145,4 +145,9 @@
 - FR110: Seller can upgrade or downgrade their subscription tier
 - FR111: System enforces tier-based limits server-side (daily posts, messages, products, connected accounts)
 - FR112: System generates invoices/receipts with seller's business branding
-
+
+### AI Trust Controls
+
+- FR113: Seller can play an audio preview of AI-generated caption content before publishing
+- FR114: System requires a per-post "Sounds Like Me" trust rating before publish; publish is enabled only when rating is 4/5 or 5/5, while lower ratings require regenerate or edit before publish
+

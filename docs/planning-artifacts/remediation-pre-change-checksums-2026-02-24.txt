@@ -1,0 +1,11 @@
+Readiness Remediation Pre-Change Checksums
+Date: 2026-02-24
+Branch: fix/readiness-remediation-2026-02-24
+
+docs/planning-artifacts/epics/epic-list.md|BF3C812C0B4DB2B9683AB49760E3CEB44A6E8B2222701DB51DE6607A8AC0DFF2
+docs/planning-artifacts/epics/stories.md|D503BAC31EB20F9BA53F60A72FE7BD473129335B34DA4CE37686973E9E104ECB
+docs/planning-artifacts/epics/requirements-inventory.md|FBCC8441A33EA3201379006EF8A0EE5AEAAC103AA7985882DB15EF002A96D6CC
+docs/planning-artifacts/prd/functional-requirements.md|C5EA123031654A8DD75F3F76570DF41FDF7C0162DF089F65A34EF8BFDDE47B3C
+docs/planning-artifacts/architecture/project-structure-boundaries.md|BDE2536A931BBDC6334BF01871DC52387B15A389FF381B120BC303703FE0028D
+docs/planning-artifacts/architecture/architecture-validation-results.md|0B15E80963FC374DDC5B889A8915F3164214E1CE862F5155EBBF58F7945215C3
+docs/planning-artifacts/implementation-readiness-report-2026-02-24-remediated.md|MISSING_PRE_CHANGE
