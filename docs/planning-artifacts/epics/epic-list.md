@@ -1,9 +1,9 @@
 # Epic List
 
 > [!IMPORTANT]
-> **Epic taxonomy update (readiness remediation):** Epics 1-3 are classified as **Prerequisite Enabler Tracks** (not primary product-value epics). Product-value delivery sequence starts at Epic 4.
+> **Epic taxonomy update (readiness remediation):** Items formerly labeled Epics 1-3 are now treated as **Prerequisite Enabler Tracks** (P1-P3), outside the primary product-value epic sequence. Product-value delivery sequence starts at Epic 4.
 
-### Epic 1 (Prerequisite Enabler Track): DevOps Foundation & Infrastructure
+### Track P1 (Prerequisite Enabler, Formerly Epic 1): DevOps Foundation & Infrastructure
 
 Developers and AI agents can clone, configure, build, and deploy the application with full CI/CD protection, automated security scanning, and a reproducible local development environment.
 
@@ -16,7 +16,7 @@ Developers and AI agents can clone, configure, build, and deploy the application
 
 ---
 
-### Epic 2 (Prerequisite Enabler Track): Backend Scaffolding & Data Foundation
+### Track P2 (Prerequisite Enabler, Formerly Epic 2): Backend Scaffolding & Data Foundation
 
 The Go backend is operational with Clean Architecture structure, database schema foundation, migration tooling, query generation, Redis infrastructure, observability instrumentation, and health endpoints — ready to receive feature implementations.
 
@@ -26,7 +26,7 @@ The Go backend is operational with Clean Architecture structure, database schema
 
 ---
 
-### Epic 3 (Prerequisite Enabler Track): Frontend Scaffolding & Design System
+### Track P3 (Prerequisite Enabler, Formerly Epic 3): Frontend Scaffolding & Design System
 
 The Next.js frontend is operational with App Router, design system tokens, component library integration, state management, API client generation, service worker, and observability — ready to receive feature implementations.
 
@@ -90,7 +90,7 @@ Sellers manage product catalog operations, track order journeys, coordinate deli
 
 **FRs covered:** FR40, FR41, FR46, FR48, FR50, FR52, FR53, FR63
 
-**Scope:** Product CRUD + media management, shareable product links, inventory tracking and low-stock alerts, pricing/bulk operations, order intake and lifecycle tracking, delivery coordination with customer progress updates, returns/refund workflows, customer feedback + dispute intake, and sales analytics.
+**Scope:** Product CRUD + media management, shareable product links, inventory tracking and low-stock alerts, pricing/bulk operations, order intake and lifecycle tracking, delivery coordination with customer progress updates, returns/refund workflows, customer feedback + dispute intake, and contextual sales insights surfaces.
 
 ---
 
@@ -135,7 +135,7 @@ Sellers analyze performance trends through contextual analytics, compare outcome
 
 **FRs covered:** FR64, FR65, FR66, FR67, FR68, FR69, FR70
 
-**Scope:** Engagement metrics dashboard, AI-vs-human performance comparison, revenue attribution + ROI tracking, growth trend analysis, customer behavior analytics, content performance insights, and exportable scheduled reports with contextual action prompts.
+**Scope:** Contextual engagement insights surfaces, AI-vs-human performance comparison, revenue attribution + ROI tracking, growth trend analysis, customer behavior analytics, content performance insights, and exportable scheduled reports with contextual action prompts.
 
 ---
 

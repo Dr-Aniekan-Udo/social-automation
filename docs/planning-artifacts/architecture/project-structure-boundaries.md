@@ -304,11 +304,12 @@ marketboss/
 
 | Boundary | From | To | Protocol |
 | --- | --- | --- | --- |
-| Client → BFF | Browser | Next.js `/api/v1/[...proxy]` | HTTPS |
-| BFF → Backend | Next.js server | Go `:8080` | HTTP (internal) |
-| Platform → Backend | Instagram/WhatsApp | Go `/api/v1/webhooks` | HTTPS webhooks |
-| Backend → AI | Go Privacy Proxy | DeepSeek/Gemini/GPT-4o | HTTPS |
-| Backend → Payment | Go adapter | Paystack/Flutterwave | HTTPS |
+| Client -> BFF | Browser | Next.js /api/v1/[...proxy] | HTTPS |
+| BFF -> Backend | Next.js server | Go :8080 | HTTP (internal) |
+| Platform -> Backend | Instagram/WhatsApp | Go /api/v1/webhooks | HTTPS webhooks |
+| Backend -> AI | Go Privacy Proxy | DeepSeek/Gemini/GPT-4o | HTTPS |
+| Backend -> Payment | Go adapter | Paystack/Flutterwave | HTTPS |
+| Backend -> Transcription | Go voice-support adapter | Managed STT provider(s) with fallback | HTTPS |
 
 #### Data Flow
 
@@ -324,27 +325,29 @@ Webhook arrival → handler → service (validates + business rules) → domain 
 
 | FR Domain | Backend Path | Frontend Route | Components | API Hook |
 | --- | --- | --- | --- | --- |
-| AI Content | `domain/ai/` → `service/ai/` → `adapter/ai/` | `settings/brand-voice/` | `messaging/DraftBox` | `useDrafts` |
-| Unified Inbox | `domain/messaging/` → `service/messaging/` | `messages/` | `messaging/*` | `useConversations`, `useMessages` |
-| Payments | `domain/payment/` → `service/payment/` | `payments/` | `payment/*` | `usePaymentLinks` |
-| Products | `domain/product/` → `service/product/` | `products/` | `product/*` | `useProducts` |
-| Analytics | `domain/analytics/` → `service/analytics/` | contextual surfaces in `feed/messages/home` (MVP), `analytics/` route post-MVP | `analytics/*` | `useAnalytics` |
-| Publishing | `domain/publishing/` → `service/publishing/` | (in feed) | `feed/*` | `usePosts` |
-| Multi-Tenancy | `domain/tenant/` → middleware → RLS | `settings/` | (implicit) | — |
-| Auth + RBAC | `domain/auth/` → `service/auth/` | `(auth)/` | — | — |
-| Revenue Feed | `domain/feed/` → `service/feed/` → SSE | `(dashboard)/page.tsx` | `feed/*` | `useFeed` |
+| AI Content | domain/ai/ -> service/ai/ -> adapter/ai/ | settings/brand-voice/ | messaging/DraftBox | useDrafts |
+| Unified Inbox | domain/messaging/ -> service/messaging/ | messages/ | messaging/* | useConversations, useMessages |
+| Support Voice Notes | domain/support/ -> service/support/ -> adapter/transcription/ | settings/support/ + support surfaces | support/VoiceNoteInput | useSupportTickets |
+| Payments | domain/payment/ -> service/payment/ | payments/ | payment/* | usePaymentLinks |
+| Products | domain/product/ -> service/product/ | products/ | product/* | useProducts |
+| Analytics | domain/analytics/ -> service/analytics/ | contextual surfaces in feed/messages/home (MVP), analytics/ route post-MVP | analytics/* | useAnalytics |
+| Publishing | domain/publishing/ -> service/publishing/ | (in feed) | feed/* | usePosts |
+| Multi-Tenancy | domain/tenant/ -> middleware -> RLS | settings/ | (implicit) | - |
+| Auth + RBAC | domain/auth/ -> service/auth/ | (auth)/ | - | - |
+| Revenue Feed | domain/feed/ -> service/feed/ -> SSE | (dashboard)/page.tsx | feed/* | useFeed |
 
 ### Cross-Cutting Concerns Location
 
 | Concern | Backend Location | Frontend Location |
 | --- | --- | --- |
-| Tenant isolation | `handler/middleware/tenant.go` + RLS | Implicit (cookies) |
-| Privacy Proxy | `service/ai/privacy_proxy.go` | — |
+| Tenant isolation | handler/middleware/tenant.go + RLS | Implicit (cookies) |
+| Privacy Proxy | service/ai/privacy_proxy.go | - |
+| Voice transcription | service/support/transcription_service.go + adapter/transcription/* (provider abstraction + fallback) | Voice-note capture components + transcription status UI |
 | Observability | OpenTelemetry middleware + Zap | Sentry SDK |
-| Rate limiting | `adapter/redis/rate_limiter.go` + middleware | 429 handling |
-| Offline support | — | `sw.ts` + `useNetworkStatus` + `OfflineBanner` |
-| Auth | `handler/middleware/auth.go` | `(auth)/` route group |
-| Error formatting | `handler/response.go` (RFC 7807) | `ErrorBoundary` + `ErrorState` |
+| Rate limiting | adapter/redis/rate_limiter.go + middleware | 429 handling |
+| Offline support | - | sw.ts + useNetworkStatus + OfflineBanner |
+| Auth | handler/middleware/auth.go | (auth)/ route group |
+| Error formatting | handler/response.go (RFC 7807) | ErrorBoundary + ErrorState |
 
 ### Validation Refinements (Advanced Elicitation)
 
@@ -371,6 +374,8 @@ The following 20 refinements were identified through 5 stress-testing methods (P
 7. **Action Endpoint Convention** — Sub-resource action endpoints use verbs: `POST /conversations/{id}/reply`, `POST /posts/{id}/publish`, `POST /payment-links/{id}/cancel`.
 8. **Publishing Scheduler Resilience** — Scheduled post publishing is idempotent. If the scheduler crashes mid-publish, it re-queues the post on restart without duplicating the publish action.
 9. **Async AI Drafts** — Draft generation returns immediately with a `pending` status. The completed draft is delivered via domain event → Redis Streams → SSE to the frontend DraftBox.
+
+10. **Voice-Note Transcription Boundary** - domain/support owns support-ticket voice notes; service/support/transcription_service.go orchestrates transcription with provider adapters in adapter/transcription/ and fallback provider routing. Contracts enforce NFR-P13 targets (<=10s for <=2-minute notes, >=85% Nigerian English accuracy).
 
 #### Minor Refinements
 

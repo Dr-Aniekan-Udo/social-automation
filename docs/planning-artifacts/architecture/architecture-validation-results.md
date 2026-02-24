@@ -14,33 +14,35 @@ Naming conventions are consistently mapped at each layer boundary: snake_case (D
 
 The Clean Architecture layer separation (domain → service → adapter → handler) is directly mirrored in the directory structure (`internal/domain/`, `internal/service/`, `internal/adapter/`, `internal/handler/`). Import rules are enforced by `go-arch-lint.yaml` in CI. Frontend feature grouping aligns with route structure. TanStack Query hooks map 1:1 to backend handler resources. ESLint custom rule enforces Zustand/API separation.
 
-### Requirements Coverage Validation ✅
+### Requirements Coverage Validation
 
 ##### Functional Requirements Coverage
 
 | FR Domain | Backend Path | Frontend Path | Status |
 | --- | --- | --- | --- |
-| AI Content Generation | `domain/ai/` → `service/ai/` → `adapter/ai/` → `handler/draft_handler.go` + `handler/brand_voice_handler.go` | `(dashboard)/content/`, `components/content/`, `hooks/api/useDrafts.ts` | ✅ |
-| Unified Inbox | `domain/messaging/` → `service/messaging/` → `adapter/platform/` → `handler/messaging_handler.go` | `(dashboard)/messages/`, `components/messaging/`, `hooks/api/useConversations.ts` | ✅ |
-| Payment Integration | `domain/payment/` → `service/payment/` → `adapter/payment/` → `handler/payment_handler.go` | `(dashboard)/payments/`, `components/payment/`, `hooks/api/usePaymentLinks.ts` | ✅ |
-| Product Catalog | `domain/product/` → `service/product/` → `adapter/postgres/` → `handler/product_handler.go` | `(dashboard)/products/`, `components/product/`, `hooks/api/useProducts.ts` | ✅ |
-| Analytics & Optimization | `domain/analytics/` â†’ `service/analytics/` â†’ `adapter/postgres/` â†’ `handler/analytics_handler.go` | contextual MVP surfaces in `(dashboard)/page.tsx`, `(dashboard)/messages/`, and feed cards; dedicated `(dashboard)/analytics/` is post-MVP/Growth (feature-gated) | âœ… |
-| Multi-Platform Publishing | `domain/publishing/` â†’ `service/publishing/` â†’ `adapter/platform/` â†’ `handler/publishing_handler.go` | `(dashboard)/content/`, `components/content/ScheduledQueue.tsx` (feed-native MVP queue); calendar UI deferred post-MVP/Growth | âœ… |
-| Revenue Command Feed | `domain/feed/` → `service/feed/` → `adapter/redis/event_bus.go` → `handler/sse_handler.go` | `(dashboard)/page.tsx`, `components/feed/`, `hooks/api/useFeed.ts` | ✅ |
+| AI Content Generation | domain/ai/ -> service/ai/ -> adapter/ai/ -> handler/draft_handler.go + handler/brand_voice_handler.go | (dashboard)/content/, components/content/, hooks/api/useDrafts.ts | OK |
+| Unified Inbox | domain/messaging/ -> service/messaging/ -> adapter/platform/ -> handler/messaging_handler.go | (dashboard)/messages/, components/messaging/, hooks/api/useConversations.ts | OK |
+| Support Voice Notes (FR98) | domain/support/ -> service/support/ -> adapter/transcription/ -> handler/support_handler.go | support surfaces + support settings flows | OK |
+| Payment Integration | domain/payment/ -> service/payment/ -> adapter/payment/ -> handler/payment_handler.go | (dashboard)/payments/, components/payment/, hooks/api/usePaymentLinks.ts | OK |
+| Product Catalog | domain/product/ -> service/product/ -> adapter/postgres/ -> handler/product_handler.go | (dashboard)/products/, components/product/, hooks/api/useProducts.ts | OK |
+| Analytics & Optimization | domain/analytics/ -> service/analytics/ -> adapter/postgres/ -> handler/analytics_handler.go | contextual MVP surfaces in (dashboard)/page.tsx, (dashboard)/messages/, and feed cards; dedicated (dashboard)/analytics/ is post-MVP/Growth (feature-gated) | OK |
+| Multi-Platform Publishing | domain/publishing/ -> service/publishing/ -> adapter/platform/ -> handler/publishing_handler.go | (dashboard)/content/, components/content/ScheduledQueue.tsx (feed-native MVP queue); calendar UI deferred post-MVP/Growth | OK |
+| Revenue Command Feed | domain/feed/ -> service/feed/ -> adapter/redis/event_bus.go -> handler/sse_handler.go | (dashboard)/page.tsx, components/feed/, hooks/api/useFeed.ts | OK |
 
 ##### Non-Functional Requirements Coverage
 
 | NFR | Architectural Support | Status |
 | --- | --- | --- |
-| Performance (LCP < 2.5s) | PWA + service worker + skeleton loading + virtual scrolling + CSS-only animations | ✅ |
-| Device support (2-3 GB RAM) | Virtual scrolling, bundle optimization, lazy loading, minimal JS | ✅ |
-| Offline capability | `sw.ts` + `useNetworkStatus` + `OfflineBanner` + IndexedDB draft persistence | ✅ |
-| Security (NDPA/GAID) | Privacy Proxy + `__Host-` cookies + RLS + Redis ACLs + PII stripping | ✅ |
-| Scalability | Clean Architecture + modular monolith + horizontal SSE scaling | ✅ |
-| Reliability | Rate limiter fails open + retry queues + SSE reconnection + circuit breakers | ✅ |
-| Network (3G) | Aggressive compression, lazy loading, bounded optimistic UI, offline-first | ✅ |
+| Performance (LCP < 2.5s) | PWA + service worker + skeleton loading + virtual scrolling + CSS-only animations | OK |
+| Device support (2-3 GB RAM) | Virtual scrolling, bundle optimization, lazy loading, minimal JS | OK |
+| Offline capability | sw.ts + useNetworkStatus + OfflineBanner + IndexedDB draft persistence | OK |
+| Security (NDPA/GAID) | Privacy Proxy + __Host- cookies + RLS + Redis ACLs + PII stripping | OK |
+| Scalability | Clean Architecture + modular monolith + horizontal SSE scaling | OK |
+| Reliability | Rate limiter fails open + retry queues + SSE reconnection + circuit breakers | OK |
+| Network (3G) | Aggressive compression, lazy loading, bounded optimistic UI, offline-first | OK |
+| Voice-note transcription (NFR-P13) | Dedicated transcription service boundary with provider-adapter abstraction, fallback provider path, and explicit latency/accuracy contract wiring | OK |
 
-### Implementation Readiness Validation ✅
+### Implementation Readiness Validation
 
 ##### Decision Completeness
 
@@ -142,6 +144,4 @@ Conflict points have been reconciled: Zustand/API separation (ESLint), domain ze
 ##### First Implementation Priority
 
 Initialize the project repository with the defined directory structure, configure CI pipelines (`backend-ci.yml`, `frontend-ci.yml`), set up Docker Compose for local development (PostgreSQL 18 + Redis 7.4), and implement the authentication domain as the foundation for all tenant-scoped features.
-
-
 

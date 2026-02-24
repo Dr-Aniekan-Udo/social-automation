@@ -135,3 +135,47 @@ All previously reported critical and major blockers in active planning artifacts
 
 - Archive synchronization remains deferred by explicit instruction:
   - `Archive/epics.md` will be aligned later in a separate step.
+
+## Addendum - Correct Course Remediation (2026-02-24)
+
+An additional Correct Course pass was executed to close remaining issues from the latest readiness reassessment.
+
+### Newly Resolved Items
+
+1. Hidden forward epic references in stories marked `Depends on: None`
+- Status: Resolved
+- Resolution: Removed forward-epic references or converted wording to capability-based phrasing in affected stories (4.5, 5.9, 6.4, 6.8, 7.3, 7.4, 7.6, 8.4, 9.4).
+- Validation: `Depends on: None` stories with forward epic references = 0.
+
+2. Story 10.3 scope and traceability mismatch (FR49 blended with FR104/FR110)
+- Status: Resolved
+- Resolution:
+  - Story 10.3 now covers FR49 fallback behavior only.
+  - Added Story 10.8 for FR104 and Story 10.9 for FR110.
+- Validation: Story 10.3 traceability now `FR=[FR49]`.
+
+3. Dashboard language conflict with contextual MVP analytics direction
+- Status: Resolved
+- Resolution:
+  - Story 8.8 renamed to `Contextual Sales Performance Insights`.
+  - Story 12.1 renamed to `Contextual Engagement Metrics Surfaces`.
+  - ACs now enforce contextual MVP surfaces; dedicated dashboard routes are post-MVP/gated.
+
+4. FR98/NFR-P13 architecture boundary explicitness
+- Status: Resolved
+- Resolution: Added explicit transcription boundary and architecture validation coverage rows for FR98 and NFR-P13.
+
+5. FR14 multimodal scope ambiguity
+- Status: Resolved
+- Resolution: FR14 updated in PRD and requirements inventory to include quick form and/or multimodal capture path while preserving canonical data fields.
+
+### Updated Validation Snapshot
+
+- Stories total: 100
+- Stories missing `Depends on:`: 0
+- Stories missing `Traceability:`: 0
+- `Depends on: None` stories with forward epic references: 0
+
+### Current Readiness Status
+
+**READY**

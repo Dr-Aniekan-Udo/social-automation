@@ -1,6 +1,6 @@
 # Stories
 
-### Epic 1: DevOps Foundation & Infrastructure
+### Track P1 (Prerequisite Enabler, Formerly Epic 1): DevOps Foundation & Infrastructure
 
 #### Story 1.1: GitHub Repository & Branching Strategy
 As a **developer or AI agent**,
@@ -34,7 +34,7 @@ So that I can immediately begin adding code to the correct locations with standa
 - **When** the monorepo structure is created
 - **Then** the following top-level directories exist: `backend/`, `frontend/`, `infra/`, `docs/`, `api/`, `.github/`
 - **And** `backend/` contains placeholder directories: `cmd/server/`, `internal/domain/`, `internal/service/`, `internal/adapter/`, `internal/handler/`, `migrations/`
-- **And** `frontend/` contains a placeholder `README.md` (scaffolded in Epic 3)
+- **And** `frontend/` contains a placeholder `README.md` (scaffolded in Track P3)
 - **And** `api/` contains a placeholder `openapi.yaml` with info section only
 - **And** `docs/events/` directory exists for the event schema registry
 - **And** a root `Makefile` exists with targets: `dev`, `test`, `lint`, `build`, `help`, `db-migrate-up`, `db-migrate-down`, `sqlc-generate`
@@ -158,15 +158,15 @@ So that validated code can be automatically deployed and runtime security is con
 **FRs covered:** None (Foundational/Additional)
 ---
 
-### Epic 2: Backend Scaffolding & Data Foundation
+### Track P2 (Prerequisite Enabler, Formerly Epic 2): Backend Scaffolding & Data Foundation
 
 #### Story 2.1: Go Project Layout & Module Init
 As a **developer or AI agent**,
 I want the Go backend project initialized with Clean Architecture directory structure and a minimal HTTP server,
 So that I have a working, runnable backend with the correct architectural boundaries from the start.
-**Depends on:** None
+**Depends on:** 1.2
 **Acceptance Criteria:**
-- **Given** the monorepo directory structure exists (Epic 1)
+- **Given** the monorepo directory structure exists (Track P1)
 - **When** the Go module is initialized in `backend/`
 - **Then** `go.mod` exists with module name `github.com/{org}/marketboss/backend` and Go 1.26
 - **And** `cmd/server/main.go` starts an `net/http` server on a configurable port (default 8080)
@@ -189,7 +189,7 @@ I want a PostgreSQL connection pool with tenant context injection,
 So that every database query is automatically scoped to the correct tenant via Row-Level Security.
 **Depends on:** 1.3, 2.1
 **Acceptance Criteria:**
-- **Given** the Go server starts (Story 2.1) and PostgreSQL is running (Epic 1, Story 1.3)
+- **Given** the Go server starts (Story 2.1) and PostgreSQL is running (Track P1, Story 1.3)
 - **When** the pgx/v5 connection pool is configured
 - **Then** the pool connects to PostgreSQL using the `DATABASE_URL` environment variable
 - **And** the pool has an `AfterRelease` hook that executes `RESET ALL` on every connection return
@@ -257,7 +257,7 @@ I want a Redis client with cache-aside helpers, rate limiter scaffold, and tenan
 So that caching, rate limiting, and real-time features have a reliable shared infrastructure from the start.
 **Depends on:** 1.3
 **Acceptance Criteria:**
-- **Given** the Go server starts and Redis is running (Epic 1, Story 1.3)
+- **Given** the Go server starts and Redis is running (Track P1, Story 1.3)
 - **When** the Redis client is initialized
 - **Then** it connects using the `REDIS_URL` environment variable
 - **And** all cache keys are namespaced by tenant: `tenant:{tenant_id}:{feature}:{key}`
@@ -288,7 +288,7 @@ So that the API contract is defined first and both backend and frontend consume 
 - **And** `make api-generate` (or equivalent) runs oapi-codegen and produces output in `internal/handler/generated/`
 - **And** the generated server interface is implemented by the handler layer
 - **And** a CI step validates the OpenAPI spec on each PR (`npx @redocly/cli lint api/openapi.yaml`)
-- **And** `api/` also contains an `openapi-typescript` config for frontend type generation (used in Epic 3)
+- **And** `api/` also contains an `openapi-typescript` config for frontend type generation (used in Track P3)
 - **And** the spec includes common response schemas: `PaginatedResponse`, `ErrorResponse` (RFC 7807)
 **Traceability:** FR=[None]; NFR=[NFR-S3, NFR-I1]; ADR=[ADR-1a, ADR-1b]; AR=[None]; ENB=[ENB-E2]
 **FRs covered:** None (Foundational/Additional)
@@ -336,15 +336,15 @@ So that all API errors are consistent, the server is resilient to panics, and cr
 **FRs covered:** None (Foundational/Additional)
 ---
 
-### Epic 3: Frontend Scaffolding & Design System
+### Track P3 (Prerequisite Enabler, Formerly Epic 3): Frontend Scaffolding & Design System
 
 #### Story 3.1: Next.js Project Initialization
 As a **developer or AI agent**,
 I want the Next.js 16 frontend project initialized with App Router, TypeScript, and Tailwind CSS 4,
 So that I have a working, runnable frontend with the correct project structure from the start.
-**Depends on:** None
+**Depends on:** 1.2
 **Acceptance Criteria:**
-- **Given** the monorepo directory structure exists (Epic 1)
+- **Given** the monorepo directory structure exists (Track P1)
 - **When** the Next.js project is created in `frontend/` using `create-next-app`
 - **Then** the project uses Next.js 16 with TypeScript strict mode enabled
 - **And** App Router is configured (not Pages Router)
@@ -432,7 +432,7 @@ I want auto-generated TypeScript types from the OpenAPI spec and a BFF proxy rou
 So that the frontend consumes type-safe API types without hardcoding backend URLs.
 **Depends on:** 2.6
 **Acceptance Criteria:**
-- **Given** the OpenAPI spec exists in `api/openapi.yaml` (Epic 2, Story 2.6)
+- **Given** the OpenAPI spec exists in `api/openapi.yaml` (Track P2, Story 2.6)
 - **When** the API client layer is set up
 - **Then** `openapi-typescript` generates TypeScript types from the OpenAPI spec into `src/types/api.generated.ts`
 - **And** a `make frontend-types` (or `npm run generate:types`) command regenerates types from the spec
@@ -630,7 +630,7 @@ So that I can take immediate action if my account is compromised.
 - **When** the event is persisted
 - **Then** it is stored in a `security_events` table (user_id, tenant_id, event_type, metadata JSONB, created_at) with RLS
 - **And** the table has an immutable constraint (no UPDATE or DELETE allowed via application role)
-- **And** security events are queryable by admins for troubleshooting (Epic 13)
+- **And** security events are queryable through internal admin troubleshooting APIs
 **Traceability:** FR=[FR107]; NFR=[NFR-S7, NFR-S9]; ADR=[ADR-2a, ADR-2b]; AR=[None]; ENB=[None]
 **FRs covered:** FR107
 ---
@@ -897,9 +897,9 @@ So that I experience the core value of MarketBoss immediately and complete onboa
 - **When** they reach the first post creation guide (FR11)
 - **Then** a step-by-step walkthrough appears: "1. Select a product → 2. Generate caption → 3. Review & edit → 4. Publish or schedule"
 - **And** each step highlights the relevant UI element with a tooltip/spotlight overlay
-- **And** the guide uses the AI content generation from Epic 6 (if available) or shows a "Coming soon — you'll create your first AI post here" placeholder with a skip option
+- **And** the guide uses AI content generation when enabled for the tenant, or shows a "Coming soon — you'll create your first AI post here" placeholder with a skip option
 - **And** the walkthrough is dismissible and can be replayed from settings
-- **Given** the seller completes all onboarding steps (or skips the first post if Epic 6 is not yet available)
+- **Given** the seller completes all onboarding steps (or skips the AI generation step if it is not yet enabled)
 - **When** the onboarding flow is marked complete
 - **Then** the `onboarding_status` in `seller_profiles` changes to `completed`
 - **And** the seller is redirected to the main dashboard/home feed
@@ -1009,7 +1009,7 @@ I want payment link CTAs embedded in my captions and assurance that my content i
 So that every post drives sales and my content doesn't look like other sellers' posts.
 **Depends on:** None
 **Acceptance Criteria:**
-- **Given** a seller generates a caption for a product that has a payment link (Epic 8)
+- **Given** a seller generates a caption for a product that has an active payment link
 - **When** the caption is generated
 - **Then** the AI automatically embeds a natural call-to-action with the payment link
 - **And** the CTA style matches the caption tone (e.g., "Tap the link to grab yours 👆" for casual, "Order now via secure checkout" for professional)
@@ -1117,9 +1117,9 @@ So that I'm never stuck without content options and can manage my usage within m
 - **When** AI budget tracking runs
 - **Then** each request's estimated cost is logged in the `ai_requests` table (token count × provider rate)
 - **And** cumulative monthly cost per tenant is tracked in a `tenant_ai_budgets` table (tenant_id, month, total_tokens, total_cost, budget_limit, created_at) with RLS
-- **And** when a tenant reaches 80% of their monthly budget, a warning is displayed (re-uses FR69 mechanism from Epic 12)
+- **And** when a tenant reaches 80% of their monthly budget, a warning is displayed using the FR69 usage-warning pattern
 - **And** when a tenant exceeds 100% of their budget, AI requests are routed to Tier 1 only (cheapest) instead of being blocked
-- **And** budget limits are configurable per tier (admin Epic 13)
+- **And** budget limits are configurable per tier through admin-managed tenant limit settings
 - **And** the seller can view their AI usage on a settings page: requests this month, tokens used, estimated cost
 **Traceability:** FR=[FR28]; NFR=[NFR-R4]; ADR=[ADR-1c, ADR-2d]; AR=[None]; ENB=[None]
 **FRs covered:** FR28
@@ -1247,7 +1247,7 @@ So that the platform never gets blocked by Instagram or WhatsApp and users exper
 - **Given** rate limiting is active
 - **When** the degradation persists
 - **Then** the system follows priority order: live DMs > scheduled posts > bulk communications
-- **And** rate limit events are logged for admin monitoring (Epic 13)
+- **And** rate limit events are logged for admin monitoring and alerting pipelines
 - **And** per-tenant rate limit state is tracked in Redis with tenant-scoped keys
 **Traceability:** FR=[FR34]; NFR=[NFR-I3]; ADR=[ADR-3d, ADR-1c]; AR=[None]; ENB=[None]
 **FRs covered:** FR34
@@ -1271,8 +1271,7 @@ So that customers get immediate acknowledgment even when I'm not working.
 - **And** the auto-response is sent within ≤2s of message receipt
 - **And** the seller can customize the auto-response message text and toggle it on/off
 - **And** auto-responses are sent at most once per customer per after-hours window (no spam on multiple messages)
-**And** auto-responses are clearly attributed as system-generated in the conversation log
-**And** the seller can customize after-hours responses (FR83 from Epic 11 team collaboration — interface added here)
+- **And** auto-responses are clearly attributed as system-generated in the conversation log
 **Traceability:** FR=[FR35]; NFR=[NFR-P8, NFR-R8]; ADR=[ADR-3d, ADR-1c]; AR=[None]; ENB=[None]
 **FRs covered:** FR35
 ---
@@ -1304,7 +1303,7 @@ I want my MarketBoss product catalog synced to my WhatsApp Business catalog,
 So that customers browsing my WhatsApp can see up-to-date products without me manually updating two systems.
 **Depends on:** None
 **Acceptance Criteria:**
-- **Given** a seller has a connected WhatsApp account (Epic 5) and products in their catalog (Epic 8)
+- **Given** a seller has a connected WhatsApp account and products in their catalog
 - **When** catalog sync is triggered
 - **Then** products are synced to the WhatsApp Business Catalog via the Catalog API
 - **And** sync includes: product name, description, price (₦), availability, image URL, product URL
@@ -1433,7 +1432,7 @@ I want to create orders from customer conversations and track them through a com
 So that I have a reliable system for managing every sale from inquiry to delivery.
 **Depends on:** None
 **Acceptance Criteria:**
-- **Given** a seller is managing customer conversations (Epic 9)
+- **Given** a seller is managing customer conversations in the inbox
 - **When** they create an order from a conversation
 - **Then** an order is created via `POST /api/v1/orders` with: customer_id, line items (product_id, quantity, unit_price), delivery_address, payment_method, notes
 - **And** the order is stored in an `orders` table (tenant_id, order_number, customer_id, status, total_amount, delivery_address, payment_status, created_at, updated_at) with RLS
@@ -1535,15 +1534,15 @@ So that I can improve service quality and resolve issues before they escalate.
 **FRs covered:** FR63
 ---
 
-#### Story 8.8: Sales Analytics Dashboard
+#### Story 8.8: Contextual Sales Performance Insights
 As a **seller**,
-I want a sales analytics dashboard showing revenue, top products, conversion rates, and repeat customers,
+I want contextual sales performance insights showing revenue, top products, conversion rates, and repeat customers,
 So that I can make data-driven decisions about my business and identify growth opportunities.
 **Depends on:** None
 **Acceptance Criteria:**
 - **Given** a seller has order history
-- **When** they view the sales analytics dashboard
-- **Then** the dashboard shows for a selectable period (7d, 30d, 90d, custom):
+- **When** they open home/feed/inbox contextual insights cards
+- **Then** the contextual insights show for a selectable period (7d, 30d, 90d, custom):
   - **Revenue chart**: line chart of daily/weekly revenue (₦) with trend indicator
   - **Top products**: ranked list of products by revenue and units sold
   - **Conversion rate**: posts published → inquiries → orders → deliveries funnel
@@ -1551,14 +1550,14 @@ So that I can make data-driven decisions about my business and identify growth o
   - **Average order value**: total revenue ÷ total orders
 - **And** all analytics are computed from the seller's own data only (tenant-scoped)
 - **And** analytics queries are optimized with materialized views or pre-computed aggregates refreshed daily
-- **And** the dashboard loads within ≤3s for up to 12 months of data (NFR-P10)
+- **And** contextual insight surfaces load within ≤4s for up to 90 days of data (NFR-P5)
 - **And** all monetary values are displayed in ₦ with proper Nigerian formatting
 - **And** charts use the design system color tokens and are mobile-responsive
-- **And** the dashboard is a Server Component (Next.js) for initial load, with client-side interactivity for period selection
-**Traceability:** FR=[FR50]; NFR=[NFR-P10]; ADR=[ADR-1a, ADR-1c]; AR=[None]; ENB=[None]
+- **And** selecting an insight opens an inline detail panel or bottom sheet (not a dedicated MVP dashboard page)
+- **And** any dedicated full analytics dashboard route is feature-gated for post-MVP/Growth
+**Traceability:** FR=[FR50]; NFR=[NFR-P5]; ADR=[ADR-1a, ADR-1c]; AR=[None]; ENB=[None]
 **FRs covered:** FR50
 ---
-
 ### Epic 9: Customer Engagement & Conversational Commerce
 
 #### Story 9.1: Unified Inbox & Conversation Threading
@@ -1645,7 +1644,7 @@ So that I always know what's been communicated to my customers and by whom.
 - **Then** each message shows a clear attribution badge: "AI" (auto-generated), "You" (seller), team member name, or "System" (auto-responses, notifications)
 - **And** AI-generated messages show a subtle indicator (e.g., ⚡ icon) distinguishable from human messages
 - **And** the `sender_type` field in the `messages` table accurately records: `customer`, `seller`, `ai`, `team_member`, `system`
-- **And** team member messages show the team member's name (from Epic 11)
+- **And** team member messages show the responding team member's display name when applicable
 - **And** system messages (after-hours auto-reply, order updates) are styled differently from human/AI messages
 - **And** attribution is visible to the seller but NOT visible to the customer (customer sees all messages as from the business)
 - **And** attribution cannot be forged or changed after message creation
@@ -1772,27 +1771,27 @@ So that I know immediately when a customer pays and can process their order with
 **FRs covered:** FR43, FR44, FR51, FR105
 ---
 
-#### Story 10.3: Multi-Payment Method Support
+#### Story 10.3: Payment Provider Outage Fallback
 
 As a **seller**,
-I want customers to pay via bank transfer, cards, USSD, and mobile money,
-So that no customer is turned away because their preferred payment method isn't available.
-**Depends on:** None
+I want an automatic fallback payment option when the primary provider is unavailable,
+So that I can still collect payments during provider outages.
+**Depends on:** 10.1, 10.2
 **Acceptance Criteria:**
 
-- **Given** a seller generates a payment link
-- **When** the customer opens the Paystack payment page
-- **Then** the following payment methods are available (via Paystack's built-in support): card (Visa, Mastercard, Verve), bank transfer, USSD, mobile money
-- **And** the seller can configure which payment methods to enable/disable in settings
-- **And** payment method preference is stored in `payment_configs`
-- **And** the seller configures billing notification channels per event type: push, WhatsApp, SMS, and email
-- **And** the seller can upgrade or downgrade subscription tier from billing settings with a before/after limit preview
-- **And** each successful payment records the method used in the `payment_links` table
-- **And** payment method analytics are available: breakdown by method for the seller's transactions
-**Traceability:** FR=[FR104, FR110, FR49]; NFR=[NFR-P4, NFR-S5]; ADR=[ADR-2d, ADR-3c]; AR=[None]; ENB=[None]
-**FRs covered:** FR49, FR104, FR110
+- **Given** primary payment-provider health checks fail repeatedly or checkout initialization returns provider-unavailable
+- **When** fallback mode is activated
+- **Then** affected checkout flows switch to a bank-transfer fallback within 60 seconds
+- **And** fallback instructions include account name, account number, bank name, amount, and unique payment reference
+- **And** the seller and buyer are notified that fallback mode is active and primary checkout will resume automatically when recovered
+- **And** fallback payment attempts are logged with status `pending_manual_confirmation` in `payment_events`
+- **Given** fallback mode is active
+- **When** provider health remains stable for 5 consecutive minutes
+- **Then** primary provider checkout is restored automatically for new payment links
+- **And** fallback-mode events remain auditable with start/end timestamps
+**Traceability:** FR=[FR49]; NFR=[NFR-R9, NFR-P4]; ADR=[ADR-2d, ADR-3c]; AR=[None]; ENB=[None]
+**FRs covered:** FR49
 ---
-
 #### Story 10.4: Installment Payments & Partial Payments
 As a **seller**,
 I want to offer installment plans and accept partial payments,
@@ -1884,6 +1883,40 @@ So that I can respond to chargebacks promptly and comply with financial regulati
 **FRs covered:** None (Foundational/Additional)
 ---
 
+#### Story 10.8: Billing Notification Channel Preferences
+As a **seller**,
+I want to configure billing notification channels per event type,
+So that I receive payment and billing updates on the channels that work best for me.
+**Depends on:** 10.2
+**Acceptance Criteria:**
+- **Given** a seller opens billing notification settings
+- **When** they configure preferences for billing events
+- **Then** they can enable/disable push, WhatsApp, SMS, and email per event type (payment received, grace warning, downgrade, suspension, invoice issued)
+- **And** preferences are stored in `notification_preferences` scoped by tenant and user
+- **And** channel selection validates availability (e.g., WhatsApp requires connected number, SMS requires verified phone)
+- **And** delivery attempts follow the critical-event fallback rule (primary + fallback channel within 5 minutes)
+- **And** preference updates are audited with actor, timestamp, and changed fields
+**Traceability:** FR=[FR104]; NFR=[NFR-R14, NFR-P10]; ADR=[ADR-2d, ADR-3c]; AR=[None]; ENB=[None]
+**FRs covered:** FR104
+---
+
+#### Story 10.9: Subscription Tier Upgrade/Downgrade
+As a **seller**,
+I want to upgrade or downgrade my subscription tier with clear impact preview,
+So that I can choose the right plan without billing surprises.
+**Depends on:** 10.5
+**Acceptance Criteria:**
+- **Given** a seller is on the billing plan page
+- **When** they select a new tier
+- **Then** the UI shows current vs new limits (posts, messages, products, connected accounts) before confirmation
+- **And** the change flow shows proration/next-charge impact and effective-date behavior
+- **And** upgrade changes apply immediately after successful payment authorization
+- **And** downgrade changes apply at cycle boundary unless seller confirms immediate downgrade rules
+- **And** tier changes are persisted in billing records and emitted as auditable events
+- **And** sellers receive confirmation notifications through their configured billing channels
+**Traceability:** FR=[FR110]; NFR=[NFR-P4, NFR-S5]; ADR=[ADR-2d, ADR-3c]; AR=[None]; ENB=[None]
+**FRs covered:** FR110
+---
 ### Epic 11: Team Collaboration & Role Management
 
 #### Story 11.1: Role-Based Team Member Management
@@ -2053,25 +2086,25 @@ So that I can refresh product data before stale information affects AI replies a
 ---
 ### Epic 12: Growth Insights & Contextual Analytics
 
-#### Story 12.1: Engagement Metrics Dashboard
+#### Story 12.1: Contextual Engagement Metrics Surfaces
 As a **seller**,
 I want to see how my social posts perform across platforms,
 So that I know what content resonates and can create more effective posts.
 **Depends on:** None
 **Acceptance Criteria:**
-- **Given** a seller has published posts (Epic 7)
-- **When** they view the engagement dashboard
-- **Then** the dashboard shows for each post: likes, comments, shares, saves, reach, impressions 
+- **Given** a seller has published posts
+- **When** they view engagement insights in home/feed/inbox contextual surfaces
+- **Then** contextual cards show per-post metrics: likes, comments, shares, saves, reach, impressions
 - **And** engagement data is fetched from Instagram Insights API and stored in a `post_metrics` table (tenant_id, post_id, platform, metric_type, value, fetched_at) with RLS
 - **And** metrics are refreshed daily via a background job (not real-time)
-- **And** aggregate metrics show: total engagement rate, average engagement per post, best performing posts 
-- **And** engagement trends are visualized as line/bar charts over time
-- **And** the dashboard is filterable by: platform, date range, post type
-- **And** the dashboard loads within ≤3s
-**Traceability:** FR=[FR64]; NFR=[NFR-P5, NFR-P10]; ADR=[ADR-1d, ADR-4a]; AR=[None]; ENB=[None]
+- **And** aggregate insights show: total engagement rate, average engagement per post, best-performing posts
+- **And** selecting a card opens an inline trend view (line/bar charts) without requiring a dedicated MVP dashboard page
+- **And** engagement insights are filterable by platform, date range, and post type
+- **And** contextual insight surfaces load within ≤4s
+- **And** dedicated analytics dashboard routes remain feature-gated for post-MVP/Growth
+**Traceability:** FR=[FR64]; NFR=[NFR-P5]; ADR=[ADR-1d, ADR-4a]; AR=[None]; ENB=[None]
 **FRs covered:** FR64
 ---
-
 #### Story 12.2: AI vs Human Performance Comparison
 As a **seller**,
 I want to compare AI-generated content performance against my manually created content,
@@ -2313,6 +2346,7 @@ So that I can track growth, identify trends, and report to stakeholders.
 - **And** all platform analytics aggregate across tenants (no individual tenant data in platform reports)
 **Traceability:** FR=[FR96, FR97, FR98]; NFR=[NFR-S10, NFR-S6]; ADR=[ADR-2c, ADR-3c]; AR=[None]; ENB=[None]
 **FRs covered:** FR96, FR97, FR98
+
 
 
 

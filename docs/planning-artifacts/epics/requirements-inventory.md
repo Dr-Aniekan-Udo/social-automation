@@ -17,7 +17,7 @@
 - FR11: System guides new sellers through first post creation step-by-step
 - FR12: Seller completes a Business Profile Form during onboarding capturing: business name, description, product categories, pricing ranges, shipping policy (delivery areas, costs, timelines), return/refund policy, accepted payment methods, operating hours, physical location (if applicable), contact channels, and common FAQs
 - FR13: System ingests product information from connected social platforms (Instagram product tags, WhatsApp catalog) and pre-fills Business Profile fields where possible
-- FR14: Seller fills a minimal per-product quick form when creating a post (product name, price, key features, availability) to give AI sufficient context for generating responses to buyer inquiries
+- FR14: Seller captures minimal per-product data when creating a post using quick form and/or multimodal shortcuts (camera-assisted product capture and voice input), always storing product name, price, key features, and availability so AI has sufficient context for buyer inquiry responses
 - FR15: AI analyzes the combined Business Profile + product data against a library of common buyer questions and displays an advisory gap indicator
 - FR16: Business Profile and per-product data feed into the RAG pipeline, enabling AI to answer buyer DMs and generate content with accurate, seller-specific information
 
