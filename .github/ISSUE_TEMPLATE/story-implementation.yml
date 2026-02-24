@@ -1,0 +1,37 @@
+name: Story Implementation
+description: Track implementation of an approved story
+title: "[Story]: "
+labels: ["feature", "priority:p1"]
+body:
+  - type: input
+    id: story_id
+    attributes:
+      label: Story ID
+      description: e.g. 1-1-github-repository-branching-strategy
+      placeholder: story-id
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is included and excluded for this implementation?
+      placeholder: List in-scope and out-of-scope items.
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Task Checklist
+      description: Add concrete implementation tasks
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: Commands, screenshots, or logs used to verify completion
+      placeholder: Include exact verification evidence.
