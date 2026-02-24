@@ -1,0 +1,168 @@
+# generated: 2026-02-24T17:36:54+01:00
+# project: social-automation
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: {implementation_artifacts}
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-02-24T17:36:54+01:00
+project: social-automation
+project_key: NOKEY
+tracking_system: file-system
+story_location: "{implementation_artifacts}"
+
+development_status:
+  epic-1: in-progress
+  1-1-github-repository-branching-strategy: in-progress
+  1-2-monorepo-directory-structure-makefile: backlog
+  1-3-docker-compose-local-development-environment: backlog
+  1-4-backend-ci-pipeline-github-actions: backlog
+  1-5-frontend-ci-pipeline-github-actions: backlog
+  1-6-security-scanning-pipeline: backlog
+  1-7-deployment-pipeline-foundation: backlog
+  epic-1-retrospective: optional
+  epic-2: backlog
+  2-1-go-project-layout-module-init: backlog
+  2-2-database-connection-pool-tenant-context: backlog
+  2-3-migration-tooling-base-schema: backlog
+  2-4-sqlc-configuration-initial-queries: backlog
+  2-5-redis-client-infrastructure: backlog
+  2-6-openapi-spec-code-generation: backlog
+  2-7-structured-logging-observability: backlog
+  2-8-error-handling-middleware-stack: backlog
+  epic-2-retrospective: optional
+  epic-3: backlog
+  3-1-next-js-project-initialization: backlog
+  3-2-design-system-tokens-global-styles: backlog
+  3-3-shadcn-ui-component-library-setup: backlog
+  3-4-state-management-data-fetching: backlog
+  3-5-api-client-type-generation: backlog
+  3-6-shared-ui-components: backlog
+  3-7-service-worker-offline-foundation: backlog
+  3-8-frontend-testing-dev-tooling: backlog
+  epic-3-retrospective: optional
+  epic-4: backlog
+  4-1-registration-otp-verification: backlog
+  4-2-jwt-authentication-login: backlog
+  4-3-tenant-provisioning-isolation-testing: backlog
+  4-4-session-management: backlog
+  4-5-suspicious-activity-detection: backlog
+  4-6-frontend-auth-pages: backlog
+  4-7-auth-rate-limiting-security-hardening: backlog
+  epic-4-retrospective: optional
+  epic-5: backlog
+  5-1-platform-selection-onboarding-flow: backlog
+  5-2-instagram-business-api-connection: backlog
+  5-3-whatsapp-business-api-connection: backlog
+  5-4-brand-voice-training: backlog
+  5-5-business-profile-form: backlog
+  5-6-product-category-compliance: backlog
+  5-7-social-data-ingestion-pre-fill: backlog
+  5-8-per-product-quick-form-rag-integration: backlog
+  5-9-first-post-guide-onboarding-completion: backlog
+  epic-5-retrospective: optional
+  epic-6: backlog
+  6-1-ai-pipeline-smoke-test: backlog
+  6-2-privacy-proxy-3-tier-ai-router: backlog
+  6-3-brand-voice-caption-generation: backlog
+  6-4-payment-link-cta-content-uniqueness: backlog
+  6-5-batch-generation-fidelity-scoring: backlog
+  6-6-nigerian-market-localization: backlog
+  6-7-learning-from-seller-corrections: backlog
+  6-8-fallback-templates-ai-budget-tracking: backlog
+  6-9-hybrid-composition-image-pipeline: backlog
+  6-10-layout-templates-brand-kit-onboarding: backlog
+  epic-6-retrospective: optional
+  epic-7: backlog
+  7-1-instagram-post-publishing: backlog
+  7-2-ai-recommended-scheduling-queue-management: backlog
+  7-3-rate-limit-detection-graceful-degradation: backlog
+  7-4-business-hours-after-hours-auto-responses: backlog
+  7-5-message-delivery-prioritization: backlog
+  7-6-whatsapp-catalog-sync: backlog
+  7-7-segmented-messaging-platform-health: backlog
+  epic-7-retrospective: optional
+  epic-8: backlog
+  8-1-product-crud-media-upload: backlog
+  8-2-inventory-tracking-low-stock-alerts: backlog
+  8-3-pricing-engine-bulk-operations: backlog
+  8-4-order-intake-status-tracking: backlog
+  8-5-delivery-coordination: backlog
+  8-6-returns-refund-processing: backlog
+  8-7-customer-feedback-disputes: backlog
+  8-8-contextual-sales-performance-insights: backlog
+  epic-8-retrospective: optional
+  epic-9: backlog
+  9-1-unified-inbox-conversation-threading: backlog
+  9-2-ai-auto-response-engine: backlog
+  9-3-human-handoff-escalation: backlog
+  9-4-ai-human-message-attribution: backlog
+  9-5-customer-labels-segmentation: backlog
+  9-6-quick-reply-templates-saved-responses: backlog
+  9-7-customer-purchase-history-conversation-insights: backlog
+  epic-9-retrospective: optional
+  epic-10: backlog
+  10-1-payment-link-generation-paystack: backlog
+  10-2-payment-status-tracking-webhooks: backlog
+  10-3-payment-provider-outage-fallback: backlog
+  10-4-installment-payments-partial-payments: backlog
+  10-5-payment-reconciliation-reports: backlog
+  10-6-refund-processing-via-paystack: backlog
+  10-7-payment-dispute-handling-security: backlog
+  10-8-billing-notification-channel-preferences: backlog
+  10-9-subscription-tier-upgrade-downgrade: backlog
+  epic-10-retrospective: optional
+  epic-11: backlog
+  11-1-role-based-team-member-management: backlog
+  11-2-conversation-assignment-transfer: backlog
+  11-3-internal-notes-team-communication: backlog
+  11-4-team-performance-analytics: backlog
+  11-5-workload-based-auto-assignment: backlog
+  11-6-team-activity-audit-log: backlog
+  11-7-emergency-pause-auto-replies: backlog
+  11-8-catalog-staleness-warning-6-hours: backlog
+  epic-11-retrospective: optional
+  epic-12: backlog
+  12-1-contextual-engagement-metrics-surfaces: backlog
+  12-2-ai-vs-human-performance-comparison: backlog
+  12-3-revenue-attribution-roi-tracking: backlog
+  12-4-growth-trend-analysis-recommendations: backlog
+  12-5-customer-behavior-analytics: backlog
+  12-6-content-performance-insights: backlog
+  12-7-report-export-scheduled-reports: backlog
+  epic-12-retrospective: optional
+  epic-13: backlog
+  13-1-super-admin-dashboard-tenant-overview: backlog
+  13-2-tenant-suspension-health-monitoring: backlog
+  13-3-system-configuration-feature-flags: backlog
+  13-4-compliance-document-review-workflow: backlog
+  13-5-platform-wide-analytics-reporting: backlog
+  epic-13-retrospective: optional
