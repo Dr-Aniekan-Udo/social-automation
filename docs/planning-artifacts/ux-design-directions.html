@@ -1,0 +1,2201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketBoss — Design Direction Mockups</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-700: #047857;
+            --primary-600: #059669;
+            --primary-500: #10B981;
+            --primary-400: #34D399;
+            --accent-600: #D97706;
+            --accent-500: #F59E0B;
+            --accent-400: #FBBF24;
+            --neutral-900: #0F172A;
+            --neutral-800: #1E293B;
+            --neutral-700: #334155;
+            --neutral-400: #94A3B8;
+            --neutral-300: #CBD5E1;
+            --neutral-100: #F1F5F9;
+            --neutral-50: #F8FAFC;
+            --error: #EF4444;
+            --info: #3B82F6;
+            --support: #D97706;
+            --font-ui: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --radius: 12px;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background: var(--neutral-900);
+            color: var(--neutral-100);
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .showcase-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--neutral-800);
+            padding: var(--space-4) var(--space-6);
+        }
+
+        .showcase-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: var(--space-1);
+        }
+
+        .showcase-header p {
+            font-size: 13px;
+            color: var(--neutral-400);
+        }
+
+        /* ===== NAV TABS ===== */
+        .direction-tabs {
+            display: flex;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            background: var(--neutral-800);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .direction-tabs button {
+            flex-shrink: 0;
+            padding: var(--space-2) var(--space-4);
+            border-radius: 8px;
+            border: 1px solid var(--neutral-700);
+            background: transparent;
+            color: var(--neutral-400);
+            font-family: var(--font-ui);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .direction-tabs button:hover {
+            border-color: var(--primary-500);
+            color: var(--neutral-100);
+        }
+
+        .direction-tabs button.active {
+            background: var(--primary-500);
+            border-color: var(--primary-500);
+            color: white;
+        }
+
+        /* ===== MOCKUP CONTAINER ===== */
+        .mockup-viewport {
+            max-width: 390px;
+            margin: var(--space-6) auto;
+            background: var(--neutral-50);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg), 0 0 0 1px var(--neutral-700);
+            min-height: 780px;
+            position: relative;
+        }
+
+        .direction-panel {
+            display: none;
+        }
+
+        .direction-panel.active {
+            display: block;
+        }
+
+        /* ===== DIRECTION INFO ===== */
+        .direction-info {
+            padding: var(--space-5) var(--space-6);
+            background: var(--neutral-800);
+            margin: 0 var(--space-6) var(--space-3);
+            border-radius: var(--radius);
+        }
+
+        .direction-info h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-400);
+            margin-bottom: var(--space-2);
+        }
+
+        .direction-info p {
+            font-size: 13px;
+            color: var(--neutral-400);
+            line-height: 1.5;
+        }
+
+        .direction-info .tags {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        .direction-info .tag {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--neutral-700);
+            color: var(--neutral-300);
+        }
+
+        /* ===== PHONE MOCKUP SHARED ===== */
+        .phone-status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-2) var(--space-4);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neutral-700);
+        }
+
+        .phone-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            border-top: 1px solid var(--neutral-300);
+            padding-bottom: 8px;
+        }
+
+        .phone-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 10px;
+            color: var(--neutral-400);
+            font-weight: 500;
+        }
+
+        .phone-nav .nav-item.active {
+            color: var(--primary-500);
+        }
+
+        .phone-nav .nav-item .nav-icon {
+            font-size: 20px;
+        }
+
+        /* ===== DIRECTION 1: CLEAN DASHBOARD ===== */
+        .d1-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) var(--space-6);
+            background: white;
+        }
+
+        .d1-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .d1-header .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-400));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .d1-revenue-card {
+            margin: 0 var(--space-6) var(--space-4);
+            padding: var(--space-5);
+            background: var(--neutral-900);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .d1-revenue-label {
+            font-size: 12px;
+            color: var(--neutral-400);
+            margin-bottom: var(--space-1);
+        }
+
+        .d1-revenue-amount {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-500);
+            letter-spacing: -0.5px;
+        }
+
+        .d1-revenue-change {
+            font-size: 12px;
+            color: var(--primary-400);
+            margin-top: var(--space-1);
+        }
+
+        .d1-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-900);
+            padding: var(--space-2) var(--space-6);
+        }
+
+        .d1-dm-card {
+            margin: var(--space-2) var(--space-6);
+            padding: var(--space-4);
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 3px solid var(--primary-500);
+            display: flex;
+            gap: var(--space-3);
+            align-items: flex-start;
+        }
+
+        .d1-dm-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--neutral-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .d1-dm-content {
+            flex: 1;
+        }
+
+        .d1-dm-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .d1-dm-msg {
+            font-size: 13px;
+            color: var(--neutral-700);
+            margin-top: 2px;
+        }
+
+        .d1-dm-meta {
+            display: flex;
+            gap: var(--space-3);
+            margin-top: var(--space-2);
+            font-size: 11px;
+            color: var(--neutral-400);
+        }
+
+        .d1-dm-price {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            color: var(--primary-500);
+        }
+
+        /* ===== DIRECTION 2: CONVERSATION-FIRST ===== */
+        .d2-chat-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-6);
+            background: var(--primary-500);
+            color: white;
+        }
+
+        .d2-chat-header .back {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .d2-chat-header .contact-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .d2-chat-header .contact-status {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .d2-priming-card {
+            margin: var(--space-3) var(--space-4);
+            padding: var(--space-3) var(--space-4);
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: var(--radius);
+            border: 1px solid var(--accent-500);
+        }
+
+        .d2-priming-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .d2-priming-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+        }
+
+        .d2-priming-item {
+            font-size: 12px;
+            color: var(--neutral-700);
+        }
+
+        .d2-priming-item strong {
+            color: var(--neutral-900);
+        }
+
+        .d2-chat-area {
+            padding: var(--space-4);
+            min-height: 280px;
+        }
+
+        .d2-bubble {
+            max-width: 80%;
+            padding: var(--space-3) var(--space-4);
+            border-radius: 16px;
+            margin-bottom: var(--space-3);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .d2-bubble.received {
+            background: white;
+            color: var(--neutral-900);
+            border-bottom-left-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .d2-bubble.draft {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid var(--primary-400);
+            border-bottom-right-radius: 4px;
+            margin-left: auto;
+        }
+
+        .d2-draft-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--primary-600);
+            margin-bottom: var(--space-1);
+        }
+
+        .d2-draft-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+            font-size: 11px;
+            color: var(--accent-600);
+        }
+
+        .d2-draft-actions {
+            display: flex;
+            gap: var(--space-3);
+            margin-top: var(--space-3);
+            justify-content: flex-end;
+        }
+
+        .d2-draft-actions button {
+            padding: var(--space-2) var(--space-5);
+            border-radius: 24px;
+            border: none;
+            font-family: var(--font-ui);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            height: 44px;
+        }
+
+        .d2-btn-edit {
+            background: var(--neutral-100);
+            color: var(--neutral-700);
+            border: 1px solid var(--neutral-300) !important;
+        }
+
+        .d2-btn-send {
+            background: var(--primary-500);
+            color: white;
+            min-width: 100px;
+        }
+
+        /* ===== DIRECTION 3: REVENUE-FOCUSED ===== */
+        .d3-hero {
+            background: var(--neutral-900);
+            padding: var(--space-5) var(--space-6);
+            text-align: center;
+        }
+
+        .d3-hero-label {
+            font-size: 11px;
+            color: var(--neutral-400);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .d3-hero-amount {
+            font-family: var(--font-mono);
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent-500);
+            margin: var(--space-2) 0;
+        }
+
+        .d3-hero-sub {
+            font-size: 13px;
+            color: var(--primary-400);
+        }
+
+        .d3-quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            background: var(--neutral-800);
+        }
+
+        .d3-stat {
+            text-align: center;
+            padding: var(--space-3);
+            background: var(--neutral-900);
+            border-radius: 8px;
+        }
+
+        .d3-stat-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-400);
+        }
+
+        .d3-stat-label {
+            font-size: 10px;
+            color: var(--neutral-400);
+            margin-top: 2px;
+        }
+
+        .d3-action-cards {
+            padding: var(--space-4) var(--space-6);
+        }
+
+        .d3-action-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: var(--space-3);
+        }
+
+        .d3-action-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .d3-action-icon.green {
+            background: #ECFDF5;
+        }
+
+        .d3-action-icon.gold {
+            background: #FEF3C7;
+        }
+
+        .d3-action-icon.blue {
+            background: #EFF6FF;
+        }
+
+        .d3-action-text h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .d3-action-text p {
+            font-size: 12px;
+            color: var(--neutral-700);
+            margin-top: 2px;
+        }
+
+        .d3-action-badge {
+            margin-left: auto;
+            background: var(--error);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== DIRECTION 4: WHATSAPP-NATIVE ===== */
+        .d4-header {
+            background: #075E54;
+            padding: var(--space-3) var(--space-6);
+            color: white;
+        }
+
+        .d4-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .d4-tabs {
+            display: flex;
+            gap: 0;
+            margin-top: var(--space-3);
+        }
+
+        .d4-tab {
+            flex: 1;
+            text-align: center;
+            padding: var(--space-2);
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .d4-tab.active {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .d4-chat-list {
+            background: white;
+        }
+
+        .d4-chat-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-6);
+            border-bottom: 1px solid var(--neutral-100);
+        }
+
+        .d4-chat-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--neutral-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .d4-chat-content {
+            flex: 1;
+        }
+
+        .d4-chat-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--neutral-900);
+        }
+
+        .d4-chat-preview {
+            font-size: 13px;
+            color: var(--neutral-400);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .d4-chat-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .d4-chat-time {
+            font-size: 11px;
+            color: var(--neutral-400);
+        }
+
+        .d4-chat-badge {
+            background: var(--primary-500);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+            margin-left: auto;
+        }
+
+        .d4-ai-indicator {
+            font-size: 10px;
+            color: var(--primary-500);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ===== DIRECTION 5: CARD-BASED ACTIONS ===== */
+        .d5-greeting {
+            padding: var(--space-5) var(--space-6) var(--space-3);
+            background: white;
+        }
+
+        .d5-greeting h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .d5-greeting p {
+            font-size: 13px;
+            color: var(--neutral-400);
+            margin-top: var(--space-1);
+        }
+
+        .d5-swipe-section {
+            padding: var(--space-2) 0;
+        }
+
+        .d5-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-2) var(--space-6);
+        }
+
+        .d5-section-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .d5-section-header a {
+            font-size: 12px;
+            color: var(--primary-500);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .d5-scroll-row {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-6);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .d5-action-card {
+            flex-shrink: 0;
+            width: 280px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .d5-action-card-header {
+            padding: var(--space-3) var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .d5-action-card-header .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .d5-action-card-header .text h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .d5-action-card-header .text p {
+            font-size: 11px;
+            color: var(--neutral-400);
+        }
+
+        .d5-action-card-body {
+            padding: 0 var(--space-4) var(--space-4);
+            font-size: 13px;
+            color: var(--neutral-700);
+            line-height: 1.4;
+        }
+
+        .d5-action-card-footer {
+            padding: var(--space-3) var(--space-4);
+            border-top: 1px solid var(--neutral-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .d5-action-card-footer .price {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-500);
+        }
+
+        .d5-action-card-footer button {
+            padding: var(--space-2) var(--space-4);
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ===== DIRECTION 6: MINIMALIST COMMAND ===== */
+        .d6-top {
+            padding: var(--space-5) var(--space-6);
+            background: white;
+            text-align: center;
+        }
+
+        .d6-top .amount {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .d6-top .label {
+            font-size: 12px;
+            color: var(--neutral-400);
+            margin-top: var(--space-1);
+        }
+
+        .d6-command-bar {
+            margin: var(--space-3) var(--space-6);
+            padding: var(--space-3) var(--space-4);
+            background: var(--neutral-100);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            border: 1px solid var(--neutral-300);
+            font-size: 14px;
+            color: var(--neutral-400);
+        }
+
+        .d6-command-bar .icon {
+            font-size: 18px;
+        }
+
+        .d6-feed {
+            padding: var(--space-3) var(--space-6);
+        }
+
+        .d6-feed-item {
+            padding: var(--space-4);
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: var(--space-3);
+        }
+
+        .d6-feed-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-2);
+        }
+
+        .d6-feed-item-type {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .d6-feed-item-type.sale {
+            background: #ECFDF5;
+            color: var(--primary-600);
+        }
+
+        .d6-feed-item-type.dm {
+            background: #EFF6FF;
+            color: var(--info);
+        }
+
+        .d6-feed-item-type.content {
+            background: #FEF3C7;
+            color: var(--accent-600);
+        }
+
+        .d6-feed-item-time {
+            font-size: 11px;
+            color: var(--neutral-400);
+        }
+
+        .d6-feed-item-text {
+            font-size: 14px;
+            color: var(--neutral-900);
+            line-height: 1.5;
+        }
+
+        .d6-feed-item-amount {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-500);
+            margin-top: var(--space-2);
+        }
+
+        .d6-feed-item-action {
+            margin-top: var(--space-3);
+            padding: var(--space-2) var(--space-4);
+            background: var(--neutral-50);
+            border: 1px solid var(--neutral-300);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary-600);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        /* ===== COMPARISON VIEW ===== */
+        .compare-bar {
+            display: flex;
+            gap: var(--space-3);
+            align-items: center;
+            padding: var(--space-3) var(--space-6);
+            background: var(--neutral-800);
+            border-bottom: 1px solid var(--neutral-700);
+        }
+
+        .compare-bar label {
+            font-size: 12px;
+            color: var(--neutral-400);
+            font-weight: 500;
+        }
+
+        .compare-bar select {
+            padding: var(--space-1) var(--space-3);
+            background: var(--neutral-700);
+            color: white;
+            border: 1px solid var(--neutral-600, #475569);
+            border-radius: 6px;
+            font-family: var(--font-ui);
+            font-size: 12px;
+        }
+
+        .compare-container {
+            display: flex;
+            gap: var(--space-6);
+            padding: var(--space-6);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .compare-container .mockup-viewport {
+            margin: 0;
+        }
+
+        /* ===== EVALUATION PANEL ===== */
+        .eval-panel {
+            padding: var(--space-6);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .eval-panel h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-400);
+            margin-bottom: var(--space-5);
+        }
+
+        .eval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+
+        .eval-card {
+            background: var(--neutral-800);
+            border-radius: var(--radius);
+            padding: var(--space-5);
+            border: 1px solid var(--neutral-700);
+        }
+
+        .eval-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--neutral-100);
+            margin-bottom: var(--space-2);
+        }
+
+        .eval-card p {
+            font-size: 13px;
+            color: var(--neutral-400);
+            line-height: 1.5;
+        }
+
+        .eval-card .best-for {
+            margin-top: var(--space-3);
+            font-size: 12px;
+            color: var(--primary-400);
+            font-weight: 500;
+        }
+
+        /* ===== DIRECTION 7: REVENUE COMMAND FEED (CHOSEN) ===== */
+        .d7-revenue-hero {
+            background: var(--neutral-900);
+            padding: var(--space-5) var(--space-6);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .d7-hero-amount {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-500);
+            letter-spacing: -1px;
+        }
+
+        .d7-hero-change {
+            font-size: 12px;
+            color: var(--primary-400);
+            margin-top: var(--space-1);
+        }
+
+        .d7-stats-expanded {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6) var(--space-4);
+            background: var(--neutral-800);
+            animation: slideDown 0.25s ease-out;
+        }
+
+        .d7-stats-expanded.show {
+            display: grid;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .d7-stat-box {
+            text-align: center;
+            padding: var(--space-3);
+            background: var(--neutral-900);
+            border-radius: 8px;
+        }
+
+        .d7-stat-box .val {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-400);
+        }
+
+        .d7-stat-box .lbl {
+            font-size: 10px;
+            color: var(--neutral-400);
+            margin-top: 2px;
+        }
+
+        .d7-stats-toggle {
+            display: flex;
+            gap: var(--space-2);
+            justify-content: center;
+            padding: 0 var(--space-6) var(--space-3);
+            background: var(--neutral-800);
+        }
+
+        .d7-stats-toggle button {
+            padding: 2px 10px;
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 4px;
+            border: 1px solid var(--neutral-700);
+            background: transparent;
+            color: var(--neutral-400);
+            font-family: var(--font-ui);
+            cursor: pointer;
+        }
+
+        .d7-stats-toggle button.active {
+            background: var(--primary-500);
+            border-color: var(--primary-500);
+            color: white;
+        }
+
+        .d7-command-bar {
+            margin: var(--space-3) var(--space-4);
+            padding: var(--space-3) var(--space-4);
+            background: var(--neutral-100);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            border: 1px solid var(--neutral-300);
+            font-size: 13px;
+            color: var(--neutral-400);
+        }
+
+        .d7-command-bar .icon {
+            font-size: 16px;
+        }
+
+        .d7-command-bar .slash {
+            color: var(--primary-500);
+            font-weight: 600;
+            background: var(--primary-500);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0 4px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .d7-feed {
+            padding: var(--space-3) var(--space-4);
+            padding-bottom: 70px;
+        }
+
+        .d7-feed-item {
+            padding: var(--space-4);
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: var(--space-3);
+            transition: all 0.25s;
+        }
+
+        .d7-feed-item.replied {
+            opacity: 0.5;
+        }
+
+        .d7-feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-2);
+        }
+
+        .d7-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .d7-badge.dm {
+            background: #EFF6FF;
+            color: var(--info);
+        }
+
+        .d7-badge.sale {
+            background: #ECFDF5;
+            color: var(--primary-600);
+        }
+
+        .d7-badge.content {
+            background: #FEF3C7;
+            color: var(--accent-600);
+        }
+
+        .d7-badge.replied-badge {
+            background: var(--neutral-100);
+            color: var(--neutral-400);
+        }
+
+        .d7-time {
+            font-size: 11px;
+            color: var(--neutral-400);
+        }
+
+        .d7-feed-text {
+            font-size: 14px;
+            color: var(--neutral-900);
+            line-height: 1.5;
+        }
+
+        .d7-feed-text strong {
+            font-weight: 600;
+        }
+
+        .d7-feed-amount {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-500);
+            margin-top: var(--space-2);
+        }
+
+        .d7-action-btn {
+            margin-top: var(--space-3);
+            padding: var(--space-3) var(--space-5);
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-ui);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            width: 100%;
+            justify-content: center;
+            height: 44px;
+            transition: all 0.2s;
+        }
+
+        .d7-action-btn:hover {
+            background: var(--primary-600);
+        }
+
+        .d7-action-btn.secondary {
+            background: var(--neutral-50);
+            color: var(--primary-600);
+            border: 1px solid var(--neutral-300);
+        }
+
+        .d7-action-btn.secondary:hover {
+            background: var(--neutral-100);
+        }
+
+        .d7-replied-label {
+            margin-top: var(--space-2);
+            font-size: 12px;
+            color: var(--neutral-400);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Expanded Draft View */
+        .d7-draft-expanded {
+            margin-top: var(--space-3);
+            border-top: 1px solid var(--neutral-100);
+            padding-top: var(--space-3);
+        }
+
+        .d7-customer-msg {
+            padding: var(--space-3);
+            background: var(--neutral-50);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--neutral-700);
+            border-left: 3px solid var(--info);
+            margin-bottom: var(--space-3);
+        }
+
+        .d7-draft-box {
+            padding: var(--space-3);
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 1px solid var(--primary-400);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--neutral-900);
+            line-height: 1.5;
+        }
+
+        .d7-draft-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-2);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .d7-draft-rating {
+            margin-top: var(--space-2);
+            font-size: 11px;
+            color: var(--accent-600);
+        }
+
+        .d7-tone-chips {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .d7-tone-chip {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid var(--neutral-300);
+            background: white;
+            color: var(--neutral-700);
+            cursor: pointer;
+            font-family: var(--font-ui);
+            transition: all 0.2s;
+        }
+
+        .d7-tone-chip.active {
+            background: var(--primary-500);
+            color: white;
+            border-color: var(--primary-500);
+        }
+
+        .d7-draft-actions {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .d7-draft-actions button {
+            flex: 1;
+            padding: var(--space-3);
+            border-radius: 8px;
+            border: none;
+            font-family: var(--font-ui);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .d7-btn-regen {
+            background: var(--neutral-100);
+            color: var(--neutral-700);
+            border: 1px solid var(--neutral-300) !important;
+        }
+
+        .d7-btn-edit {
+            background: var(--neutral-100);
+            color: var(--neutral-700);
+            border: 1px solid var(--neutral-300) !important;
+        }
+
+        .d7-btn-send {
+            background: var(--primary-500);
+            color: white;
+            flex: 1.5 !important;
+        }
+
+        .d7-dismiss {
+            margin-top: var(--space-2);
+            font-size: 12px;
+            color: var(--neutral-400);
+            cursor: pointer;
+            text-align: center;
+            padding: var(--space-2);
+        }
+
+        .d7-dismiss:hover {
+            color: var(--error);
+        }
+
+        .d7-draft-counter {
+            font-size: 10px;
+            color: var(--neutral-400);
+            text-align: right;
+            margin-top: var(--space-1);
+        }
+
+        .d7-chosen-badge {
+            background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .eval-card.chosen {
+            border-color: var(--primary-500);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(245, 158, 11, 0.05));
+        }
+
+        @media (max-width: 768px) {
+            .eval-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .compare-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="showcase-header">
+        <h1>🎨 MarketBoss — Design Directions</h1>
+        <p>Explore 6 visual approaches + the final chosen direction. Click each tab to preview.</p>
+    </div>
+    <p
+        style="max-width:980px;margin:0 auto 16px;padding:12px 14px;border:1px solid #FDE68A;background:#FFFBEB;color:#92400E;border-radius:10px;font-size:13px;">
+        Planning note: This file is a visual reference artifact and is non-normative for architecture/requirements.
+        Canonical precedence is architecture > ux spec > prd > ux html > product-brief. Directions 1-6 are retained as
+        exploratory archive. Direction 7 (Revenue Command Feed) is the canonical implementation target for visual
+        direction only. Dashboard-first alternatives are rejected and must not drive implementation decisions.
+    </p>
+
+    <div class="direction-tabs" id="tabs">
+        <button onclick="showDirection(1)">① Clean Dashboard</button>
+        <button onclick="showDirection(2)">② Conversation-First</button>
+        <button onclick="showDirection(3)">③ Revenue-Focused</button>
+        <button onclick="showDirection(4)">④ WhatsApp-Native</button>
+        <button onclick="showDirection(5)">⑤ Card-Based Actions</button>
+        <button onclick="showDirection(6)">⑥ Minimalist Command</button>
+        <button class="active" onclick="showDirection(7)"
+            style="background:linear-gradient(135deg,var(--primary-500),var(--accent-500));border-color:transparent;color:white;">⭐
+            Revenue Command Feed</button>
+    </div>
+
+    <!-- ===== DIRECTION 1: CLEAN DASHBOARD ===== -->
+    <div class="direction-panel" id="dir-1">
+        <div class="direction-info">
+            <h2>① Clean Dashboard</h2>
+            <p>Traditional dashboard layout with revenue hero card at top, followed by actionable DM cards. Clean
+                hierarchy, clear separation between metrics and conversations.</p>
+            <p style="font-size:12px;color:#b45309;margin-top:8px;">Exploratory archive only. Rejected for implementation.
+            </p>
+            <div class="tags">
+                <span class="tag">Dashboard-first</span>
+                <span class="tag">Revenue visible</span>
+                <span class="tag">Structured</span>
+                <span class="tag">Familiar pattern</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+            </div>
+            <div class="d1-header">
+                <h2>MarketBoss</h2>
+                <div class="avatar">AO</div>
+            </div>
+            <div class="d1-revenue-card">
+                <div class="d1-revenue-label">Today's Revenue</div>
+                <div class="d1-revenue-amount">₦85,000</div>
+                <div class="d1-revenue-change">↑ 23% from yesterday</div>
+            </div>
+            <div class="d1-section-title">🔥 Hot Leads (3)</div>
+            <div class="d1-dm-card">
+                <div class="d1-dm-avatar">👩🏾</div>
+                <div class="d1-dm-content">
+                    <div class="d1-dm-name">Chioma Obi</div>
+                    <div class="d1-dm-msg">How much for the blue ankara? 💙</div>
+                    <div class="d1-dm-meta">
+                        <span class="d1-dm-price">₦8,500</span>
+                        <span>• 2 prev orders</span>
+                        <span>• 3m ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d1-dm-card">
+                <div class="d1-dm-avatar">👨🏾</div>
+                <div class="d1-dm-content">
+                    <div class="d1-dm-name">Tunde Bakare</div>
+                    <div class="d1-dm-msg">I want to order 5 pieces</div>
+                    <div class="d1-dm-meta">
+                        <span class="d1-dm-price">₦42,500</span>
+                        <span>• New customer</span>
+                        <span>• 8m ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d1-dm-card">
+                <div class="d1-dm-avatar">👩🏾</div>
+                <div class="d1-dm-content">
+                    <div class="d1-dm-name">Blessing Eze</div>
+                    <div class="d1-dm-msg">Shey the bag still dey?</div>
+                    <div class="d1-dm-meta">
+                        <span class="d1-dm-price">₦12,000</span>
+                        <span>• 5 prev orders</span>
+                        <span>• 12m ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d1-section-title">📊 Quick Stats</div>
+            <div class="phone-nav">
+                <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Content</div>
+                <div class="nav-item"><span class="nav-icon">💬</span>DMs</div>
+                <div class="nav-item"><span class="nav-icon">📊</span>Analytics</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DIRECTION 2: CONVERSATION-FIRST ===== -->
+    <div class="direction-panel" id="dir-2">
+        <div class="direction-info">
+            <h2>② Conversation-First</h2>
+            <p>Opens directly into the DM Close flow. PrimingCard at top, AI draft in compose area. Optimized for the
+                core experience — reply and close in 3 taps. This IS the defining experience.</p>
+            <div class="tags">
+                <span class="tag">DM Close optimized</span>
+                <span class="tag">PrimingCard visible</span>
+                <span class="tag">AI draft prominent</span>
+                <span class="tag">WhatsApp-feel</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar" style="color: white; background: var(--primary-600);">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+            </div>
+            <div class="d2-chat-header">
+                <span class="back">←</span>
+                <div>
+                    <div class="contact-name">Chioma Obi</div>
+                    <div class="contact-status">Online • via Instagram</div>
+                </div>
+            </div>
+            <div class="d2-priming-card">
+                <div class="d2-priming-label">🔥 Hot Lead</div>
+                <div class="d2-priming-details">
+                    <div class="d2-priming-item"><strong>🛒 Ankara Dress</strong></div>
+                    <div class="d2-priming-item" style="text-align: right;"><strong
+                            style="font-family: var(--font-mono); color: var(--primary-600);">₦8,500</strong></div>
+                    <div class="d2-priming-item">📊 2 prev orders</div>
+                    <div class="d2-priming-item" style="text-align: right;">⏱️ Buys fast</div>
+                </div>
+            </div>
+            <div class="d2-chat-area">
+                <div class="d2-bubble received">
+                    How much for the blue ankara? 💙
+                </div>
+                <div class="d2-bubble draft">
+                    <div class="d2-draft-label">✨ AI Draft</div>
+                    Hi Chioma! The blue ankara na ₦8,500 😊 E dey available. I fit send am today if you wan order!
+                    <div class="d2-draft-rating">
+                        ⭐⭐⭐⭐⭐ Sounds Like Me
+                    </div>
+                </div>
+                <div class="d2-draft-actions">
+                    <button class="d2-btn-edit">✏️ Edit</button>
+                    <button class="d2-btn-send">➤ Send</button>
+                </div>
+            </div>
+            <div class="phone-nav">
+                <div class="nav-item"><span class="nav-icon">🏠</span>Home</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Content</div>
+                <div class="nav-item active"><span class="nav-icon">💬</span>DMs</div>
+                <div class="nav-item"><span class="nav-icon">📊</span>Analytics</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DIRECTION 3: REVENUE-FOCUSED ===== -->
+    <div class="direction-panel" id="dir-3">
+        <div class="direction-info">
+            <h2>③ Revenue-Focused</h2>
+            <p>Hero revenue number dominates. Quick stats ring. Every element tied to money impact. "How much have I
+                made?" is answered before any other question. Bold, unapologetically about making money.</p>
+            <div class="tags">
+                <span class="tag">Money-first</span>
+                <span class="tag">OPay-inspired</span>
+                <span class="tag">Stats prominent</span>
+                <span class="tag">Action-oriented</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar">
+                <span style="color: var(--neutral-400);">9:41</span>
+                <span style="color: var(--neutral-400);">📶 🔋</span>
+            </div>
+            <div class="d3-hero">
+                <div class="d3-hero-label">Today's Revenue</div>
+                <div class="d3-hero-amount">₦85,000</div>
+                <div class="d3-hero-sub">↑ ₦15,500 more than yesterday 🎉</div>
+            </div>
+            <div class="d3-quick-stats">
+                <div class="d3-stat">
+                    <div class="d3-stat-value">12</div>
+                    <div class="d3-stat-label">Sales</div>
+                </div>
+                <div class="d3-stat">
+                    <div class="d3-stat-value">3</div>
+                    <div class="d3-stat-label">Hot Leads</div>
+                </div>
+                <div class="d3-stat">
+                    <div class="d3-stat-value">89%</div>
+                    <div class="d3-stat-label">Close Rate</div>
+                </div>
+            </div>
+            <div class="d3-action-cards">
+                <div class="d3-action-card">
+                    <div class="d3-action-icon green">💬</div>
+                    <div class="d3-action-text">
+                        <h4>Reply to DMs</h4>
+                        <p>3 customers waiting • ₦63,000 potential</p>
+                    </div>
+                    <div class="d3-action-badge">3</div>
+                </div>
+                <div class="d3-action-card">
+                    <div class="d3-action-icon gold">📝</div>
+                    <div class="d3-action-text">
+                        <h4>Create Content</h4>
+                        <p>2 AI drafts ready to review</p>
+                    </div>
+                </div>
+                <div class="d3-action-card">
+                    <div class="d3-action-icon blue">📦</div>
+                    <div class="d3-action-text">
+                        <h4>Pending Deliveries</h4>
+                        <p>4 orders to mark as delivered</p>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-nav">
+                <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Content</div>
+                <div class="nav-item"><span class="nav-icon">💬</span>DMs</div>
+                <div class="nav-item"><span class="nav-icon">📊</span>Analytics</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DIRECTION 4: WHATSAPP-NATIVE ===== -->
+    <div class="direction-panel" id="dir-4">
+        <div class="direction-info">
+            <h2>④ WhatsApp-Native</h2>
+            <p>Looks and feels exactly like WhatsApp — familiar green header, chat list, tab navigation. AI features are
+                subtle overlays, not a separate interface. Zero learning curve for Nigerian sellers who live in
+                WhatsApp.</p>
+            <div class="tags">
+                <span class="tag">Ultra-familiar</span>
+                <span class="tag">Zero learning curve</span>
+                <span class="tag">Chat-list home</span>
+                <span class="tag">AI as overlay</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar" style="background: #075E54; color: white;">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+            </div>
+            <div class="d4-header">
+                <h2>MarketBoss</h2>
+                <div class="d4-tabs">
+                    <div class="d4-tab active">CHATS</div>
+                    <div class="d4-tab">SALES</div>
+                    <div class="d4-tab">CONTENT</div>
+                </div>
+            </div>
+            <div class="d4-chat-list">
+                <div class="d4-chat-item">
+                    <div class="d4-chat-avatar">👩🏾</div>
+                    <div class="d4-chat-content">
+                        <div class="d4-chat-name">Chioma Obi</div>
+                        <div class="d4-chat-preview">How much for the blue ankara? 💙</div>
+                        <div class="d4-ai-indicator">✨ AI reply ready</div>
+                    </div>
+                    <div class="d4-chat-right">
+                        <div class="d4-chat-time">9:38</div>
+                        <div class="d4-chat-badge">1</div>
+                    </div>
+                </div>
+                <div class="d4-chat-item">
+                    <div class="d4-chat-avatar">👨🏾</div>
+                    <div class="d4-chat-content">
+                        <div class="d4-chat-name">Tunde Bakare</div>
+                        <div class="d4-chat-preview">I want to order 5 pieces</div>
+                        <div class="d4-ai-indicator">✨ AI reply ready</div>
+                    </div>
+                    <div class="d4-chat-right">
+                        <div class="d4-chat-time">9:33</div>
+                        <div class="d4-chat-badge">1</div>
+                    </div>
+                </div>
+                <div class="d4-chat-item">
+                    <div class="d4-chat-avatar">👩🏾</div>
+                    <div class="d4-chat-content">
+                        <div class="d4-chat-name">Blessing Eze</div>
+                        <div class="d4-chat-preview">✓✓ Thank you for your order!</div>
+                    </div>
+                    <div class="d4-chat-right">
+                        <div class="d4-chat-time">Yesterday</div>
+                    </div>
+                </div>
+                <div class="d4-chat-item">
+                    <div class="d4-chat-avatar">👨🏾</div>
+                    <div class="d4-chat-content">
+                        <div class="d4-chat-name">Alhaji Musa</div>
+                        <div class="d4-chat-preview">✓✓ Generators have been delivered</div>
+                    </div>
+                    <div class="d4-chat-right">
+                        <div class="d4-chat-time">Yesterday</div>
+                    </div>
+                </div>
+                <div class="d4-chat-item">
+                    <div class="d4-chat-avatar">👩🏾</div>
+                    <div class="d4-chat-content">
+                        <div class="d4-chat-name">Fatima Ibrahim</div>
+                        <div class="d4-chat-preview">✓✓ Payment confirmed ₦15,000</div>
+                    </div>
+                    <div class="d4-chat-right">
+                        <div class="d4-chat-time">Mon</div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-nav">
+                <div class="nav-item active"><span class="nav-icon">💬</span>Chats</div>
+                <div class="nav-item"><span class="nav-icon">📊</span>Sales</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Content</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DIRECTION 5: CARD-BASED ACTIONS ===== -->
+    <div class="direction-panel" id="dir-5">
+        <div class="direction-info">
+            <h2>⑤ Card-Based Actions</h2>
+            <p>Horizontal swipeable action cards — like Instagram Stories but for business actions. Each card = one
+                thing to do NOW. Swipe through leads, content drafts, and sales. TikTok-inspired "result first" layout.
+            </p>
+            <div class="tags">
+                <span class="tag">Swipeable</span>
+                <span class="tag">Action-oriented</span>
+                <span class="tag">Instagram-inspired</span>
+                <span class="tag">Engaging</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+            </div>
+            <div class="d5-greeting">
+                <h2>Good morning, Amaka 👋</h2>
+                <p>₦85,000 earned today • 3 leads waiting</p>
+            </div>
+            <div class="d5-swipe-section">
+                <div class="d5-section-header">
+                    <h3>🔥 Hot Leads</h3>
+                    <a href="#">See all →</a>
+                </div>
+                <div class="d5-scroll-row">
+                    <div class="d5-action-card">
+                        <div class="d5-action-card-header">
+                            <div class="icon" style="background: #ECFDF5;">👩🏾</div>
+                            <div class="text">
+                                <h4>Chioma Obi</h4>
+                                <p>2 prev orders • Buys fast</p>
+                            </div>
+                        </div>
+                        <div class="d5-action-card-body">
+                            "How much for the blue ankara? 💙"
+                        </div>
+                        <div class="d5-action-card-footer">
+                            <span class="price">₦8,500</span>
+                            <button>Reply Now →</button>
+                        </div>
+                    </div>
+                    <div class="d5-action-card">
+                        <div class="d5-action-card-header">
+                            <div class="icon" style="background: #FEF3C7;">👨🏾</div>
+                            <div class="text">
+                                <h4>Tunde Bakare</h4>
+                                <p>New customer</p>
+                            </div>
+                        </div>
+                        <div class="d5-action-card-body">
+                            "I want to order 5 pieces"
+                        </div>
+                        <div class="d5-action-card-footer">
+                            <span class="price">₦42,500</span>
+                            <button>Reply Now →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d5-swipe-section">
+                <div class="d5-section-header">
+                    <h3>📝 Content Ready</h3>
+                    <a href="#">See all →</a>
+                </div>
+                <div class="d5-scroll-row">
+                    <div class="d5-action-card">
+                        <div class="d5-action-card-header">
+                            <div class="icon" style="background: #EFF6FF;">📸</div>
+                            <div class="text">
+                                <h4>New Product Post</h4>
+                                <p>AI-generated caption ready</p>
+                            </div>
+                        </div>
+                        <div class="d5-action-card-body">
+                            "Check out dis fine ankara! Premium quality, original design..."
+                        </div>
+                        <div class="d5-action-card-footer">
+                            <span style="font-size: 12px; color: var(--neutral-400);">⭐⭐⭐⭐⭐</span>
+                            <button>Post Now →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="phone-nav">
+                <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Content</div>
+                <div class="nav-item"><span class="nav-icon">💬</span>DMs</div>
+                <div class="nav-item"><span class="nav-icon">📊</span>Analytics</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DIRECTION 6: MINIMALIST COMMAND ===== -->
+    <div class="direction-panel" id="dir-6">
+        <div class="direction-info">
+            <h2>⑥ Minimalist Command</h2>
+            <p>Ultra-clean feed with a command bar. Everything is a chronological event — sales, DMs, content — all in
+                one stream. Spotlight-style search/command bar for quick actions. Minimal, efficient, no clutter.</p>
+            <div class="tags">
+                <span class="tag">Feed-based</span>
+                <span class="tag">Minimal</span>
+                <span class="tag">Command bar</span>
+                <span class="tag">Chronological</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+            </div>
+            <div class="d6-top">
+                <div class="amount">₦85,000</div>
+                <div class="label">Today's revenue</div>
+            </div>
+            <div class="d6-command-bar">
+                <span class="icon">🔍</span>
+                Type a command or search...
+            </div>
+            <div class="d6-feed">
+                <div class="d6-feed-item">
+                    <div class="d6-feed-item-header">
+                        <span class="d6-feed-item-type dm">DM</span>
+                        <span class="d6-feed-item-time">3m ago</span>
+                    </div>
+                    <div class="d6-feed-item-text">
+                        <strong>Chioma Obi</strong> asked about ankara dress
+                    </div>
+                    <div class="d6-feed-item-action">✨ Reply with AI draft →</div>
+                </div>
+                <div class="d6-feed-item">
+                    <div class="d6-feed-item-header">
+                        <span class="d6-feed-item-type sale">SALE</span>
+                        <span class="d6-feed-item-time">15m ago</span>
+                    </div>
+                    <div class="d6-feed-item-text">
+                        <strong>Blessing Eze</strong> paid for leather bag
+                    </div>
+                    <div class="d6-feed-item-amount">+₦12,000</div>
+                    <div class="d6-feed-item-action">📦 Mark as shipped</div>
+                </div>
+                <div class="d6-feed-item">
+                    <div class="d6-feed-item-header">
+                        <span class="d6-feed-item-type content">CONTENT</span>
+                        <span class="d6-feed-item-time">1h ago</span>
+                    </div>
+                    <div class="d6-feed-item-text">
+                        AI drafted 3 new product posts
+                    </div>
+                    <div class="d6-feed-item-action">📝 Review drafts →</div>
+                </div>
+                <div class="d6-feed-item">
+                    <div class="d6-feed-item-header">
+                        <span class="d6-feed-item-type dm">DM</span>
+                        <span class="d6-feed-item-time">2h ago</span>
+                    </div>
+                    <div class="d6-feed-item-text">
+                        <strong>Tunde Bakare</strong> wants 5 pieces
+                    </div>
+                    <div class="d6-feed-item-action">✨ Reply with AI draft →</div>
+                </div>
+            </div>
+            <div class="phone-nav">
+                <div class="nav-item active"><span class="nav-icon">📋</span>Feed</div>
+                <div class="nav-item"><span class="nav-icon">💬</span>DMs</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Content</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DIRECTION 7: REVENUE COMMAND FEED (CHOSEN) ===== -->
+    <div class="direction-panel active" id="dir-7">
+        <div class="direction-info">
+            <h2><span class="d7-chosen-badge">✅ CHOSEN</span> ⑦ Revenue Command Feed</h2>
+            <p>Hybrid of ③ Revenue-Focused + ⑥ Minimalist Command. Chronological feed with hero ₦ number, dual-mode
+                command bar, inline draft expansion with tone chips, manual reply detection, and 4-tab primary
+                navigation. Everything in one stream - fast, minimal, money-first, with contextual analytics in-feed.</p>
+            <p style="font-size:12px;color:#065f46;margin-top:8px;">Canonical visual direction aligned to UX spec and
+                architecture precedence.</p>
+            <div class="tags">
+                <span class="tag">Feed-based</span>
+                <span class="tag">Minimal</span>
+                <span class="tag">Command bar</span>
+                <span class="tag">Chronological</span>
+                <span class="tag">Money-first</span>
+                <span class="tag">OPay-inspired</span>
+                <span class="tag">Stats on-demand</span>
+                <span class="tag">Action-oriented</span>
+            </div>
+        </div>
+        <div class="mockup-viewport">
+            <div class="phone-status-bar">
+                <span style="color:var(--neutral-400)">9:41</span>
+                <span style="color:var(--neutral-400)">📶 🔋</span>
+            </div>
+
+            <!-- REVENUE HERO (Tier 1 — always visible, 80px) -->
+            <div class="d7-revenue-hero" onclick="toggleStats()" title="Tap to expand stats">
+                <div class="d7-hero-amount">₦85,000</div>
+                <div class="d7-hero-change">↑ 23% from yesterday · tap for details</div>
+            </div>
+
+            <!-- STATS EXPANDED (Tier 2 — on tap) -->
+            <div class="d7-stats-expanded" id="d7-stats">
+                <div class="d7-stat-box">
+                    <div class="val">12</div>
+                    <div class="lbl">Sales</div>
+                </div>
+                <div class="d7-stat-box">
+                    <div class="val">3</div>
+                    <div class="lbl">Hot Leads</div>
+                </div>
+                <div class="d7-stat-box">
+                    <div class="val">89%</div>
+                    <div class="lbl">Close Rate</div>
+                </div>
+            </div>
+            <div class="d7-stats-toggle" id="d7-toggle" style="display:none">
+                <button class="active">Today</button>
+                <button>Week</button>
+                <button>Month</button>
+            </div>
+
+            <!-- COMMAND BAR -->
+            <div class="d7-command-bar">
+                <span class="icon">🔍</span>
+                Type a command or search... <span class="slash">/</span>
+            </div>
+
+            <!-- FEED -->
+            <div class="d7-feed">
+
+                <!-- FEED ITEM 1: DM — DRAFT_READY (collapsed) -->
+                <div class="d7-feed-item" id="d7-item1">
+                    <div class="d7-feed-header">
+                        <span class="d7-badge dm">✨ DM</span>
+                        <span class="d7-time">3m ago</span>
+                    </div>
+                    <div class="d7-feed-text">
+                        <strong>Chioma Obi</strong> asked about blue ankara dress
+                    </div>
+                    <button class="d7-action-btn" onclick="expandDraft()">
+                        ✨ Reply with AI draft →
+                    </button>
+                </div>
+
+                <!-- FEED ITEM 1B: DM — EXPANDED DRAFT VIEW (hidden initially) -->
+                <div class="d7-feed-item" id="d7-item1-expanded" style="display:none">
+                    <div class="d7-feed-header">
+                        <span class="d7-badge dm">✨ DM</span>
+                        <span class="d7-time">3m ago · Chioma Obi</span>
+                    </div>
+                    <div class="d7-draft-expanded">
+                        <div class="d7-customer-msg">
+                            💬 "How much for the blue ankara? 💙"
+                        </div>
+                        <div class="d7-draft-box">
+                            <div class="d7-draft-label">✨ AI Draft <span class="d7-draft-counter">Draft 1/3</span></div>
+                            Hi Chioma! The blue ankara na ₦8,500 😊 E dey available. I fit send am today if you wan
+                            order!
+                            <div class="d7-draft-rating">⭐⭐⭐⭐⭐ Sounds Like Me</div>
+                        </div>
+                        <div class="d7-tone-chips">
+                            <span class="d7-tone-chip active">Friendly</span>
+                            <span class="d7-tone-chip">Pidgin</span>
+                            <span class="d7-tone-chip">Formal</span>
+                        </div>
+                        <div class="d7-draft-actions">
+                            <button class="d7-btn-regen" onclick="collapseDraft()">🔄 New</button>
+                            <button class="d7-btn-edit">✏️ Edit</button>
+                            <button class="d7-btn-send">➤ Send</button>
+                        </div>
+                        <div class="d7-dismiss" onclick="collapseDraft()">✕ Dismiss this AI reply</div>
+                    </div>
+                </div>
+
+                <!-- FEED ITEM 2: SALE -->
+                <div class="d7-feed-item">
+                    <div class="d7-feed-header">
+                        <span class="d7-badge sale">SALE</span>
+                        <span class="d7-time">15m ago</span>
+                    </div>
+                    <div class="d7-feed-text">
+                        <strong>Blessing Eze</strong> paid for leather bag
+                    </div>
+                    <div class="d7-feed-amount">+₦12,000</div>
+                    <button class="d7-action-btn secondary">
+                        📦 Mark as shipped
+                    </button>
+                </div>
+
+                <!-- FEED ITEM 3: DM — MANUAL_REPLIED (auto-detected) -->
+                <div class="d7-feed-item replied">
+                    <div class="d7-feed-header">
+                        <span class="d7-badge replied-badge">✓ DM</span>
+                        <span class="d7-time">25m ago</span>
+                    </div>
+                    <div class="d7-feed-text">
+                        <strong>Tunde Bakare</strong> asked about bulk pricing
+                    </div>
+                    <div class="d7-replied-label">
+                        ✓ You replied manually via Instagram
+                    </div>
+                </div>
+
+                <!-- FEED ITEM 4: CONTENT -->
+                <div class="d7-feed-item">
+                    <div class="d7-feed-header">
+                        <span class="d7-badge content">CONTENT</span>
+                        <span class="d7-time">1h ago</span>
+                    </div>
+                    <div class="d7-feed-text">
+                        AI drafted 3 new product posts for your ankara collection
+                    </div>
+                    <button class="d7-action-btn secondary">
+                        📝 Review drafts →
+                    </button>
+                </div>
+
+                <!-- FEED ITEM 5: DM — another DRAFT_READY -->
+                <div class="d7-feed-item">
+                    <div class="d7-feed-header">
+                        <span class="d7-badge dm">✨ DM</span>
+                        <span class="d7-time">2h ago</span>
+                    </div>
+                    <div class="d7-feed-text">
+                        <strong>Fatima Ibrahim</strong> asked about delivery to Kano
+                    </div>
+                    <button class="d7-action-btn">
+                        ✨ Reply with AI draft →
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- BOTTOM NAV -->
+            <div class="phone-nav">
+                <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
+                <div class="nav-item"><span class="nav-icon">💬</span>Messages</div>
+                <div class="nav-item"><span class="nav-icon">📝</span>Create</div>
+                <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EVALUATION PANEL ===== -->
+    <div class="eval-panel">
+        <h2>📊 Evaluation Criteria</h2>
+        <div class="eval-grid">
+            <div class="eval-card chosen" style="grid-column: 1 / -1;">
+                <h3>⭐ Revenue Command Feed — CHOSEN DIRECTION</h3>
+                <p>Hybrid ③+⑥. Chronological feed + hero ₦ + command bar. Inline draft expansion with tone chips
+                    (Friendly/Pidgin/Formal). Manual reply detection auto-dismisses AI option. Contextual analytics are embedded in feed/home/inbox; detailed analytics pages are post-MVP.</p>
+                <div class="best-for">Best for: Fast, minimal, money-first - makes every interaction feel powerful and
+                    effortless</div>
+            </div>
+            <div class="eval-card">
+                <h3>① Clean Dashboard</h3>
+                <p>Structured, familiar. Revenue + leads in one view. Risk: too "app-like", not conversational enough.
+                </p>
+                <div class="best-for">Best for: Users who want overview first, act second</div>
+            </div>
+            <div class="eval-card">
+                <h3>② Conversation-First</h3>
+                <p>Opens in the DM Close flow. PrimingCard + AI draft = core experience front and center. Most aligned
+                    with defining experience.</p>
+                <div class="best-for">Best for: Maximizing the DM Close — the money moment</div>
+            </div>
+            <div class="eval-card">
+                <h3>③ Revenue-Focused</h3>
+                <p>BIG money number. Every action tied to ₦ impact. Motivating. Risk: analytics-first feeling.</p>
+                <div class="best-for">Best for: "I feel powerful" emotional goal — money visibility</div>
+            </div>
+            <div class="eval-card">
+                <h3>④ WhatsApp-Native</h3>
+                <p>Zero learning curve. Feels like a WhatsApp upgrade. AI is invisible infrastructure. Risk: looks like
+                    a clone.</p>
+                <div class="best-for">Best for: Adoption speed — sellers already know how to use it</div>
+            </div>
+            <div class="eval-card">
+                <h3>⑤ Card-Based Actions</h3>
+                <p>Swipeable, engaging, TikTok-energy. Each card = one action NOW. Risk: too many cards = overwhelm.</p>
+                <div class="best-for">Best for: Engagement — makes business feel like social media</div>
+            </div>
+            <div class="eval-card">
+                <h3>⑥ Minimalist Command</h3>
+                <p>Clean stream, command bar for power users. Everything in one feed. Risk: not visual enough for
+                    fashion sellers.</p>
+                <div class="best-for">Best for: Power users — efficiency over decoration</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDirection(num) {
+            document.querySelectorAll('.direction-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.direction-tabs button').forEach(b => {
+                b.classList.remove('active');
+                b.style.background = '';
+                b.style.borderColor = '';
+                b.style.color = '';
+            });
+            document.getElementById('dir-' + num).classList.add('active');
+            const btn = document.querySelectorAll('.direction-tabs button')[num - 1];
+            btn.classList.add('active');
+            if (num === 7) {
+                btn.style.background = 'linear-gradient(135deg,var(--primary-500),var(--accent-500))';
+                btn.style.borderColor = 'transparent';
+                btn.style.color = 'white';
+            }
+        }
+
+        function toggleStats() {
+            const stats = document.getElementById('d7-stats');
+            const toggle = document.getElementById('d7-toggle');
+            stats.classList.toggle('show');
+            toggle.style.display = stats.classList.contains('show') ? 'flex' : 'none';
+        }
+
+        function expandDraft() {
+            document.getElementById('d7-item1').style.display = 'none';
+            document.getElementById('d7-item1-expanded').style.display = 'block';
+        }
+
+        function collapseDraft() {
+            document.getElementById('d7-item1').style.display = 'block';
+            document.getElementById('d7-item1-expanded').style.display = 'none';
+        }
+
+        // Tone chip toggling
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('d7-tone-chip')) {
+                document.querySelectorAll('.d7-tone-chip').forEach(c => c.classList.remove('active'));
+                e.target.classList.add('active');
+            }
+            // Stats toggle
+            if (e.target.closest('.d7-stats-toggle')) {
+                const btn = e.target.closest('button');
+                if (btn) {
+                    document.querySelectorAll('.d7-stats-toggle button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+

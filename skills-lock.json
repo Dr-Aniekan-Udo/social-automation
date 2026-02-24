@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "skills": {
+    "api-designer": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "be87e2d8da3ef9a2b4116ff21cf9000ecdd9b1c14a3f4fa912764f23e22b77f9"
+    },
+    "apify-audience-analysis": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "3ea06ffeb3d1f167cac85ac57d53e292df89ed4762d57e6888ac4d422c18ae0a"
+    },
+    "apify-brand-reputation-monitoring": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "36e3d197a3db938e01ff4cda089a12ba3ad48fafa923ca99bf91c4a487caa66a"
+    },
+    "apify-competitor-intelligence": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "1f46a23f3fbc116e9d1e24b55e0909d7b953a26c99522322118ecaa34ffe3d32"
+    },
+    "apify-content-analytics": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "02c212172cb1f7dc374c63e13282513b3d22ef93c63c74cb400aef6e70b79247"
+    },
+    "apify-influencer-discovery": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "fb221270dbf832a9a9f909259381710072b799f45aeb273ac6a8737a932ceafe"
+    },
+    "apify-lead-generation": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "8109e4c20608eb72bfa76f4c0e38eeeca25a4d5ea02a8138e7ab164d7e93de72"
+    },
+    "apify-market-research": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "15913ac142cc1cc77837b6bb2cd3a22622d6f24ad1f9d94800e7b78bd98a562e"
+    },
+    "apify-trend-analysis": {
+      "source": "apify/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ded7856f31964fbd0ee38879c6ceb083cfb9bebd4516dadb6e46d27cd75eb72d"
+    },
+    "architecture-designer": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "ba65211bfe50b014453d996b76199862e933470d30f16666d70740a7fd05023e"
+    },
+    "design-md": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "computedHash": "44af3e6e89a42a765d9cebf943f1e2ff3cdf43d1958341eb43fb7b74116f6691"
+    },
+    "enhance-prompt": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "computedHash": "28c47bcbc0e8d81f48fbbbe41d227efe4018a32c5d4674b0d052a70d215072d3"
+    },
+    "feature-forge": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "b1217bc1e766260f2d346cfc62ca3e945463a269a71e2a70c3ce421482d0f4e2"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "gemini-api-dev": {
+      "source": "google-gemini/gemini-skills",
+      "sourceType": "github",
+      "computedHash": "9bc5e171e7192ae36bb81950735ed729231870efa7750a30719f91c7ad31495a"
+    },
+    "golang-pro": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "04dd56df210d6e79bf3528175f11fa213cf62040acc3b3b3ec11dc2c586b8e3c"
+    },
+    "graphql-architect": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "abb64543232f69396938297fdede63b2bd3afa68f050d799b0dc2db45ba88dcc"
+    },
+    "microservices-architect": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "13eea50c2fd864ca8fbf9f044abc0c172b097c4bb63a85e09d63203d5ea0ac08"
+    },
+    "ml-pipeline": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "ba5d3399fa1be8b92d0829e143e2204700150b38c47ff79dd99918babe30ef0d"
+    },
+    "monitoring-expert": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "d5b399bf44494bfc03471a05bd3f5fc627d951c9f31676253960401daa0a05af"
+    },
+    "nestjs-expert": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "73f712d3971871e3600174f300d2efdc773528979f8591d2c3ffdb0781e73a47"
+    },
+    "nextjs-developer": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "40dd9e9a3fc9235bc9238bfe2bb38fc3360ec6f0acbd7ca14625591704285c37"
+    },
+    "openai-webhooks": {
+      "source": "hookdeck/webhook-skills",
+      "sourceType": "github",
+      "computedHash": "47a2355cb599e22405a7f14fbec15cf9bfdb473874a588a4da6822b18e0f7fb1"
+    },
+    "playwright-expert": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "91d62929ffbc4cf3f725ace2cb658263167eb5986edd34d14c6813b44615dce8"
+    },
+    "postgres-pro": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "ef7e44790d4c7d71f69836f281f4404b69fffed569f1a3e7561fea01303091ff"
+    },
+    "prompt-engineer": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "98be4b085bfc9144e95ba12590c543ca025eed2cce3542ddaaef8cfa089ac314"
+    },
+    "rag-architect": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "a6ece6375c7565f18184089aa0dcb818748aa6bd3dd2825262acbbbb98552541"
+    },
+    "react:components": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "computedHash": "0c5e494ae2092c57a893874e6d288de3706a224385c7d26dc4769d9db3aaaa12"
+    },
+    "sentry-create-alert": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "dd0385b20be33d9f872fa05f8b396e52273b0f7bdf8f17e37b81d3aa9f30a995"
+    },
+    "sentry-fix-issues": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "6dcf01ec6a3abb3f6754d1c202437503006cbafae49e99a1f09af3b5ac1069e9"
+    },
+    "sentry-pr-code-review": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "b5fe59c669bd4e633745786d41a9e4c5d0be930a69eeca2d69e45c6ddd9069b9"
+    },
+    "sentry-react-setup": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "c13354984e5cc4d97e77875a49fb74e4460671292c87f0c3c3488c4d566dcdfb"
+    },
+    "sentry-setup-ai-monitoring": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "46fe09cbca41f959d464bc446b0a3b6058968635ef658203da5e540b6764a5ac"
+    },
+    "sentry-setup-logging": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "6cdc767fd3e75ab58dd748024e21cdb89cbae50245b4cb65418031229b1fb6c3"
+    },
+    "sentry-setup-metrics": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "e6d1092c42af12cceb89d1cffa41edf197febd10754953948784002b4e56b849"
+    },
+    "sentry-setup-tracing": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "computedHash": "cacfe3de677538a2c611345f4ab059b829faf7d882fba1f8da0e266f21a4fb2c"
+    },
+    "shadcn-ui": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "computedHash": "119a14a004bd30fa99d386df599bd0db8d057cca146f7ee08349daed48b2ea55"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "1a2f4694384cb90d19d75354975dfb654d5c4ad230041667cb4b5b898474d7df"
+    },
+    "sql-pro": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "4be7a1682d7ddb09bd471e5f0387597f61412e0e7e1cdc520ba343f7614d0329"
+    },
+    "sre-engineer": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "computedHash": "f92f6380452279efafd6e23d2678a1517773aa3412f4ff91604c31871e5391d3"
+    },
+    "stripe-webhooks": {
+      "source": "hookdeck/webhook-skills",
+      "sourceType": "github",
+      "computedHash": "a5f33ff25838b587c647e584b4a4d0fd3b8f24800fa4fa6f08c012b20b773875"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "10eb4ec94577b79ae98c63ce3e7f35f8a6a06436a4011bff083b397de6960eeb"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "61f8c307aa8ce0c4c52da8886d42e344dab83f76f9b5360cf8923b25fb1d67bb"
+    },
+    "vercel-react-native-skills": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "a804b4e848059822638c390359976f7021380bcefb1469d473aa4e9202c15ecb"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d8e7d3afe37dcc8a97b99ffb5afdb4d0919ae0092ea8b68f44eb201f035e33ac"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "5a6a18c0137cfbabec058e86fc1c8f6919d846a7b2a34ee978cc8ced866ee2e5"
+    }
+  }
+}

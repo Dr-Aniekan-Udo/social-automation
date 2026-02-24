@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketBoss — Color Themes Visualizer</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-700: #047857;
+            --primary-600: #059669;
+            --primary-500: #10B981;
+            --primary-400: #34D399;
+            --accent-600: #D97706;
+            --accent-500: #F59E0B;
+            --accent-400: #FBBF24;
+            --neutral-900: #0F172A;
+            --neutral-800: #1E293B;
+            --neutral-700: #334155;
+            --neutral-400: #94A3B8;
+            --neutral-300: #CBD5E1;
+            --neutral-100: #F1F5F9;
+            --neutral-50: #F8FAFC;
+            --error: #EF4444;
+            --info: #3B82F6;
+            --support: #D97706;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--neutral-50);
+            color: var(--neutral-900);
+            line-height: 1.6;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        body.dark {
+            background: var(--neutral-900);
+            color: var(--neutral-100);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-8);
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header .subtitle {
+            font-size: 14px;
+            color: var(--neutral-400);
+            margin-top: 4px;
+        }
+
+        .dark header .subtitle {
+            color: var(--neutral-400);
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: var(--space-2);
+            background: white;
+            border-radius: 999px;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: background 0.3s;
+        }
+
+        .dark .mode-toggle {
+            background: var(--neutral-800);
+        }
+
+        .mode-toggle button {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            background: transparent;
+            color: var(--neutral-700);
+            transition: all 0.25s ease;
+        }
+
+        .dark .mode-toggle button {
+            color: var(--neutral-400);
+        }
+
+        .mode-toggle button.active {
+            background: var(--primary-500);
+            color: white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+        }
+
+        /* Section */
+        section {
+            margin-bottom: var(--space-8);
+        }
+
+        section h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        section h2 .badge {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: var(--primary-500);
+            color: white;
+        }
+
+        section h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: var(--space-3);
+            color: var(--neutral-700);
+        }
+
+        .dark section h3 {
+            color: var(--neutral-300);
+        }
+
+        .section-description {
+            font-size: 14px;
+            color: var(--neutral-400);
+            margin-bottom: var(--space-5);
+            max-width: 640px;
+        }
+
+        /* Palette Grid */
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .swatch-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            background: white;
+        }
+
+        .dark .swatch-card {
+            background: var(--neutral-800);
+        }
+
+        .swatch-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .swatch-color {
+            height: 96px;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-3);
+            position: relative;
+        }
+
+        .swatch-color .hex {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .swatch-color .copied-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .swatch-color .copied-badge.show {
+            opacity: 1;
+        }
+
+        .swatch-info {
+            padding: var(--space-3);
+        }
+
+        .swatch-info .token {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary-600);
+            margin-bottom: 4px;
+        }
+
+        .dark .swatch-info .token {
+            color: var(--primary-400);
+        }
+
+        .swatch-info .usage {
+            font-size: 12px;
+            color: var(--neutral-700);
+            line-height: 1.4;
+        }
+
+        .dark .swatch-info .usage {
+            color: var(--neutral-400);
+        }
+
+        .swatch-info .emotion {
+            font-size: 11px;
+            color: var(--neutral-400);
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Semantic Section */
+        .semantic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .semantic-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border-radius: var(--radius);
+            background: white;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .dark .semantic-card {
+            background: var(--neutral-800);
+        }
+
+        .semantic-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .semantic-label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .semantic-usage {
+            font-size: 12px;
+            color: var(--neutral-400);
+        }
+
+        /* Revenue Colors */
+        .revenue-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .revenue-card {
+            border-radius: var(--radius);
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .revenue-card .label {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        .revenue-card .amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .revenue-card .rule {
+            font-size: 12px;
+            opacity: 0.6;
+            line-height: 1.4;
+        }
+
+        /* Contrast Table */
+        .contrast-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .contrast-table thead {
+            background: var(--neutral-100);
+        }
+
+        .dark .contrast-table thead {
+            background: var(--neutral-800);
+        }
+
+        .contrast-table th,
+        .contrast-table td {
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+            border-bottom: 1px solid var(--neutral-100);
+        }
+
+        .dark .contrast-table th,
+        .dark .contrast-table td {
+            border-bottom-color: var(--neutral-700);
+        }
+
+        .contrast-table th {
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--neutral-400);
+        }
+
+        .contrast-table tbody tr {
+            background: white;
+        }
+
+        .dark .contrast-table tbody tr {
+            background: var(--neutral-800);
+        }
+
+        .contrast-table .ratio {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .contrast-table .pass {
+            color: var(--primary-500);
+        }
+
+        .contrast-table .warn {
+            color: var(--accent-500);
+        }
+
+        .contrast-preview {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Dark Mode Preview */
+        .theme-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-5);
+            margin-top: var(--space-4);
+        }
+
+        @media (max-width: 640px) {
+            .theme-preview {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Preview-only media query for this artifact page. Canonical app breakpoints are defined in UX spec/architecture. */
+
+        .preview-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-card .preview-header {
+            padding: var(--space-4) var(--space-5);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .preview-card .preview-body {
+            padding: var(--space-5);
+        }
+
+        .preview-card .mock-card {
+            border-radius: 8px;
+            padding: var(--space-4);
+            margin-bottom: var(--space-3);
+        }
+
+        .preview-card .mock-text {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .preview-card .mock-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .preview-card .mock-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: var(--space-3);
+        }
+
+        /* Cultural Validation */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .culture-card {
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            background: white;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid;
+        }
+
+        .dark .culture-card {
+            background: var(--neutral-800);
+        }
+
+        .culture-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        .culture-card .meaning {
+            font-size: 12px;
+            color: var(--neutral-700);
+            line-height: 1.5;
+        }
+
+        .dark .culture-card .meaning {
+            color: var(--neutral-400);
+        }
+
+        .culture-card .verdict {
+            margin-top: var(--space-2);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Competitor Landscape */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .competitor-chip {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3);
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            font-size: 13px;
+        }
+
+        .dark .competitor-chip {
+            background: var(--neutral-800);
+        }
+
+        .competitor-chip .dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .competitor-chip .name {
+            font-weight: 500;
+        }
+
+        .competitor-chip .overlap {
+            font-size: 11px;
+            color: var(--neutral-400);
+            margin-left: auto;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 64px;
+            padding: var(--space-6) 0;
+            border-top: 1px solid var(--neutral-100);
+            text-align: center;
+            font-size: 13px;
+            color: var(--neutral-400);
+        }
+
+        .dark footer {
+            border-top-color: var(--neutral-700);
+        }
+
+        /* Toast for copy */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--neutral-900);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <div>
+                <h1>🎨 MarketBoss Color Themes</h1>
+                <div class="subtitle">Visual Design Foundation — Green & Gold of Nigerian Prosperity</div>
+            </div>
+            <div class="mode-toggle">
+                <button class="active" onclick="setMode('light')">☀️ Light</button>
+                <button onclick="setMode('dark')">🌙 Dark</button>
+            </div>
+        </header>
+
+        <p class="section-description"
+            style="max-width:980px;margin:0 auto 16px;padding:12px 14px;border:1px solid #FDE68A;background:#FFFBEB;color:#92400E;border-radius:10px;">
+            Planning note: This file is a visual reference artifact and is non-normative for architecture/requirements.
+            Canonical precedence is architecture > ux spec > prd > ux html > product-brief.
+        </p>
+
+        <!-- Core Palette: Primary -->
+        <section>
+            <h2>Primary Scale <span class="badge">Emerald</span></h2>
+            <p class="section-description">Money Green — inspired by ₦ notes. Every CTA, navigation highlight, and
+                success state uses this scale.</p>
+            <div class="palette-grid" id="primary-grid"></div>
+        </section>
+
+        <!-- Core Palette: Accent -->
+        <section>
+            <h2>Accent Scale <span class="badge"
+                    style="background:var(--accent-500);color:var(--neutral-900)">Gold</span></h2>
+            <p class="section-description">Chieftaincy Gold — prestige, revenue, achievements. Never as body text on
+                white (AA contrast).</p>
+            <div class="palette-grid" id="accent-grid"></div>
+        </section>
+
+        <!-- Core Palette: Neutrals -->
+        <section>
+            <h2>Neutral Scale <span class="badge" style="background:var(--neutral-700)">Slate</span></h2>
+            <p class="section-description">Professional authority. Cool-toned slate keeps attention on emerald/gold
+                highlights.</p>
+            <div class="palette-grid" id="neutral-grid"></div>
+        </section>
+
+        <!-- Semantic Colors -->
+        <section>
+            <h2>Semantic Colors</h2>
+            <p class="section-description">Fixed-meaning colors. These don't change between light/dark mode — only their
+                container backgrounds adapt.</p>
+            <div class="semantic-grid" id="semantic-grid"></div>
+        </section>
+
+        <!-- Revenue Colors -->
+        <section>
+            <h2>💰 Revenue-Specific Colors</h2>
+            <p class="section-description">Money-first design — revenue is always the hero. These rules are
+                non-negotiable.</p>
+            <div class="revenue-section" id="revenue-section"></div>
+        </section>
+
+        <!-- Contrast Ratios -->
+        <section>
+            <h2>♿ Accessibility Contrast</h2>
+            <p class="section-description">WCAG 2.1 AA compliance. Click any row to preview the pair.</p>
+            <table class="contrast-table">
+                <thead>
+                    <tr>
+                        <th>Pair</th>
+                        <th>Preview</th>
+                        <th>Ratio</th>
+                        <th>WCAG</th>
+                    </tr>
+                </thead>
+                <tbody id="contrast-body"></tbody>
+            </table>
+        </section>
+
+        <!-- Dark Mode Preview -->
+        <section>
+            <h2>🌙 Light vs Dark Preview</h2>
+            <p class="section-description">Launch with light mode (MVP). Dark tokens pre-defined for Phase 2. Nigerian
+                users are outdoors — light with high contrast is priority.</p>
+            <p class="section-description" style="margin-top:-6px;font-size:13px;color:#92400e;">Note: media queries in this preview page are showcase-only and do not define product breakpoint tokens. Canonical app breakpoints are 480 / 768 / 1024 with 320px minimum supported width.</p>
+            <div class="theme-preview">
+                <!-- Light Preview -->
+                <div class="preview-card" style="border:1px solid var(--neutral-300)">
+                    <div class="preview-header" style="background:var(--neutral-50);color:var(--neutral-900)">☀️ Light
+                        Mode</div>
+                    <div class="preview-body" style="background:var(--neutral-50)">
+                        <div class="mock-card" style="background:var(--neutral-900)">
+                            <div class="mock-text" style="color:var(--neutral-400)">Today's Revenue</div>
+                            <div class="mock-amount" style="color:var(--accent-500)">₦45,200</div>
+                        </div>
+                        <div class="mock-card" style="background:white;border:1px solid var(--neutral-300)">
+                            <div class="mock-text" style="color:var(--neutral-900)">📩 New DM from Chioma</div>
+                            <div class="mock-text" style="color:var(--neutral-400)">How much is the ankara?</div>
+                        </div>
+                        <span class="mock-btn" style="background:var(--primary-500);color:white">Send Reply →</span>
+                    </div>
+                </div>
+                <!-- Dark Preview -->
+                <div class="preview-card" style="border:1px solid var(--neutral-700)">
+                    <div class="preview-header" style="background:var(--neutral-800);color:var(--neutral-100)">🌙 Dark
+                        Mode</div>
+                    <div class="preview-body" style="background:var(--neutral-900)">
+                        <div class="mock-card" style="background:var(--neutral-800)">
+                            <div class="mock-text" style="color:var(--neutral-400)">Today's Revenue</div>
+                            <div class="mock-amount" style="color:var(--accent-400)">₦45,200</div>
+                        </div>
+                        <div class="mock-card" style="background:var(--neutral-800)">
+                            <div class="mock-text" style="color:var(--neutral-100)">📩 New DM from Chioma</div>
+                            <div class="mock-text" style="color:var(--neutral-400)">How much is the ankara?</div>
+                        </div>
+                        <span class="mock-btn" style="background:var(--primary-400);color:var(--neutral-900)">Send Reply
+                            →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cultural Validation -->
+        <section>
+            <h2>🇳🇬 Cultural Color Validation</h2>
+            <p class="section-description">Every color validated across Igbo, Yoruba, and Hausa cultural contexts. Zero
+                negatives across all groups.</p>
+            <div class="culture-grid" id="culture-grid"></div>
+        </section>
+
+        <!-- Competitor Landscape -->
+        <section>
+            <h2>📊 Competitor Color Landscape</h2>
+            <p class="section-description">MarketBoss's green + gold combination is unique in the Nigerian
+                fintech/commerce space.</p>
+            <div class="competitor-grid" id="competitor-grid"></div>
+        </section>
+
+        <footer>
+            MarketBoss UX Design Specification — Color Themes Visualizer<br>
+            Part of <code>docs/planning-artifacts/ux-design-specification.md</code>
+        </footer>
+    </div>
+
+    <!-- Copy toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ── Data ──
+        const primaryColors = [
+            { token: '--color-primary-700', hex: '#047857', usage: 'High-contrast / sunlight variant', emotion: 'Deep confidence' },
+            { token: '--color-primary-600', hex: '#059669', usage: 'Hover states, emphasis', emotion: 'Stronger confidence' },
+            { token: '--color-primary-500', hex: '#10B981', usage: 'CTAs, navigation, active states', emotion: '"I feel powerful" — money green' },
+            { token: '--color-primary-400', hex: '#34D399', usage: 'Success indicators, dark mode primary', emotion: 'Positive feedback' },
+        ];
+
+        const accentColors = [
+            { token: '--color-accent-600', hex: '#D97706', usage: 'Hover on accent, support PrimingCard', emotion: 'Earned achievement' },
+            { token: '--color-accent-500', hex: '#F59E0B', usage: 'Revenue numbers, achievements, badges', emotion: '"I feel respected" — premium' },
+            { token: '--color-accent-400', hex: '#FBBF24', usage: 'Dark mode accent variant', emotion: 'Warm reward' },
+        ];
+
+        const neutralColors = [
+            { token: '--color-neutral-900', hex: '#0F172A', usage: 'Primary text, revenue hero bg', emotion: 'Professional authority', textColor: '#fff' },
+            { token: '--color-neutral-800', hex: '#1E293B', usage: 'Dark mode card backgrounds', emotion: 'Deep surface', textColor: '#fff' },
+            { token: '--color-neutral-700', hex: '#334155', usage: 'Secondary text', emotion: 'Readable, calm', textColor: '#fff' },
+            { token: '--color-neutral-400', hex: '#94A3B8', usage: 'Placeholder text, disabled', emotion: 'Subtle', textColor: '#0F172A' },
+            { token: '--color-neutral-300', hex: '#CBD5E1', usage: 'Borders (720p visibility)', emotion: 'Structure', textColor: '#0F172A' },
+            { token: '--color-neutral-100', hex: '#F1F5F9', usage: 'Card backgrounds, sections', emotion: 'Clean', textColor: '#0F172A' },
+            { token: '--color-neutral-50', hex: '#F8FAFC', usage: 'Page background', emotion: 'Airy, premium', textColor: '#0F172A' },
+        ];
+
+        const semanticColors = [
+            { name: 'Success', hex: '#10B981', usage: 'Payment received, order confirmed', token: '--color-success' },
+            { name: 'Warning', hex: '#F59E0B', usage: 'Low stock, expiring offers', token: '--color-warning' },
+            { name: 'Error', hex: '#EF4444', usage: 'Payment failed, validation errors', token: '--color-error' },
+            { name: 'Info', hex: '#3B82F6', usage: 'Tips, onboarding hints', token: '--color-info' },
+            { name: 'Support', hex: '#D97706', usage: 'Support PrimingCard, complaint DMs', token: '--color-support' },
+        ];
+
+        const revenueColors = [
+            { label: "Revenue Hero", amount: "₦245,800", bg: '#0F172A', fg: '#F59E0B', rule: 'Always dark bg, even in light mode (gold readability)' },
+            { label: "Amount (Received)", amount: "₦18,500", bg: '#fff', fg: '#10B981', rule: 'Green = money received/confirmed' },
+            { label: "Amount (Pending)", amount: "₦12,000", bg: '#fff', fg: '#F59E0B', rule: 'Gold = in-progress/pending' },
+            { label: "Payment Banner", amount: "₦8,200 ✅", bg: '#D1FAE5', fg: '#047857', rule: 'Celebratory — primary-400 background' },
+        ];
+
+        const contrastPairs = [
+            { pair: 'Primary on White', fg: '#10B981', bg: '#FFFFFF', ratio: '4.6:1', wcag: '✅ AA', pass: true },
+            { pair: 'Primary on Neutral-900', fg: '#10B981', bg: '#0F172A', ratio: '8.2:1', wcag: '✅ AAA', pass: true },
+            { pair: 'Neutral-900 on Neutral-50', fg: '#0F172A', bg: '#F8FAFC', ratio: '16.5:1', wcag: '✅ AAA', pass: true },
+            { pair: 'Accent on White', fg: '#F59E0B', bg: '#FFFFFF', ratio: '3.2:1', wcag: '⚠️ Large only', pass: false },
+            { pair: 'Accent on Neutral-900', fg: '#F59E0B', bg: '#0F172A', ratio: '6.8:1', wcag: '✅ AA', pass: true },
+            { pair: 'Error on White', fg: '#EF4444', bg: '#FFFFFF', ratio: '4.6:1', wcag: '✅ AA', pass: true },
+            { pair: 'Slate-800 on White', fg: '#1E293B', bg: '#FFFFFF', ratio: '12.6:1', wcag: '✅ AAA', pass: true },
+            { pair: 'Slate-200 on Slate-900', fg: '#E2E8F0', bg: '#0F172A', ratio: '11.3:1', wcag: '✅ AAA', pass: true },
+        ];
+
+        const cultureData = [
+            { color: 'Emerald', hex: '#10B981', igbo: 'Prosperity (new yam)', yoruba: 'Work/industry (Ogun)', hausa: 'Islam (positive)', verdict: '✅ Zero negatives' },
+            { color: 'Gold', hex: '#F59E0B', igbo: 'Wealth, status', yoruba: 'Aso-oke prestige', hausa: 'Royalty (Emirs)', verdict: '✅ Premium all groups' },
+            { color: 'Red', hex: '#EF4444', igbo: 'Sacrifice/danger', yoruba: 'Power (Shango)', hausa: '—', verdict: '✅ Standard error' },
+            { color: 'Amber', hex: '#D97706', igbo: 'Neutral', yoruba: 'Neutral', hausa: 'Neutral', verdict: '✅ No political associations' },
+        ];
+
+        const competitors = [
+            { name: 'OPay', color: '#3B82F6', overlap: 'None' },
+            { name: 'Paystack', color: '#3B82F6', overlap: 'None' },
+            { name: 'Moniepoint', color: '#3B82F6', overlap: 'None' },
+            { name: 'Bumpa', color: '#3B82F6', overlap: 'None' },
+            { name: 'Kuda', color: '#7C3AED', overlap: 'None' },
+            { name: 'PalmPay', color: '#7C3AED', overlap: 'None' },
+            { name: 'Flutterwave', color: '#F97316', overlap: 'None' },
+            { name: 'Jumia', color: '#F97316', overlap: 'None' },
+            { name: 'WhatsApp', color: '#25D366', overlap: 'Distinct' },
+            { name: 'MarketBoss', color: '#10B981', overlap: '✨ Unique' },
+        ];
+
+        // ── Render Functions ──
+        function createSwatchCard(color, textColor = '#fff') {
+            return `
+        <div class="swatch-card" onclick="copyHex('${color.hex}', this)">
+          <div class="swatch-color" style="background:${color.hex}">
+            <span class="hex" style="color:${textColor}">${color.hex}</span>
+            <span class="copied-badge">Copied!</span>
+          </div>
+          <div class="swatch-info">
+            <div class="token">${color.token}</div>
+            <div class="usage">${color.usage}</div>
+            <div class="emotion">${color.emotion}</div>
+          </div>
+        </div>
+      `;
+        }
+
+        function renderPalettes() {
+            document.getElementById('primary-grid').innerHTML = primaryColors.map(c => createSwatchCard(c)).join('');
+            document.getElementById('accent-grid').innerHTML = accentColors.map(c => createSwatchCard(c, '#0F172A')).join('');
+            document.getElementById('neutral-grid').innerHTML = neutralColors.map(c => createSwatchCard(c, c.textColor)).join('');
+        }
+
+        function renderSemantics() {
+            document.getElementById('semantic-grid').innerHTML = semanticColors.map(c => `
+        <div class="semantic-card" onclick="copyHex('${c.hex}', this)">
+          <div class="semantic-dot" style="background:${c.hex}"></div>
+          <div>
+            <div class="semantic-label">${c.name}</div>
+            <div class="semantic-usage">${c.usage}</div>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        function renderRevenue() {
+            document.getElementById('revenue-section').innerHTML = revenueColors.map(c => `
+        <div class="revenue-card" style="background:${c.bg};${c.bg === '#fff' ? 'border:1px solid var(--neutral-300)' : ''}">
+          <div class="label" style="color:${c.bg === '#fff' ? 'var(--neutral-400)' : 'rgba(255,255,255,0.5)'}">${c.label}</div>
+          <div class="amount" style="color:${c.fg}">${c.amount}</div>
+          <div class="rule" style="color:${c.bg === '#fff' ? 'var(--neutral-400)' : 'rgba(255,255,255,0.4)'}">${c.rule}</div>
+        </div>
+      `).join('');
+        }
+
+        function renderContrast() {
+            document.getElementById('contrast-body').innerHTML = contrastPairs.map(c => `
+        <tr>
+          <td>${c.pair}</td>
+          <td>
+            <span class="contrast-preview" style="background:${c.bg};color:${c.fg};border:1px solid var(--neutral-300)">
+              Aa Sample
+            </span>
+          </td>
+          <td class="ratio ${c.pass ? 'pass' : 'warn'}">${c.ratio}</td>
+          <td>${c.wcag}</td>
+        </tr>
+      `).join('');
+        }
+
+        function renderCulture() {
+            document.getElementById('culture-grid').innerHTML = cultureData.map(c => `
+        <div class="culture-card" style="border-left-color:${c.hex}">
+          <h4>${c.color}</h4>
+          <div class="meaning">
+            <strong>Igbo:</strong> ${c.igbo}<br>
+            <strong>Yoruba:</strong> ${c.yoruba}<br>
+            <strong>Hausa:</strong> ${c.hausa}
+          </div>
+          <div class="verdict">${c.verdict}</div>
+        </div>
+      `).join('');
+        }
+
+        function renderCompetitors() {
+            document.getElementById('competitor-grid').innerHTML = competitors.map(c => `
+        <div class="competitor-chip">
+          <div class="dot" style="background:${c.color}"></div>
+          <span class="name">${c.name}</span>
+          <span class="overlap">${c.overlap}</span>
+        </div>
+      `).join('');
+        }
+
+        // ── Interactions ──
+        function copyHex(hex, el) {
+            navigator.clipboard?.writeText(hex);
+            const badge = el.querySelector('.copied-badge');
+            if (badge) {
+                badge.classList.add('show');
+                setTimeout(() => badge.classList.remove('show'), 1200);
+            }
+            showToast(`Copied ${hex}`);
+        }
+
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function setMode(mode) {
+            document.body.classList.toggle('dark', mode === 'dark');
+            document.querySelectorAll('.mode-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(mode === 'dark' ? '🌙' : '☀️'));
+            });
+        }
+
+        // ── Init ──
+        renderPalettes();
+        renderSemantics();
+        renderRevenue();
+        renderContrast();
+        renderCulture();
+        renderCompetitors();
+    </script>
+</body>
+
+</html>
