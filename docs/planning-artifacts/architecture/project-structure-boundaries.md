@@ -172,13 +172,14 @@ marketboss/
 │   │       ├── posts.sql
 │   │       ├── analytics.sql
 │   │       └── feed.sql
-│   ├── docs/events/                             # Event schema registry
-│   │   ├── README.md
-│   │   ├── product.created.md
-│   │   ├── message.received.md
-│   │   ├── draft.completed.md
-│   │   ├── payment.confirmed.md
-│   │   └── webhook.failed.md
+│   ├── docs/
+│   │   └── events/                             # Event schema registry (backend/docs/events/)
+│   │       ├── README.md
+│   │       ├── product.created.md
+│   │       ├── message.received.md
+│   │       ├── draft.completed.md
+│   │       ├── payment.confirmed.md
+│   │       └── webhook.failed.md
 │   └── test/
 │       ├── e2e/                                 # Full HTTP lifecycle
 │       ├── isolation/                           # Cross-tenant data leakage tests
@@ -297,6 +298,15 @@ marketboss/
         ├── messaging.spec.ts
         └── fixtures/
 ```
+
+#### Structure Clarifications (Canonical)
+
+- `infra/` exists at repo root as the container for deployment/IaC artifacts (for example, provider app specs and operations scripts).
+- Story 1.2 creates only `infra/.gitkeep`; concrete deployment/IaC files are introduced in Story 1.7.
+- Example future `infra/` artifacts (if needed by deployment workflow): `infra/digitalocean/app-staging.yaml`, `infra/digitalocean/app-production.yaml`, `infra/scripts/release.ps1`.
+- Deployment workflow files remain under `.github/workflows/` (`deploy-staging.yml`, `deploy-production.yml`).
+- Local development Compose files remain at repo root (`docker-compose.yml`, `docker-compose.test.yml`) and are not moved into `infra/`.
+- Event schema registry path is `backend/docs/events/`.
 
 ### Architectural Boundaries
 

@@ -33,10 +33,13 @@ So that I can immediately begin adding code to the correct locations with standa
 - **Given** the GitHub repository exists with branch protection (Story 1.1)
 - **When** the monorepo structure is created
 - **Then** the following top-level directories exist: `backend/`, `frontend/`, `infra/`, `docs/`, `api/`, `.github/`
+- **And** `infra/` is reserved for deployment/IaC artifacts for future deployment stories (placeholder allowed in Story 1.2)
+- **And** concrete `infra/` filenames are deferred to Story 1.7; Story 1.2 only requires `infra/.gitkeep`
 - **And** `backend/` contains placeholder directories: `cmd/server/`, `internal/domain/`, `internal/service/`, `internal/adapter/`, `internal/handler/`, `migrations/`
 - **And** `frontend/` contains a placeholder `README.md` (scaffolded in Track P3)
 - **And** `api/` contains a placeholder `openapi.yaml` with info section only
-- **And** `docs/events/` directory exists for the event schema registry
+- **And** `backend/docs/events/` directory exists for the event schema registry
+- **And** local development compose files remain at repo root (`docker-compose.yml`, `docker-compose.test.yml`)
 - **And** a root `Makefile` exists with targets: `dev`, `test`, `lint`, `build`, `help`, `db-migrate-up`, `db-migrate-down`, `sqlc-generate`
 - **And** `make help` prints all available targets with descriptions
 - **And** a `.env.example` file exists with all required environment variables (database URL, Redis URL, JWT secrets placeholder, API keys placeholder) with safe defaults for local dev
@@ -149,6 +152,7 @@ So that validated code can be automatically deployed and runtime security is con
 - **And** it builds production Docker images with production environment variables
 - **And** it deploys to DigitalOcean App Platform production environment
 - **And** it runs a post-deployment health check and smoke test
+- **And** deployment workflows remain in `.github/workflows/`; any deployment manifests/scripts they use live under `infra/`
 - **Given** deployment pipelines exist
 - **When** the `security-nightly.yml` workflow is configured
 - **Then** OWASP ZAP runs nightly against the staging environment URL
