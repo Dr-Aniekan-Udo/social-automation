@@ -12,3 +12,4 @@ Linked story/issue:
 - [ ] Lint clean
 - [ ] Coverage maintained
 - [ ] Story linked
+- [ ] Architecture/scope compliance confirmed (no out-of-scope changes)

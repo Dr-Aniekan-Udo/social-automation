@@ -1,0 +1,12 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  frontend-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "placeholder frontend-ci check"

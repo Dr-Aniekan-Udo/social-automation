@@ -1,7 +1,7 @@
 name: Bug Report
 description: Report a reproducible defect
 title: "[Bug]: "
-labels: ["bug", "priority:p1"]
+labels: ["bug", "priority:p2"]
 body:
   - type: textarea
     id: summary
