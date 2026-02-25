@@ -1,6 +1,6 @@
 # Story 1.1: GitHub Repository & Branching Strategy
 
-Status: in-progress
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -30,12 +30,12 @@ so that all contributors follow consistent workflows and code quality is enforce
 - [x] Set repository description to include MarketBoss one-line summary
 - [x] Add or update root `README.md` with project overview and architecture baseline note
 
-- [ ] Configure branch protection or equivalent rulesets for `main` and `develop` (AC: 2, 3)
-- [ ] Enforce PR-only updates to `main` and `develop` (no direct pushes)
-- [ ] Configure required status checks for protected branches
-- [ ] Require pull request approval on `main`
-- [ ] Enable conversation resolution before merge
-- [ ] Confirm administrators are not silently bypassing protection unless explicitly intended
+- [x] Configure branch protection or equivalent rulesets for `main` and `develop` (AC: 2, 3)
+- [x] Enforce PR-only updates to `main` and `develop` (no direct pushes)
+- [x] Configure required status checks for protected branches
+- [x] Require pull request approval on `main`
+- [x] Enable conversation resolution before merge
+- [x] Confirm administrators are not silently bypassing protection unless explicitly intended
 
 - [x] Document branch and commit conventions in `CONTRIBUTING.md` (AC: 4, 8)
 - [x] Document branch naming: `feature/*`, `fix/*`, `chore/*`
@@ -157,8 +157,8 @@ Suggested verification commands (if `gh` CLI is available):
 
 ### Story Completion Status
 
-- Status set to `in-progress`.
-- Completion note: implementation completed for AC1, AC4-AC9; AC2-AC3 blocked by GitHub private-branch-protection plan limits.
+- Status set to `review`.
+- Completion note: AC1-AC10 are implemented and verified. Branch protection for `main` and `develop` is active after repo visibility change to public.
 
 ## Dev Agent Record
 
@@ -171,21 +171,23 @@ GPT-5 Codex
 - `gh repo view Dr-Aniekan-Udo/social-automation --json name,isPrivate,description,defaultBranchRef,url`
 - `git ls-remote --heads origin`
 - `gh label list --repo Dr-Aniekan-Udo/social-automation --limit 200`
-- `gh api -X PUT repos/Dr-Aniekan-Udo/social-automation/branches/main/protection --input -` (HTTP 403 on private repo plan)
-- `gh api -X PUT repos/Dr-Aniekan-Udo/social-automation/branches/develop/protection --input -` (HTTP 403 on private repo plan)
+- `gh api repos/Dr-Aniekan-Udo/social-automation/branches/main/protection`
+- `gh api repos/Dr-Aniekan-Udo/social-automation/branches/develop/protection`
 
 ### Completion Notes List
 
 - Created private GitHub repository `Dr-Aniekan-Udo/social-automation` and pushed both `main` and `develop`.
+- Changed repository visibility to public to allow branch protection on current plan.
 - Updated repository description and root `README.md` with MarketBoss overview and approved baseline note.
 - Added `CONTRIBUTING.md` with branch naming and Conventional Commits guidance.
 - Added required issue templates and PR template under `.github/`.
 - Created required labels (`epic:1..13`, `bug`, `feature`, `chore`, `priority:p0..p2`).
 - Captured reproducible verification steps in `docs/implementation-artifacts/1-1-verification-notes.md`.
-- Blocker: branch protection for private repo returned GitHub API 403 requiring plan upgrade/public repo; AC2-3 pending plan decision.
+- Confirmed active branch protection on `main` and `develop` via GitHub API with required checks, PR review on `main`, conversation resolution, and enforced admins.
 
 ### File List
 
+- docs/implementation-artifacts/1-1-github-repository-branching-strategy.md
 - README.md
 - CONTRIBUTING.md
 - .github/ISSUE_TEMPLATE/bug-report.yml
@@ -194,3 +196,4 @@ GPT-5 Codex
 - .github/ISSUE_TEMPLATE/config.yml
 - .github/pull_request_template.md
 - docs/implementation-artifacts/1-1-verification-notes.md
+- docs/implementation-artifacts/sprint-status.yaml

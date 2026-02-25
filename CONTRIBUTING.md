@@ -11,11 +11,15 @@
 - `feature/*` for new functionality
 - `fix/*` for bug fixes
 - `chore/*` for maintenance or non-feature work
+- `release/*` for release preparation branches
+- `hotfix/*` for urgent production fixes (from `main`, then back-merge to `develop`)
 
 Examples:
 - `feature/auth-onboarding`
 - `fix/session-timeout`
 - `chore/dependency-bump`
+- `release/v1.2.0`
+- `hotfix/NA-200-payment-webhook-crash`
 
 ## Commit Message Convention
 
