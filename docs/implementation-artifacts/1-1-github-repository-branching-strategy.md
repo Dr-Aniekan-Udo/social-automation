@@ -1,6 +1,6 @@
 # Story 1.1: GitHub Repository & Branching Strategy
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -157,7 +157,7 @@ Suggested verification commands (if `gh` CLI is available):
 
 ### Story Completion Status
 
-- Status set to `review`.
+- Status set to `done`.
 - Completion note: AC1-AC10 are implemented and verified. Branch protection for `main` and `develop` is active after repo visibility change to public.
 
 ## Dev Agent Record

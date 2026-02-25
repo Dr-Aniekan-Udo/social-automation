@@ -1,5 +1,31 @@
 # Contributing to MarketBoss
 
+## Quick Start: Branch + PR Flow
+
+Start from updated `develop`:
+
+```bash
+git checkout develop
+git pull origin develop
+git checkout -b feature/<name>   # or fix/<name>, chore/<name>
+```
+
+Commit to your feature branch only:
+
+```bash
+git add .
+git commit -m "feat: ..."
+git push -u origin feature/<name>
+```
+
+Always open PR with base = `develop`:
+- In GitHub UI: set base branch to `develop` before creating PR.
+- CLI (safer):
+
+```bash
+gh pr create --base develop --head feature/<name>
+```
+
 ## Branching Model
 
 - Base branches: `main` (production), `develop` (integration)

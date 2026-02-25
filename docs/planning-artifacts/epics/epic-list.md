@@ -22,7 +22,7 @@ The Go backend is operational with Clean Architecture structure, database schema
 
 **FRs covered:** None (Foundational/Additional)
 
-**Scope:** Go 1.26 project layout (cmd/server, internal/domain, service, adapter, handler), golang-migrate setup with base schemas (tenants, users, sessions), RLS framework policies, sqlc configuration + initial query files, pgx/v5 connection pool (with AfterRelease RESET ALL), Redis client (cache-aside, streams, rate limiter scaffold), OpenAPI 3.1 spec foundation + oapi-codegen server stubs, event schema registry (docs/events/), Zap structured logging, OpenTelemetry instrumentation, Sentry error tracking, health endpoints (/healthz, /readyz), go-arch-lint configuration.
+**Scope:** Go 1.26 project layout (cmd/server, internal/domain, service, adapter, handler), golang-migrate setup with base schemas (tenants, users, sessions), RLS framework policies, sqlc configuration + initial query files, pgx/v5 connection pool (with AfterRelease RESET ALL), Redis client (cache-aside, streams, rate limiter scaffold), OpenAPI 3.1 spec foundation + oapi-codegen server stubs, event schema registry (backend/docs/events/), Zap structured logging, OpenTelemetry instrumentation, Sentry error tracking, health endpoints (/healthz, /readyz), go-arch-lint configuration.
 
 ---
 

@@ -122,8 +122,8 @@ npx -y create-next-app@latest ./frontend \
 social-automation/
 ├── backend/                     # Go 1.26 API (Clean Architecture)
 ├── frontend/                    # Next.js 16 PWA
-├── infra/                       # Docker Compose, DigitalOcean configs
-│   └── docker-compose.dev.yml   # PostgreSQL 18 + Redis 7.4 local dev
+├── infra/                       # Deployment/IaC artifacts (DigitalOcean configs)
+│   └── .gitkeep                 # Placeholder in scaffolding stories
 ├── docs/                        # Planning artifacts, OpenAPI specs
 │   ├── planning-artifacts/      # PRD, architecture, UX spec
 │   └── api/                     # OpenAPI specs (codegen shared types)
@@ -137,7 +137,7 @@ social-automation/
 - **Path-based CI triggers** — backend changes don't rebuild frontend (DevOps War Room finding)
 - **OpenAPI codegen for shared types** — replaces `shared/` directory (Occam's Razor finding)
 - **Makefile with `make help`** — developer onboarding (`make dev-backend`, `make dev-frontend`, `make test`)
-- **Docker Compose in `infra/`** — one command spins up PostgreSQL 18 + Redis 7.4 locally
+- **Docker Compose at repo root** — one command spins up PostgreSQL 18 + Redis 7.4 locally
 
 ### Alternatives Rejected (from What-If Scenarios)
 

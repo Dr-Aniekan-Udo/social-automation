@@ -227,7 +227,7 @@ _5 methods applied to validate and harden the 20 core architectural decisions._
 | --- | --- |
 | sqlc (static SQL) vs dynamic filter/search queries | **Hybrid approach:** sqlc for 90% fixed CRUD, pgx direct with parameterized SQL for dynamic search/filter (e.g., squirrel query builder) |
 | Cache TTL (30min) vs SSE real-time event push | **Write-triggered cache invalidation:** on product/message update → invalidate Redis key → publish event to Stream. TTL is backup expiry only |
-| No single source of truth for Redis Streams event schemas | **Event schema registry:** JSON Schema files in `docs/events/` — CI validates producers and consumers match schema |
+| No single source of truth for Redis Streams event schemas | **Event schema registry:** JSON Schema files in `backend/docs/events/` — CI validates producers and consumers match schema |
 | httpOnly cookies invisible to PWA service worker | **Auth indicator cookie:** non-sensitive `is_authenticated=true` readable cookie for SW routing decisions. Actual JWT remains httpOnly |
 
 #### Pre-mortem Analysis (Failure Prevention)

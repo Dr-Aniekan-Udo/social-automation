@@ -83,7 +83,7 @@ backend/
 │       ├── sse_handler.go
 │       └── webhook_handler.go
 ├── db/queries/*.sql                            # Raw SQL for sqlc
-├── docs/events/*.json                          # Event schema registry
+├── backend/docs/events/*.json                  # Event schema registry
 ├── api/openapi.yaml                            # OpenAPI 3.1 spec (source of truth)
 ├── Makefile, Dockerfile, go.mod
 ```
@@ -212,7 +212,7 @@ Event envelope:
 }
 ```
 
-Rules: every event includes `tenant_id` at envelope level | `event_version` starts at 1, increment on breaking changes | stream names: `events:{tenant_id}:{domain}` | consumer groups: `{service}-{action}` | schemas validated against `docs/events/{event_type}.json` in CI
+Rules: every event includes `tenant_id` at envelope level | `event_version` starts at 1, increment on breaking changes | stream names: `events:{tenant_id}:{domain}` | consumer groups: `{service}-{action}` | schemas validated against `backend/docs/events/{event_type}.json` in CI
 
 #### SSE Format
 
@@ -303,7 +303,7 @@ _3 methods applied to validate implementation patterns for agent consistency._
 
 | Reviewer | Concern | Refinement |
 | --- | --- | --- |
-| Pragmatist | Event JSON Schema registry is overkill for MVP (5 event types) | Keep registry in MVP - lightweight `docs/events/*.json` schemas + CI validation prevent producer/consumer drift |
+| Pragmatist | Event JSON Schema registry is overkill for MVP (5 event types) | Keep registry in MVP - lightweight `backend/docs/events/*.json` schemas + CI validation prevent producer/consumer drift |
 | Pragmatist | `__Host-` cookies fail on `http://localhost` | Environment-aware prefix: `__Host-` in production, none in dev |
 | Pragmatist | "Skeletons for every component" too strict | Skeletons only for data-fetching components (updated in enforcement) |
 | Purist | No tooling enforces import dependency rules | `go-arch-lint.yaml` in project root + CI enforcement |

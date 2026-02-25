@@ -183,6 +183,12 @@ AI Agents MUST strictly adhere to this exact naming boundary map when tracking a
 - **Main + Develop Flow:** Use short-lived feature branches branching off `develop`; merge release branches into `main` and back-merge to `develop`.
 - **Branch Naming:** Format: `type/feature-name` (e.g., `feature/ai-drafts`, `fix/tenant-isolation`, `chore/deps`).
 - **Commit Messages:** Use Conventional Commits (e.g., `feat: add deepseek model routing`).
+- **PR Base Safety Rule:** For normal work (`feature/*`, `fix/*`, `chore/*`), PR base MUST be `develop` (never `main`).
+- **Branch Start Rule:** Always start work from up-to-date `develop`:
+  - `git checkout develop`
+  - `git pull origin develop`
+  - `git checkout -b feature/<name>` (or `fix/<name>`, `chore/<name>`)
+- **PR Creation Guardrail:** Prefer CLI command `gh pr create --base develop --head <branch-name>` to prevent wrong base branch.
 
 #### The "Trust But Verify" CI Pipeline
 
@@ -255,4 +261,4 @@ When diagnosing CI failures or runtime errors, you MUST stop guessing and use th
 - Review quarterly for outdated rules
 - Remove rules that become obvious over time
 
-Last Updated: 2026-02-22
+Last Updated: 2026-02-25
