@@ -54,21 +54,17 @@ while IFS= read -r message; do
 done <<'EOF'
 docker is required for 'dev'
 docker compose is required for 'dev'
-docker is required for 'dev-down'
-docker compose is required for 'dev-down'
-docker is required for 'dev-reset'
-docker compose is required for 'dev-reset'
 golang-migrate CLI is required for 'db-migrate-up'
 golang-migrate CLI is required for 'db-migrate-down'
 sqlc is required for 'sqlc-generate'
 EOF
 
-if ! grep -Eq '^openapi: 3\.1\.0$' api/openapi.yaml; then
+if ! tr -d '\r' < api/openapi.yaml | grep -Eq '^openapi: 3\.1\.0$'; then
   echo "api/openapi.yaml must declare OpenAPI 3.1.0"
   exit 1
 fi
 
-if ! grep -Eq '^info:$' api/openapi.yaml; then
+if ! tr -d '\r' < api/openapi.yaml | grep -Eq '^info:$'; then
   echo "api/openapi.yaml must include an info section"
   exit 1
 fi
