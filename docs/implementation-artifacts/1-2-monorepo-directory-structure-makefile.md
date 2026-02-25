@@ -156,11 +156,14 @@ GPT-5 Codex
 - Preserved and validated `.gitignore` coverage for Go binaries, Node/Next artifacts, `.env`, IDE files, and OS files.
 - Added `tools/verify-structure.sh` and wired `make test` to verify required structure, required target docs, OpenAPI stub, and dependency-help text.
 - Completed optional preparatory scaffolding: `dev-down`, `dev-reset`, `api-generate`, backend query/migration placeholders, and backend-local `Makefile` stub.
+- Updated story documentation to fully reflect all files changed in commit `c8b5165` and separated source files from story tracking artifacts in the File List.
 - Opened PR: https://github.com/Dr-Aniekan-Udo/social-automation/pull/2
 
 ### File List
 
+**Implementation and project source files changed**
 - .env.example
+- CONTRIBUTING.md
 - Makefile
 - api/openapi.yaml
 - backend/Makefile
@@ -173,12 +176,23 @@ GPT-5 Codex
 - backend/internal/handler/.gitkeep
 - backend/internal/service/.gitkeep
 - backend/migrations/.gitkeep
+- docs/implementation-artifacts/1-1-github-repository-branching-strategy.md
+- docs/planning-artifacts/architecture/core-architectural-decisions.md
+- docs/planning-artifacts/architecture/implementation-patterns-consistency-rules.md
+- docs/planning-artifacts/architecture/project-structure-boundaries.md
+- docs/planning-artifacts/architecture/starter-template-evaluation.md
+- docs/planning-artifacts/epics/epic-list.md
+- docs/planning-artifacts/epics/stories.md
+- docs/project-context.md
 - frontend/README.md
 - infra/.gitkeep
 - tools/verify-structure.sh
+
+**Story tracking artifacts changed**
 - docs/implementation-artifacts/1-2-monorepo-directory-structure-makefile.md
 - docs/implementation-artifacts/sprint-status.yaml
 
 ## Change Log
 
 - 2026-02-25: Implemented Story 1.2 scaffold, Makefile targets, environment template, verification checks, optional prep tasks, and created PR #2.
+- 2026-02-25: Addressed review report discrepancies by synchronizing File List with commit `c8b5165`, refining `.gitignore`, narrowing `verify-structure.sh` to required Story 1.2 checks, and improving `.env.example` variable comments.

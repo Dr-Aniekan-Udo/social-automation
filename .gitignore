@@ -1,9 +1,3 @@
-# Project-specific content
-IGNORE/
-MD/
-Archive/
-scripts/
-
 # Environment files
 .env
 .env.*
